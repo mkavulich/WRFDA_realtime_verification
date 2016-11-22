@@ -1,0 +1,270 @@
+eval `/glade/apps/opt/lmod/lmod/libexec/lmod tcsh load mkl`
+/glade/apps/opt/lmod/lmod/libexec/lmod tcsh load mkl
+setenv LMOD_DEFAULT_MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep
+setenv MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep:/glade/apps/opt/modulefiles/ys/cdep/intel
+setenv INC_NCAR -I/ncar/opt/intel/ics-2013-sp1/mkl/include -I/ncar/opt/intel/ics-2013-sp1/mkl/include/fftw -I/ncar/opt/intel/ics-2013-sp1/mkl/include/intel64/lp64 -DMKL_DOUBLE -I/glade/apps/opt/netcdf/4.3.0/intel/12.1.5/include -I/glade/apps/opt/usr/include
+setenv LIB_NCAR  -L/glade/apps/opt/libmkl/10.3.10/intel/12.1.0.233 -L/ncar/opt/intel/ics-2013-sp1/mkl/lib/intel64 -lfftw2xf_intel -lmkl_rt -lmkl_lapack95_lp64 -lmkl_blas95_lp64 -laux_intel64_intel -lm -lpthread -Wl,-rpath,/ncar/opt/intel/ics-2013-sp1/mkl/lib/intel64 -L/glade/apps/opt/netcdf/4.3.0/intel/12.1.5/lib -Wl,-rpath,/glade/apps/opt/netcdf/4.3.0/intel/12.1.5/lib -L/glade/apps/opt/hdf5/1.8.12/intel/12.1.5/lib -Wl,-rpath,/glade/apps/opt/hdf5/1.8.12/intel/12.1.5/lib -lnetcdf_c++ -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lsz -lz -Wl,-rpath,/ncar/opt/intel/12.1.0.233/composer_xe_2011_sp1.11.339/compiler/lib/intel64 -Wl,-rpath,/ncar/opt/intel/12.1.0.233/composer_xe_2011_sp1.11.339/compiler/lib/ia32 -L/glade/apps/opt/usr/lib -Wl,-rpath,/glade/apps/opt/usr/lib
+setenv LMOD_DEFAULT_MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep
+setenv MANPATH /ncar/opt/intel/ics-2013-sp1/man:/glade/apps/opt/netcdf/4.3.0/intel/12.1.5/share/man:/ncar/opt/intel/12.1.0.233/composer_xe_2011_sp1.11.339/man:/glade/apps/opt/usr/share/man:/glade/apps/opt/man:/ncar/opt/lsf/9.1/man::/opt/ibmhpc/pecurrent/ppe.man
+setenv MKLROOT /ncar/opt/intel/ics-2013-sp1/mkl
+setenv MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep:/glade/apps/opt/modulefiles/ys/cdep/intel
+setenv _ModuleTable001_ X01vZHVsZVRhYmxlXz17WyJhY3RpdmVTaXplIl09NixiYXNlTXBhdGhBPXsiL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2NvbXBpbGVycyIsIi9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9pZGVwIix9LFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLGZhbWlseT17WyJjb21waWxlciJdPSJpbnRlbCIsfSxpbmFjdGl2ZT17fSxtVD17aW50ZWw9e1siRk4iXT0iL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2NvbXBpbGVycy9pbnRlbC8xMi4xLjUubHVhIixbImRlZmF1bHQiXT0xLFsiZnVsbE5hbWUiXT0iaW50ZWwvMTIuMS41IixbImxvYWRPcmRlciJdPTMsWyJtVHlwZSJdPSJ3Iixwcm9wVD17fSxbInNob3J0Il09ImludGVsIixbInN0YXR1cyJdPSJh
+setenv _ModuleTable002_ Y3RpdmUiLH0sbWtsPXtbIkZOIl09Ii9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9jZGVwL2ludGVsL21rbC8xMS4xLjIubHVhIixbImRlZmF1bHQiXT0xLFsiZnVsbE5hbWUiXT0ibWtsLzExLjEuMiIsWyJsb2FkT3JkZXIiXT02LFsibVR5cGUiXT0idyIscHJvcFQ9e30sWyJzaG9ydCJdPSJta2wiLFsic3RhdHVzIl09ImFjdGl2ZSIsfSxuY2FyYmlubGlicz17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvaWRlcC9uY2FyYmlubGlicy8xLjEubHVhIixbImRlZmF1bHQiXT0xLFsiZnVsbE5hbWUiXT0ibmNhcmJpbmxpYnMvMS4xIixbImxvYWRPcmRlciJdPTIsWyJtVHlwZSJdPSJ3Iixwcm9wVD17fSxbInNob3J0Il09Im5jYXJiaW5saWJzIixb
+setenv _ModuleTable003_ InN0YXR1cyJdPSJhY3RpdmUiLH0sbmNhcmNvbXBpbGVycz17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY2RlcC9pbnRlbC9uY2FyY29tcGlsZXJzLzEuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuY2FyY29tcGlsZXJzLzEuMCIsWyJsb2FkT3JkZXIiXT00LFsibVR5cGUiXT0idyIscHJvcFQ9e30sWyJzaG9ydCJdPSJuY2FyY29tcGlsZXJzIixbInN0YXR1cyJdPSJhY3RpdmUiLH0sbmNhcmVudj17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvaWRlcC9uY2FyZW52LzEuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuY2FyZW52LzEuMCIsWyJsb2FkT3JkZXIiXT0xLFsibVR5cGUiXT0idyIs
+setenv _ModuleTable004_ cHJvcFQ9e30sWyJzaG9ydCJdPSJuY2FyZW52IixbInN0YXR1cyJdPSJhY3RpdmUiLH0sbmV0Y2RmPXtbIkZOIl09Ii9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9jZGVwL2ludGVsL25ldGNkZi80LjMuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuZXRjZGYvNC4zLjAiLFsibG9hZE9yZGVyIl09NSxbIm1UeXBlIl09InciLHByb3BUPXt9LFsic2hvcnQiXT0ibmV0Y2RmIixbInN0YXR1cyJdPSJhY3RpdmUiLH0sfSxtcGF0aEE9eyIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY29tcGlsZXJzIiwiL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2lkZXAiLCIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY2RlcC9pbnRlbCIs
+setenv _ModuleTable005_ fSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY29tcGlsZXJzOi9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9pZGVwIixbInZlcnNpb24iXT0yLH0=
+setenv _ModuleTable_Sz_ 5
+eval `/glade/apps/opt/lmod/lmod/libexec/lmod tcsh swap intel/12.1.5 intel/13.1.2`
+/glade/apps/opt/lmod/lmod/libexec/lmod tcsh swap intel/12.1.5 intel/13.1.2
+
+The following have been reloaded with a version change:
+  1) intel/12.1.5 => intel/13.1.2
+
+setenv LMOD_DEFAULT_MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep
+setenv MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep:/glade/apps/opt/modulefiles/ys/cdep/intel
+setenv COMPILER_VERSION 13.1.2
+unsetenv COMP_NCAR
+setenv IMPILIBDIR /ncar/opt/intel/2013/impi/4.1.0.024/intel64/lib
+setenv INC_NCAR -I/ncar/opt/intel/ics-2013-sp1/mkl/include -I/ncar/opt/intel/ics-2013-sp1/mkl/include/fftw -I/ncar/opt/intel/ics-2013-sp1/mkl/include/intel64/lp64 -DMKL_DOUBLE -I/glade/apps/opt/netcdf/4.3.0/intel/13.1.2/include -I/glade/apps/opt/usr/include
+setenv INTEL_LICENSE_FILE 28518@128.117.183.213:28518@128.117.183.214:28518@128.117.183.215
+setenv INTEL_MAJOR_VERSION 13.1
+setenv INTEL_MINOR_VERSION 2
+setenv LD_LIBRARY_PATH /ncar/opt/intel/2013/composer_xe_2013.4.183/compiler/lib/intel64:/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/lib
+setenv LIB_NCAR  -L/glade/apps/opt/libmkl/10.3.10/intel/12.1.0.233 -L/ncar/opt/intel/ics-2013-sp1/mkl/lib/intel64 -lfftw2xf_intel -lmkl_rt -lmkl_lapack95_lp64 -lmkl_blas95_lp64 -laux_intel64_intel -lm -lpthread -Wl,-rpath,/ncar/opt/intel/ics-2013-sp1/mkl/lib/intel64 -L/glade/apps/opt/netcdf/4.3.0/intel/13.1.2/lib -Wl,-rpath,/glade/apps/opt/netcdf/4.3.0/intel/13.1.2/lib -L/glade/apps/opt/hdf5/1.8.12/intel/12.1.5/lib -Wl,-rpath,/glade/apps/opt/hdf5/1.8.12/intel/12.1.5/lib -lnetcdf_c++ -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lsz -lz -Wl,-rpath,/ncar/opt/intel/2013/composer_xe_2013.4.183/compiler/lib/intel64 -Wl,-rpath,/ncar/opt/intel/2013/composer_xe_2013.4.183/compiler/lib/ia32 -L/glade/apps/opt/usr/lib -Wl,-rpath,/glade/apps/opt/usr/lib
+setenv LMOD_DEFAULT_MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep
+setenv LMOD_FAMILY_COMPILER intel
+setenv LM_LICENSE_FILE 28518@128.117.183.213,28518@128.117.183.214,28518@128.117.183.215
+setenv MANPATH /ncar/opt/intel/ics-2013-sp1/man:/glade/apps/opt/netcdf/4.3.0/intel/13.1.2/share/man:/ncar/opt/intel/2013/composer_xe_2013.4.183/man:/glade/apps/opt/usr/share/man:/glade/apps/opt/man:/ncar/opt/lsf/9.1/man::/opt/ibmhpc/pecurrent/ppe.man
+setenv MKLROOT /ncar/opt/intel/ics-2013-sp1/mkl
+setenv MODULEPATH /glade/apps/opt/modulefiles/ys/compilers:/glade/apps/opt/modulefiles/ys/idep:/glade/apps/opt/modulefiles/ys/cdep/intel
+setenv MP_COMPILER intel
+setenv NETCDF /glade/apps/opt/netcdf/4.3.0/intel/13.1.2
+setenv PATH /glade/apps/opt/netcdf/4.3.0/intel/13.1.2/bin:/glade/apps/opt/modulefiles/ys/cmpwrappers:/ncar/opt/intel/2013/composer_xe_2013.4.183/bin/intel64:/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/etc:/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin:/usr/lib64/qt-3.3/bin:/glade/apps/opt/usr/bin:/usr/bin:/bin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/ncar/opt/hpss
+setenv TACC_FAMILY_COMPILER intel
+setenv _ModuleTable001_ X01vZHVsZVRhYmxlXz17WyJhY3RpdmVTaXplIl09NixiYXNlTXBhdGhBPXsiL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2NvbXBpbGVycyIsIi9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9pZGVwIix9LFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLGZhbWlseT17WyJjb21waWxlciJdPSJpbnRlbCIsfSxpbmFjdGl2ZT17fSxtVD17aW50ZWw9e1siRk4iXT0iL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2NvbXBpbGVycy9pbnRlbC8xMy4xLjIubHVhIixbImRlZmF1bHQiXT0wLFsiZnVsbE5hbWUiXT0iaW50ZWwvMTMuMS4yIixbImxvYWRPcmRlciJdPTMsWyJtVHlwZSJdPSJ3Iixwcm9wVD17fSxbInNob3J0Il09ImludGVsIixbInN0YXR1cyJdPSJh
+setenv _ModuleTable002_ Y3RpdmUiLH0sbWtsPXtbIkZOIl09Ii9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9jZGVwL2ludGVsL21rbC8xMS4xLjIubHVhIixbImRlZmF1bHQiXT0xLFsiZnVsbE5hbWUiXT0ibWtsLzExLjEuMiIsWyJsb2FkT3JkZXIiXT02LFsibVR5cGUiXT0idyIscHJvcFQ9e30sWyJzaG9ydCJdPSJta2wiLFsic3RhdHVzIl09ImFjdGl2ZSIsfSxuY2FyYmlubGlicz17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvaWRlcC9uY2FyYmlubGlicy8xLjEubHVhIixbImRlZmF1bHQiXT0xLFsiZnVsbE5hbWUiXT0ibmNhcmJpbmxpYnMvMS4xIixbImxvYWRPcmRlciJdPTIsWyJtVHlwZSJdPSJ3Iixwcm9wVD17fSxbInNob3J0Il09Im5jYXJiaW5saWJzIixb
+setenv _ModuleTable003_ InN0YXR1cyJdPSJhY3RpdmUiLH0sbmNhcmNvbXBpbGVycz17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY2RlcC9pbnRlbC9uY2FyY29tcGlsZXJzLzEuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuY2FyY29tcGlsZXJzLzEuMCIsWyJsb2FkT3JkZXIiXT00LFsibVR5cGUiXT0idyIscHJvcFQ9e30sWyJzaG9ydCJdPSJuY2FyY29tcGlsZXJzIixbInN0YXR1cyJdPSJhY3RpdmUiLH0sbmNhcmVudj17WyJGTiJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvaWRlcC9uY2FyZW52LzEuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuY2FyZW52LzEuMCIsWyJsb2FkT3JkZXIiXT0xLFsibVR5cGUiXT0idyIs
+setenv _ModuleTable004_ cHJvcFQ9e30sWyJzaG9ydCJdPSJuY2FyZW52IixbInN0YXR1cyJdPSJhY3RpdmUiLH0sbmV0Y2RmPXtbIkZOIl09Ii9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9jZGVwL2ludGVsL25ldGNkZi80LjMuMC5sdWEiLFsiZGVmYXVsdCJdPTEsWyJmdWxsTmFtZSJdPSJuZXRjZGYvNC4zLjAiLFsibG9hZE9yZGVyIl09NSxbIm1UeXBlIl09InciLHByb3BUPXt9LFsic2hvcnQiXT0ibmV0Y2RmIixbInN0YXR1cyJdPSJhY3RpdmUiLH0sfSxtcGF0aEE9eyIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY29tcGlsZXJzIiwiL2dsYWRlL2FwcHMvb3B0L21vZHVsZWZpbGVzL3lzL2lkZXAiLCIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY2RlcC9pbnRlbCIs
+setenv _ModuleTable005_ fSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvZ2xhZGUvYXBwcy9vcHQvbW9kdWxlZmlsZXMveXMvY29tcGlsZXJzOi9nbGFkZS9hcHBzL29wdC9tb2R1bGVmaWxlcy95cy9pZGVwIixbInZlcnNpb24iXT0yLH0=
+setenv _ModuleTable_Sz_ 5
+if ( ! 1 ) then
+if ( ! 1 ) then
+set DATE = 2015060106
+set PREV_DATE = `${HOME}/bin/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 -06
+set NEXT_DATE = `${HOME}/bin/da_advance_time.exe ${DATE}  ${CYCLE_PERIOD}`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 06
+set cc = `echo $DATE | cut -c1-2`
+cut -c1-2
+echo 2015060106
+set yy = `echo $DATE | cut -c3-4`
+cut -c3-4
+echo 2015060106
+set ccyy = `echo $DATE | cut -c1-4`
+cut -c1-4
+echo 2015060106
+set mm = `echo $DATE | cut -c5-6`
+cut -c5-6
+echo 2015060106
+set dd = `echo $DATE | cut -c7-8`
+cut -c7-8
+echo 2015060106
+set hh = `echo $DATE | cut -c9-10`
+cut -c9-10
+echo 2015060106
+set mi = 00
+set DATE1 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 -1h30m -f ccyymmddhhnn
+set DATE2 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 1h30m -f ccyymmddhhnn
+set ccyy1 = `echo $DATE1 | cut -c1-4`
+cut -c1-4
+echo 201506010430
+set mm1 = `echo $DATE1 | cut -c5-6`
+cut -c5-6
+echo 201506010430
+set dd1 = `echo $DATE1 | cut -c7-8`
+cut -c7-8
+echo 201506010430
+set hh1 = `echo $DATE1 | cut -c9-10`
+cut -c9-10
+echo 201506010430
+set mi1 = `echo $DATE1 | cut -c11-12`
+cut -c11-12
+echo 201506010430
+set ccyy2 = `echo $DATE2 | cut -c1-4`
+cut -c1-4
+echo 201506010730
+set mm2 = `echo $DATE2 | cut -c5-6`
+cut -c5-6
+echo 201506010730
+set dd2 = `echo $DATE2 | cut -c7-8`
+cut -c7-8
+echo 201506010730
+set hh2 = `echo $DATE2 | cut -c9-10`
+cut -c9-10
+echo 201506010730
+set mi2 = `echo $DATE2 | cut -c11-12`
+cut -c11-12
+echo 201506010730
+if ( FALSE == TRUE ) then
+set ccyy_e = `echo $DATE | cut -c1-4`
+cut -c1-4
+echo 2015060106
+set mm_e = `echo $DATE | cut -c5-6`
+cut -c5-6
+echo 2015060106
+set dd_e = `echo $DATE | cut -c7-8`
+cut -c7-8
+echo 2015060106
+set hh_e = `echo $DATE | cut -c9-10`
+cut -c9-10
+echo 2015060106
+set mi_e = 00
+endif
+set DATE_WRF = `${BIN_DIR}/da_advance_time.exe ${DATE} 0 -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 0 -w
+set domain_id = 01
+set DA_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060106
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060106 ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060106
+cd /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060106
+rm: No match.
+rm -f /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060106/FAIL
+set gdate = ( `${BIN_DIR}/da_advance_time.exe $DATE 0 -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 0 -g
+set gdatef = ( `${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 06 -g
+if ( ! -e wrfinput_d01_151361_21600_mean ) then
+tar xvf retro.tar
+obs_seq.out
+wrfinput_d01_151361_21600_mean.gz
+wrfinput_d01_151361_43200_mean.gz
+wrfbdy_d01_151361_43200_mean.gz
+gzip -d wrfbdy_d01_151361_43200_mean.gz wrfinput_d01_151361_21600_mean.gz wrfinput_d01_151361_43200_mean.gz
+endif
+if ( -e ep ) rm -f ep
+ln -sf /glade/scratch/hclin/CONUS/wrfda/enspert/2015060100/ep ./ep
+/glade/p/work/hclin/code_intel/WRFDA/trunk/var/build/gen_be_vertloc.exe 40
+ vertical level =     40
+ Threshold, truncation =         0.99000    14
+ln -sf /glade/p/work/hclin/code_intel/WRFDA/trunk/run/LANDUSE.TBL .
+ln -sf /glade/u/home/hclin/scripts/rt2015/fix/obs_errtable_hclin ./obs_errtable
+ln -sf /glade/u/home/hclin/scripts/rt2015/fix/be.dat.cyang ./be.dat
+if ( FALSE == TRUE ) then
+if ( FALSE == TRUE ) then
+ln -sf /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060106/ob_d01.ascii.2015060106 ./ob.ascii
+ln -sf /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060106/gfs.t06z.gpsro.tm00.bufr_d ./gpsro.bufr
+ln -sf /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060106/gfs.t06z.prepbufr.nr ./ob.bufr
+if ( true == true ) then
+if ( 06 == 00 || 06 == 12 ) then
+ln -sf /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060106/gfs.t06z.1bamua.tm00.bufr_d ./amsua.bufr
+endif
+endif
+endif
+if ( true == true ) then
+if ( -e radiance_info ) rm -f radiance_info
+ln -sf /glade/u/home/hclin/scripts/rt2015/fix/radiance_info ./radiance_info
+set VARBC_PREV_DATE = `${HOME}/bin/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060106 -06
+set VARBC_DIR = /nfs/gpfs/PAS0400/osu5183/VARBC
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/VARBC.out ) then
+if ( ! -e /nfs/gpfs/PAS0400/osu5183/VARBC/2015060106/VARBC.out ) then
+ln -sf /glade/p/work/hclin/code_intel/WRFDA/trunk/var/run/VARBC.in ./VARBC.in
+else
+else
+endif
+if ( cycle == cold ) then
+if ( cycle == ensfc_mean ) then
+if ( cycle == cycle ) then
+set FG_FILE = /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/advance/2015060100/wrfout_d01_2015-06-01_06:00:00
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/advance/2015060100/wrfout_d01_2015-06-01_06:00:00 ) then
+echo ERROR in run_wrfda.csh : first guess /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/advance/2015060100/wrfout_d01_2015-06-01_06:00:00 not found...
+exit 1
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@ys2005-ib>
+Subject: Job 906132: <da060106> in cluster <yellowstone> Exited
+
+Job <da060106> was submitted from host <yslogin3-ib> by user <hclin> in cluster <yellowstone>.
+Job was executed on host(s) <16*ys2005-ib>, in queue <regular>, as user <hclin> in cluster <yellowstone>.
+                            <16*ys2006-ib>
+                            <16*ys2007-ib>
+                            <16*ys2008-ib>
+</glade/u/home/hclin> was used as the home directory.
+</glade/u/home/hclin/scripts/rt2015/ob_prepb> was used as the working directory.
+Started at Mon Jun  1 05:30:23 2015
+Results reported at Mon Jun  1 05:30:37 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/csh
+#BSUB -J da
+#BSUB -q regular
+##BSUB -n 128
+#BSUB -n 64
+#BSUB -o job.out
+#BSUB -e job.out
+#BSUB -W 0:10
+#BSUB -P P64000510
+#
+set echo
+module load mkl
+module swap intel/12.1.5 intel/13.1.2
+
+if ( ! $?PARAMS_SET ) then
+   source /glade/u/home/hclin/scripts/rt2015/params.csh
+endif
+#set FG_SOURCE = $1
+#set FG_SOURCE = ensfc_mean
+#set FG_SOURCE = cycle
+#set DA_METHOD = hybrid_ens75_amsua
+#set JE_FACTOR = 1.33
+#set ENS_SIZE = 50
+#set DA_METHOD = 3dvar_amsua
+#set JE_FACTOR = 1.0
+#set ENS_SIZE = 0
+#set use_radiance = false
+#set use_radiance = true
+
+if ( ! $?ANAL_DATE ) then
+   echo "ANAL_DATE not set"
+   exit 1
+endif
+
+set DATE  = $ANAL_DATE
+
+set PREV_DATE = `${HOME}/bin/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
+set NEXT_DATE = `${HOME}/bin/da_advance_time.exe ${DATE}  ${CYCLE_PERIOD}`
+set cc = `echo $DATE | cut -c1-2`
+set yy = `echo $DATE | cut -c3-4`
+set ccyy = `echo $DATE | cut -c1-4`
+set   mm = `echo $DATE | cut -c5-6`
+set   dd = `echo $DATE | cut -c7-8`
+set   hh = `echo $DATE | cut -c9-10`
+set   mi = 00 #`echo $DATE | cut -c11-12`
+set DATE1 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
+set DATE2 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
+set ccyy1 = `echo $DATE1 | cut -c1-4`
+set   mm1 = `echo $DATE1 | cut -c5-6`
+set   dd1 = `echo $DATE1 | cut -c7-8`
+
+(... more ...)
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :               10.01 sec.
+    Max Memory :             43 MB
+    Average Memory :         43.00 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Processes :          4
+    Max Threads :            5
+
+The output (if any) is above this job summary.
+

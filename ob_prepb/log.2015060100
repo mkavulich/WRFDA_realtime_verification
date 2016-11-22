@@ -1,0 +1,148 @@
+setenv ANAL_DATE 2015060100
+if ( 00 == 00 ) then
+setenv QUEUE premium
+endif
+cd /glade/u/home/hclin/scripts/rt2015/ob_prepb
+if ( 2015060100 == 2015051212 ) then
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/logdir ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/logdir
+echo ====== 2015060100 ======
+====== 2015060100 ======
+if ( 1 == 2 ) then
+if ( 1 == 1 ) then
+set OBSPROC_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060100
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060100 ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060100
+cd /glade/scratch/hclin/CONUS/wrfda/obsproc/2015060100
+if ( ! -e gfs.t00z.1bamua.tm00.bufr_d ) then
+if ( ! -e gfs.t00z.gpsro.tm00.bufr_d ) then
+if ( ! -e gfs.t00z.prepbufr.nr ) then
+endif
+cd /glade/u/home/hclin/scripts/rt2015/ob_prepb
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FINISHED ) then
+set DA_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100 ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100
+set gdate = ( `${BIN_DIR}/da_advance_time.exe $DATE 0 -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060100 0 -g
+set gdatef = ( `${BIN_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2015060100 6 -g
+set inpfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/wrfinput_d01_151361_0_mean
+set bdyfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/wrfbdy_d01_151361_21600_mean
+set tarfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/retro.tar
+set done = false
+while ( false == false )
+if ( -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/wrfinput_d01_151361_0_mean && -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/wrfbdy_d01_151361_21600_mean ) then
+if ( -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/retro.tar ) then
+set done = true
+cp -p /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2015060100/retro.tar /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100
+endif
+if ( true == false ) sleep 120
+end
+while ( true == false )
+echo `date` submit run_wrfda.csh ......
+date
+Sun May 31 23:53:49 MDT 2015 submit run_wrfda.csh ......
+/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub -q premium -J da060100
+set da_done = false
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/wrfvar_output_d01_2015060100 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/ob_prepb/hybrid_ens75_amsua/2015060100/FAIL ) then
+sleep 60
+

@@ -1,0 +1,170 @@
+setenv ANAL_DATE 2016092700
+if ( 00 == 00 ) then
+setenv QUEUE premium
+endif
+cd /glade/u/home/hclin/scripts/rt2015/hyb_ens75
+rm -f /glade/u/home/hclin/scripts/rt2015/hyb_ens75/job.out
+echo `date` started for hyb_ens75 2016092700
+date
+if ( 2016092700 == 2016082612 ) then
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/logdir ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/logdir
+echo ====== 2016092700 ======
+====== 2016092700 ======
+if ( 2 == 2 ) then
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/obsproc/2016092700/FINISHED ) then
+endif
+if ( 2 == 1 ) then
+cd /glade/u/home/hclin/scripts/rt2015/hyb_ens75
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FINISHED ) then
+set DA_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700 ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700
+set gdate = ( `${BIN_DIR}/da_advance_time.exe $DATE 0 -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2016092700 0 -g
+set gdatef = ( `${BIN_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g` )
+/glade/u/home/hclin/bin/da_advance_time.exe 2016092700 6 -g
+set inpfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfinput_d01_151845_0_mean
+set bdyfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfbdy_d01_151845_21600_mean
+set tarfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart_80M40L/output/2016092700/retro.tar
+set done = false
+while ( false == false )
+if ( -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfinput_d01_151845_0_mean && -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfbdy_d01_151845_21600_mean ) then
+set done = true
+cp -p /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfinput_d01_151845_0_mean /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700
+cp -p /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/2016092700/wrfbdy_d01_151845_21600_mean /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700
+else if ( -e /glade/scratch/wrfrt/realtime_ensemble/wrfdart_80M40L/output/2016092700/retro.tar ) then
+if ( true == false ) sleep 120
+end
+while ( true == false )
+@ num_rerun = 0
+SUBMIT_DA_AGAIN:
+echo `date` submit run_wrfda.csh ......
+date
+Tue Sep 27 07:47:44 MDT 2016 submit run_wrfda.csh ......
+/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub -q premium -J da092700
+set da_done = false
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL ) then
+if ( 0 < 2 ) then
+rm -f /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL
+@ num_rerun ++
+goto SUBMIT_DA_AGAIN
+echo `date` submit run_wrfda.csh ......
+date
+Tue Sep 27 07:47:44 MDT 2016 submit run_wrfda.csh ......
+/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub -q premium -J da092700
+set da_done = false
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016092700/wrfvar_output_d01_2016092700 ) then
+set da_done = true
+mv /glade/u/home/hclin/scripts/rt2015/hyb_ens75/job.out /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/logdir/job_wrfda.2016092700
+endif
+if ( true == false ) then
+end
+while ( true == false )
+endif
+cd /glade/u/home/hclin/scripts/rt2015/hyb_ens75
+set file_to_check = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+echo `date` submit run_advance.csh ......
+date
+Tue Sep 27 07:51:45 MDT 2016 submit run_advance.csh ......
+/ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub -q premium -J adv092700
+set adv_done = false
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+if ( false == false ) then
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FAIL ) then
+sleep 60
+endif
+end
+while ( false == false )
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+set adv_done = true
+mv /glade/u/home/hclin/scripts/rt2015/hyb_ens75/job.out /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/logdir/job_adv.2016092700
+endif
+if ( true == false ) then
+end
+while ( true == false )
+endif
+if ( -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75/advance/2016092700/FINISHED ) then
+echo `date` Done rt.csh for hyb_ens75 2016092700
+date
+Tue Sep 27 07:58:46 MDT 2016 Done rt.csh for hyb_ens75 2016092700
+mail -s RT2015: 2016092700 hyb_ens75 Done hclin@ucar.edu
+endif
+echo `date` running run_diag.csh ......
+date
+Tue Sep 27 07:58:46 MDT 2016 running run_diag.csh ......
+/glade/u/home/hclin/scripts/rt2015/diag/run_diag.csh

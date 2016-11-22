@@ -1,0 +1,18 @@
+#MDT
+#50 15 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.18z 2>&1
+#45 17 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.18z 2>&1
+#50 21 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.00z 2>&1
+#35 21 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.00z 2>&1
+#50 03 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.06z 2>&1
+#45 05 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.06z 2>&1
+#50 09 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.12z 2>&1
+#35 09 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.12z 2>&1
+#MST
+50 14 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.18z 2>&1
+45 16 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.18z 2>&1
+50 20 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.00z 2>&1
+35 20 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.00z 2>&1
+50 02 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.06z 2>&1
+45 04 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.06z 2>&1
+50 08 * * * /glade/u/home/hclin/scripts/rt2015/get_ep_inflate.csh > /glade/u/home/hclin/scripts/rt2015/logdir/log_ep_inf.12z 2>&1
+35 08 * * * /glade/u/home/hclin/scripts/rt2015/hyb_ens75/rt.csh > /glade/u/home/hclin/scripts/rt2015/hyb_ens75/logdir/log.12z 2>&1

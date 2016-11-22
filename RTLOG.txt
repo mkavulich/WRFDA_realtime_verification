@@ -1,0 +1,132 @@
+2015051200 wrfout_d01_2015051200_2015051206.mean size 0
+
+2015051912 ep_2015051912_2015051918.tar.gz size 0 
+
+ep_2015053118_2015060100 is probably not right
+
+2015060100 ep_2015060100_2015060106.tar.gz size 0
+
+2015060212 ep_2015060212_2015060218.tar.gz size 0 
+2015060218 ep_2015060218_2015060300.tar.gz size 0 
+2015060400 ep_2015060400_2015060406.tar.gz size 0
+
+2015060100 wrfout_d01_2015060100_2015060106.mean size 0 
+2015060212 wrfout_d01_2015060212_2015060218.mean size 0 
+2015060218 wrfout_d01_2015060218_2015060300.mean size 0 
+2015060400 wrfout_d01_2015060400_2015060406.mean size 0
+
+2015060812: start from ensfc_mean
+            50% ensemble
+2015062418: switch to use inflated ensemble perturbation
+
+2015070100: yellowstone was down.
+            Ensemble perturbation valid at 2015070106 didn't get archived.
+
+2015070106: WRFDA ran is 3DVAR mode.
+
+yellowtone was down for maintenance on July 7.
+Manually recover 2015070706, 2015070712, 2015070718
+2015070712: no low-bdy update because no real/wrfinput available
+
+yellowtone was down for maintenance on July 28.
+Manually recover 2015072812
+
+2015072918:
+switch to /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf for 
+advancing 6-h forecast
+
+2015080218:
+set sst_skin = 1 in run_advance.csh
+
+2015080618:
+switch off noaa-15-amsua chan6 and metop-2-amsua chan8.
+
+2015081906:
+wrfbdy delayed
+WRFDA failed to run with both 6-h fcst from previous cycle and GFS wrfinput.
+Use the 6-h fcst from fcst_15km/2015081900
+
+2015091800:
+WRF fcst core dumped after hour 2015-09-19_18:10:00, so no output after
+hour 42. Craig and Glen said it was because of a corrupted wrfbdy file.
+Manually re-ran the forecast with fixed wrfbdy.
+
+2015091806:
+AIREP moisture information becomes available.
+run_diag.csh is modified to process airep q.
+
+2015091900:
+forecast is now run at 15/3km.
+fcst plots are generated using d02 wrfout.
+goesch3*png have problems. Disable the plots before figuring out the solution.
+
+2015092106:
+little_r obs.2015092106 not available. DA run with ob_format=1.
+
+2015092112:
+little_r obs.2015092112 not available. DA run with ob_format=1.
+
+2015092118:
+The lack of little_r obs for previous two runs was because the MMM data ingest
+machine pine was dead. Data ingest job was transfered to another machine, but
+the modification for decoding airep q was lost. No airep q available for this run.
+
+2015092206:
+airep q info becomes available again.
+
+2015092212:
+yellowstone was down for LSF upgrade. Ensemble perturbations valid at
+2015092218 are not generated.
+
+2015102000:
+obsproc failed (hanged). Re-ran with ob_format=1.
+
+2015102118:
+consolidated various fixes into latest trunk code in
+/glade/p/work/hclin/code_intel/WRFDA/v371+
+obsproc code is modified to assign elevation info for ships and buoys
+in the Great Lakes. This code change also fixes the failed 2015102000
+obsproc case.
+Fixed a bug in writing out buoy info in filtered_obs
+Commented out the code that calculate psfc from slp in
+da_obs_sfc_correction.inc. That resulted in C-MAN pressure not being used
+between 2015102118-2015102206, because C-MAN only has slp.
+
+2015102218:
+Allow the slp_to_psfc calculation when psfc is missing.
+Found the problem that when psfc is calculated from slp,
+the qc of iv vector is good but its inv value is set to 0.0
+due to a bug in the da_get_innovation code. It is the reason that
+the omb/oma of buoy P had been weird.
+
+2015102718
+Prevent the slp_to_psfc calulcation even when psfc is missing.
+The number of used buoy (actually CMAN) P is expected to be reduced.
+In obsproc, calc_psfc_from_QNH for FM-16 SPECI is added.
+
+2016032218
+switching to code version v38-, pre-V38 release.
+Most of the DA modifications in v371+ are merged in the v38-.
+
+2016060800
+The RT system cold-started from 2016060800, because of the following
+reasons:
+1) yellowstone was down on June 7.
+2) wrfbdy/wrfinput for 2016060712 and 2016060718 are not available from
+   /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output
+3) hclin was on PTO and was unable to recover the RT system until June 9.
+
+The RT system had been in 3dvar-only mode between 2016060806 and 2016062900
+because of the un-accounted changes in the ensemble system.
+
+2016062906
+Processed the 80-member ensemble from the new file location.
+
+2016070518
+Changed the ensdim_alpha from 50 to 80.
+Increased the nodes for running WRFDA.
+
+yellowstone was down Aug 22-24.
+The real-time system cold-started from 2016082612.
+Missed runs were not recovered.
+

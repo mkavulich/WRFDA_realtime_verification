@@ -1,0 +1,12 @@
+original source code is from
+/glade/p/nmmm0001/wrfrt/realtime/wrfdart/post
+
+/glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir/run_unipost_in
+/glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir/run_unipost_out
+/glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir/extract_wrfin.ncl
+/glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir/extract_wrfout.ncl
+
+ /glade/scratch/wrfrt/realtime_ensemble/wrfdart/scripts/sub_grb_convert.csh
+ /glade/scratch/wrfrt/realtime_ensemble/wrfdart/scripts/merge2.ncl
+
+/glade/u/home/wrfrt/rt_ensemble/run_post.csh

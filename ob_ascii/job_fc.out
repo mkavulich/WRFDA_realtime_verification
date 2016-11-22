@@ -1,0 +1,1115 @@
+setenv EXPT ob_ascii
+if ( ! 0 ) then
+source /glade/u/home/hclin/scripts/rt2015/ob_ascii/params15.csh
+setenv PARAMS_SET yes
+setenv bsub_cmd /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
+setenv BIN_DIR /glade/u/home/hclin/bin
+setenv SCRIPT_DIR /glade/u/home/hclin/scripts/rt2015/ob_ascii
+setenv DIAG_SCRIPT_DIR /glade/u/home/hclin/scripts/rt2015/diag
+setenv FIX_DIR /glade/u/home/hclin/scripts/rt2015/fix
+setenv EP_EXE_DIR /glade/p/work/hclin/code_intel/V37/v371+/var/build
+setenv EP_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/enspert_inflate
+setenv FC_DIR_TOP /glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir
+setenv OB_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/obsproc
+setenv ENS_SIZE 50
+setenv FCST_HOUR 48
+setenv ADVANCE_HOUR 6
+setenv OBSPROC_EXE_DIR /glade/p/work/hclin/code_intel/WRFDA/v371+/var/obsproc
+setenv WRFDA_SRC_DIR /glade/p/work/hclin/code_intel/WRFDA/v371+
+setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+setenv RUN_BASEDIR /glade/scratch/hclin/CONUS/wrfda
+setenv EXP_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii
+setenv LOG_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/logdir
+setenv AMSU_DIR /glade/scratch/ampsrt/data/amsu
+setenv WPS_RUNDIR_TOP /glade/scratch/wrfrt/realtime_ensemble/ensf
+setenv VARBC_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/ob_ascii/hybrid_ens75_amsua/2015053118
+setenv FCST_RUN_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km
+setenv FCST_DOMAINS 1
+setenv TIME_STEP 60
+setenv TIME_STEP_FCST 45
+setenv VAR4D FALSE
+setenv VAR4D_LBC FALSE
+setenv FGAT FALSE
+if ( FALSE == TRUE ) then
+setenv NUM_FGAT_TIME 1
+setenv WRITE_INPUT FALSE
+endif
+setenv LBC_FREQ 06
+setenv CYCLE_PERIOD 06
+if ( FALSE == TRUE ) then
+setenv TIMEWINDOW1 -1h30m
+setenv TIMEWINDOW2 1h30m
+endif
+setenv WEST_EAST_GRID_NUMBER 415
+setenv SOUTH_NORTH_GRID_NUMBER 325
+setenv VERTICAL_GRID_NUMBER 40
+setenv GRID_DISTANCE 15000
+setenv CV_OPTIONS 5
+if ( 5 == 3 ) then
+if ( 5 == 5 ) then
+setenv BE_FILE /glade/u/home/hclin/scripts/rt2015/fix/be.dat.cyang
+endif
+setenv OBSERR_FILE /glade/u/home/hclin/scripts/rt2015/fix/obs_errtable_hclin
+setenv FIRST_DATE 2015060812
+setenv FG_SOURCE cycle
+setenv DA_METHOD hyb_e50_amsua
+setenv JE_FACTOR 2
+setenv ENS_SIZE 50
+setenv use_radiance true
+endif
+if ( ! 0 ) then
+echo ANAL_DATE not set
+ANAL_DATE not set
+exit 1
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@ys0261-ib>
+Subject: Job 325540: <fc112400> in cluster <yellowstone> Exited
+
+Job <fc112400> was submitted from host <yslogin5-ib> by user <hclin> in cluster <yellowstone>.
+Job was executed on host(s) <16*ys0261-ib>, in queue <regular>, as user <hclin> in cluster <yellowstone>.
+                            <16*ys0317-ib>
+                            <16*ys3014-ib>
+                            <16*ys3020-ib>
+                            <16*ys3021-ib>
+                            <16*ys3022-ib>
+                            <16*ys3023-ib>
+                            <16*ys3024-ib>
+                            <16*ys3026-ib>
+                            <16*ys3034-ib>
+                            <16*ys3044-ib>
+                            <16*ys3046-ib>
+                            <16*ys3048-ib>
+                            <16*ys3049-ib>
+                            <16*ys3053-ib>
+                            <16*ys3054-ib>
+                            <16*ys3055-ib>
+                            <16*ys3056-ib>
+                            <16*ys3069-ib>
+                            <16*ys3070-ib>
+                            <16*ys3071-ib>
+                            <16*ys3072-ib>
+                            <16*ys3104-ib>
+                            <16*ys3106-ib>
+                            <16*ys3108-ib>
+                            <16*ys3112-ib>
+                            <16*ys3114-ib>
+                            <16*ys3115-ib>
+                            <16*ys3121-ib>
+                            <16*ys3122-ib>
+                            <16*ys3123-ib>
+                            <16*ys3124-ib>
+</glade/u/home/hclin> was used as the home directory.
+</glade/u/home/hclin/scripts/rt2015/ob_ascii> was used as the working directory.
+Started at Tue Nov 24 07:58:26 2015
+Results reported on Tue Nov 24 07:58:31 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/csh -f
+#BSUB -J fc112400
+#BSUB -q regular
+#BSUB -n 512
+#BSUB -o job_fc.out
+#BSUB -e job_fc.out
+#BSUB -W 1:00
+#BSUB -P P64000510
+set echo
+
+setenv EXPT ob_ascii
+if ( ! $?PARAMS_SET ) then
+   source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params15.csh
+endif
+
+if ( ! $?ANAL_DATE ) then
+   echo "ANAL_DATE not set"
+   exit 1
+endif
+if ( ! $?FCST_DOMAINS ) then
+   echo "FCST_DOMAINS not set"
+   exit 1
+endif
+if ( ! $?FCST_RUN_DIR ) then
+   echo "FCST_RUN_DIR not set"
+   exit 1
+endif
+
+if ( ! $?WRF_SRC_DIR ) setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+if ( ! $?DA_METHOD )   set DA_METHOD = hyb_e50_amsua
+
+set DATE = $ANAL_DATE
+set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
+
+set MAX_DOM = ${FCST_DOMAINS}
+if ( ${MAX_DOM} == 1 ) then
+   set WRF_RUN_DIR = ${FCST_RUN_DIR}/${DATE}
+   set OUT_INTERVAL_d01 = 60
+else if ( ${MAX_DOM} == 2 ) then
+   set WRF_RUN_DIR = ${FCST_RUN_DIR}/${DATE}
+   set OUT_INTERVAL_d01 = 60
+endif
+set WPS_RUN_DIR = ${WPS_RUNDIR_TOP}/${DATE}/wps_rundir
+if ( ! -d ${WPS_RUN_DIR} ) then
+   set WPS_RUN_DIR = /glade/scratch/hclin/CONUS/gfs_wrfbdy/${DATE}
+   if ( ! -e ${WPS_RUN_DIR}/fhr_0/gfs_wrfbdy_d01_${START_DATE} ) then
+      echo "Error in run_fcst.csh: gfs_wrfbdy_d01 not available"
+      exit 1
+   endif
+endif
+
+(... more ...)
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   2.31 sec.
+    Max Memory :                                 34 MB
+    Average Memory :                             3.00 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              1
+    Max Threads :                                1
+    Run time :                                   0 sec.
+    Turnaround time :                            107 sec.
+
+The output (if any) is above this job summary.
+
+setenv EXPT ob_ascii
+if ( ! 0 ) then
+source /glade/u/home/hclin/scripts/rt2015/ob_ascii/params15.csh
+setenv PARAMS_SET yes
+setenv bsub_cmd /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
+setenv BIN_DIR /glade/u/home/hclin/bin
+setenv SCRIPT_DIR /glade/u/home/hclin/scripts/rt2015/ob_ascii
+setenv DIAG_SCRIPT_DIR /glade/u/home/hclin/scripts/rt2015/diag
+setenv FIX_DIR /glade/u/home/hclin/scripts/rt2015/fix
+setenv EP_EXE_DIR /glade/p/work/hclin/code_intel/V37/v371+/var/build
+setenv EP_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/enspert_inflate
+setenv FC_DIR_TOP /glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir
+setenv OB_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/obsproc
+setenv ENS_SIZE 50
+setenv FCST_HOUR 48
+setenv ADVANCE_HOUR 6
+setenv OBSPROC_EXE_DIR /glade/p/work/hclin/code_intel/WRFDA/v371+/var/obsproc
+setenv WRFDA_SRC_DIR /glade/p/work/hclin/code_intel/WRFDA/v371+
+setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+setenv RUN_BASEDIR /glade/scratch/hclin/CONUS/wrfda
+setenv EXP_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii
+setenv LOG_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/logdir
+setenv AMSU_DIR /glade/scratch/ampsrt/data/amsu
+setenv WPS_RUNDIR_TOP /glade/scratch/wrfrt/realtime_ensemble/ensf
+setenv VARBC_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/ob_ascii/hybrid_ens75_amsua/2015053118
+setenv FCST_RUN_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km
+setenv FCST_DOMAINS 1
+setenv TIME_STEP 60
+setenv TIME_STEP_FCST 45
+setenv VAR4D FALSE
+setenv VAR4D_LBC FALSE
+setenv FGAT FALSE
+if ( FALSE == TRUE ) then
+setenv NUM_FGAT_TIME 1
+setenv WRITE_INPUT FALSE
+endif
+setenv LBC_FREQ 06
+setenv CYCLE_PERIOD 06
+if ( FALSE == TRUE ) then
+setenv TIMEWINDOW1 -1h30m
+setenv TIMEWINDOW2 1h30m
+endif
+setenv WEST_EAST_GRID_NUMBER 415
+setenv SOUTH_NORTH_GRID_NUMBER 325
+setenv VERTICAL_GRID_NUMBER 40
+setenv GRID_DISTANCE 15000
+setenv CV_OPTIONS 5
+if ( 5 == 3 ) then
+if ( 5 == 5 ) then
+setenv BE_FILE /glade/u/home/hclin/scripts/rt2015/fix/be.dat.cyang
+endif
+setenv OBSERR_FILE /glade/u/home/hclin/scripts/rt2015/fix/obs_errtable_hclin
+setenv FIRST_DATE 2015060812
+setenv FG_SOURCE cycle
+setenv DA_METHOD hyb_e50_amsua
+setenv JE_FACTOR 2
+setenv ENS_SIZE 50
+setenv use_radiance true
+endif
+if ( ! 1 ) then
+if ( ! 1 ) then
+if ( ! 1 ) then
+if ( ! 1 ) setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+if ( ! 1 ) set DA_METHOD = hyb_e50_amsua
+set DATE = 2015112400
+set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 0 -w
+set MAX_DOM = 1
+if ( 1 == 1 ) then
+set WRF_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/2015112400
+set OUT_INTERVAL_d01 = 60
+else if ( 1 == 2 ) then
+set WPS_RUN_DIR = /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir
+if ( ! -d /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir ) then
+set DA_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/2015112400
+set FCST_RANGE = 48
+set LBC_FREQ = 3
+@ LBC_FREQ_SEC = 3 * 3600
+if ( ! -d /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/2015112400} ) mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/2015112400
+mkdir -p /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/2015112400
+cd /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/2015112400
+rm: No match.
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CAM_ABS_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CAM_AEROPT_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_ALB_ICE_DFS_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_ALB_ICE_DRC_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_ASM_ICE_DFS_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_ASM_ICE_DRC_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_DRDSDT0_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_EXT_ICE_DFS_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_EXT_ICE_DRC_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_KAPPA_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/CLM_TAU_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/ETAMPNEW_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/RRTMG_LW_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/RRTMG_SW_DATA /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/RRTM_DATA .
+ln: No match.
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/GENPARM.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/LANDUSE.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/MPTABLE.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/SOILPARM.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/URBPARM.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/URBPARM_UZE.TBL /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/VEGPARM.TBL .
+ln: No match.
+ln: No match.
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/ozone.formatted /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/ozone_lat.formatted /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/ozone_plev.formatted .
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/aerosol.formatted /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/aerosol_lat.formatted /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/aerosol_lon.formatted /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/aerosol_plev.formatted .
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/tr49t67 /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/tr49t85 /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run/tr67t85 .
+set cc = `echo $DATE | cut -c1-2`
+cut -c1-2
+echo 2015112400
+set yy = `echo $DATE | cut -c3-4`
+cut -c3-4
+echo 2015112400
+set mm = `echo $DATE | cut -c5-6`
+cut -c5-6
+echo 2015112400
+set dd = `echo $DATE | cut -c7-8`
+cut -c7-8
+echo 2015112400
+set hh = `echo $DATE | cut -c9-10`
+cut -c9-10
+echo 2015112400
+set END_DATE = `${BIN_DIR}/da_advance_time.exe $DATE $FCST_RANGE -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 48 -w
+set ccyy_s = `echo $START_DATE | cut -c1-4`
+cut -c1-4
+echo 2015-11-24_00:00:00
+set mm_s = `echo $START_DATE | cut -c6-7`
+cut -c6-7
+echo 2015-11-24_00:00:00
+set dd_s = `echo $START_DATE | cut -c9-10`
+cut -c9-10
+echo 2015-11-24_00:00:00
+set hh_s = `echo $START_DATE | cut -c12-13`
+cut -c12-13
+echo 2015-11-24_00:00:00
+set mi_s = `echo $START_DATE | cut -c15-16`
+cut -c15-16
+echo 2015-11-24_00:00:00
+set ccyy_e = `echo $END_DATE | cut -c1-4`
+cut -c1-4
+echo 2015-11-26_00:00:00
+set mm_e = `echo $END_DATE | cut -c6-7`
+cut -c6-7
+echo 2015-11-26_00:00:00
+set dd_e = `echo $END_DATE | cut -c9-10`
+cut -c9-10
+echo 2015-11-26_00:00:00
+set hh_e = `echo $END_DATE | cut -c12-13`
+cut -c12-13
+echo 2015-11-26_00:00:00
+set mi_e = `echo $END_DATE | cut -c15-16`
+cut -c15-16
+echo 2015-11-26_00:00:00
+cat
+if ( ! -e /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/2015112400/wrfvar_output_d01_2015112400 ) then
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_0/gfs_wrfbdy_d01_2015-11-24_00:00:00 ./gfs_wrfbdy_d01_2015112400
+if ( 1 == 2 ) then
+set update_bc = true
+if ( true == true ) then
+cp -p gfs_wrfbdy_d01_2015112400 wrfbdy_d01
+cat
+ln -sf /glade/p/work/hclin/code_intel/WRFDA/v371+/var/build/da_update_bc.exe .
+./da_update_bc.exe
+0.254u 0.541s 0:02.43 32.5%	0+0k 0+0io 0pf+0w
+mv parame.in parame.in.latbdy
+grep Update_bc completed successfully log.update_lat_bc_2015112400
+ *** Update_bc completed successfully ***
+if ( 0 != 0 ) then
+endif
+@ nfile = 48 / 3 + 1
+@ n = 1
+while ( 1 < = 17 )
+@ fcsthour = 3 * ( 1 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 0 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_0/gfs_wrfbdy_d01_2015-11-24_00:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_00:00:00 wrfbdy_d01_2015-11-24_00:00:00
+@ n = 1 + 1
+end
+while ( 2 < = 17 )
+@ fcsthour = 3 * ( 2 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 3 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_3/gfs_wrfbdy_d01_2015-11-24_03:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_03:00:00 wrfbdy_d01_2015-11-24_03:00:00
+@ n = 2 + 1
+end
+while ( 3 < = 17 )
+@ fcsthour = 3 * ( 3 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 6 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_6/gfs_wrfbdy_d01_2015-11-24_06:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_06:00:00 wrfbdy_d01_2015-11-24_06:00:00
+@ n = 3 + 1
+end
+while ( 4 < = 17 )
+@ fcsthour = 3 * ( 4 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 9 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_9/gfs_wrfbdy_d01_2015-11-24_09:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_09:00:00 wrfbdy_d01_2015-11-24_09:00:00
+@ n = 4 + 1
+end
+while ( 5 < = 17 )
+@ fcsthour = 3 * ( 5 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 12 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_12/gfs_wrfbdy_d01_2015-11-24_12:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_12:00:00 wrfbdy_d01_2015-11-24_12:00:00
+@ n = 5 + 1
+end
+while ( 6 < = 17 )
+@ fcsthour = 3 * ( 6 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 15 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_15/gfs_wrfbdy_d01_2015-11-24_15:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_15:00:00 wrfbdy_d01_2015-11-24_15:00:00
+@ n = 6 + 1
+end
+while ( 7 < = 17 )
+@ fcsthour = 3 * ( 7 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 18 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_18/gfs_wrfbdy_d01_2015-11-24_18:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_18:00:00 wrfbdy_d01_2015-11-24_18:00:00
+@ n = 7 + 1
+end
+while ( 8 < = 17 )
+@ fcsthour = 3 * ( 8 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 21 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_21/gfs_wrfbdy_d01_2015-11-24_21:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-24_21:00:00 wrfbdy_d01_2015-11-24_21:00:00
+@ n = 8 + 1
+end
+while ( 9 < = 17 )
+@ fcsthour = 3 * ( 9 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 24 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_24/gfs_wrfbdy_d01_2015-11-25_00:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_00:00:00 wrfbdy_d01_2015-11-25_00:00:00
+@ n = 9 + 1
+end
+while ( 10 < = 17 )
+@ fcsthour = 3 * ( 10 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 27 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_27/gfs_wrfbdy_d01_2015-11-25_03:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_03:00:00 wrfbdy_d01_2015-11-25_03:00:00
+@ n = 10 + 1
+end
+while ( 11 < = 17 )
+@ fcsthour = 3 * ( 11 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 30 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_30/gfs_wrfbdy_d01_2015-11-25_06:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_06:00:00 wrfbdy_d01_2015-11-25_06:00:00
+@ n = 11 + 1
+end
+while ( 12 < = 17 )
+@ fcsthour = 3 * ( 12 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 33 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_33/gfs_wrfbdy_d01_2015-11-25_09:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_09:00:00 wrfbdy_d01_2015-11-25_09:00:00
+@ n = 12 + 1
+end
+while ( 13 < = 17 )
+@ fcsthour = 3 * ( 13 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 36 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_36/gfs_wrfbdy_d01_2015-11-25_12:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_12:00:00 wrfbdy_d01_2015-11-25_12:00:00
+@ n = 13 + 1
+end
+while ( 14 < = 17 )
+@ fcsthour = 3 * ( 14 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 39 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_39/gfs_wrfbdy_d01_2015-11-25_15:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_15:00:00 wrfbdy_d01_2015-11-25_15:00:00
+@ n = 14 + 1
+end
+while ( 15 < = 17 )
+@ fcsthour = 3 * ( 15 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 42 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_42/gfs_wrfbdy_d01_2015-11-25_18:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_18:00:00 wrfbdy_d01_2015-11-25_18:00:00
+@ n = 15 + 1
+end
+while ( 16 < = 17 )
+@ fcsthour = 3 * ( 16 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 45 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_45/gfs_wrfbdy_d01_2015-11-25_21:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-25_21:00:00 wrfbdy_d01_2015-11-25_21:00:00
+@ n = 16 + 1
+end
+while ( 17 < = 17 )
+@ fcsthour = 3 * ( 17 - 1 )
+set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+/glade/u/home/hclin/bin/da_advance_time.exe 2015112400 48 -w
+ln -sf /glade/scratch/wrfrt/realtime_ensemble/ensf/2015112400/wps_rundir/fhr_48/gfs_wrfbdy_d01_2015-11-26_00:00:00 .
+ln -sf gfs_wrfbdy_d01_2015-11-26_00:00:00 wrfbdy_d01_2015-11-26_00:00:00
+@ n = 17 + 1
+end
+while ( 18 < = 17 )
+ln -sf wrfbdy_d01 ./wrfbdy_d01_2015-11-24_00:00:00
+ln -sf /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/2015112400/wrfvar_output_d01_2015112400 ./wrfinput_d01
+if ( 1 == 2 ) then
+ln -sf /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/main/wrf.exe .
+mpirun.lsf ./wrf.exe
+Execute poe command line: poe  ./wrf.exe
+ starting wrf task          270  of          512
+ starting wrf task           11  of          512
+ starting wrf task          258  of          512
+ starting wrf task          261  of          512
+ starting wrf task          267  of          512
+ starting wrf task          256  of          512
+ starting wrf task            2  of          512
+ starting wrf task          260  of          512
+ starting wrf task            0  of          512
+ starting wrf task          259  of          512
+ starting wrf task            7  of          512
+ starting wrf task          264  of          512
+ starting wrf task          262  of          512
+ starting wrf task            1  of          512
+ starting wrf task          245  of          512
+ starting wrf task          342  of          512
+ starting wrf task          373  of          512
+ starting wrf task          253  of          512
+ starting wrf task          161  of          512
+ starting wrf task          370  of          512
+ starting wrf task          269  of          512
+ starting wrf task           15  of          512
+ starting wrf task          371  of          512
+ starting wrf task          435  of          512
+ starting wrf task          268  of          512
+ starting wrf task          374  of          512
+ starting wrf task           10  of          512
+ starting wrf task          174  of          512
+ starting wrf task          252  of          512
+ starting wrf task          251  of          512
+ starting wrf task          440  of          512
+ starting wrf task            8  of          512
+ starting wrf task          437  of          512
+ starting wrf task          271  of          512
+ starting wrf task          163  of          512
+ starting wrf task          244  of          512
+ starting wrf task          254  of          512
+ starting wrf task           87  of          512
+ starting wrf task          106  of          512
+ starting wrf task          346  of          512
+ starting wrf task           93  of          512
+ starting wrf task          445  of          512
+ starting wrf task           13  of          512
+ starting wrf task          351  of          512
+ starting wrf task          100  of          512
+ starting wrf task          377  of          512
+ starting wrf task          240  of          512
+ starting wrf task          432  of          512
+ starting wrf task           98  of          512
+ starting wrf task          446  of          512
+ starting wrf task          142  of          512
+ starting wrf task          397  of          512
+ starting wrf task          243  of          512
+ starting wrf task          312  of          512
+ starting wrf task           97  of          512
+ starting wrf task          183  of          512
+ starting wrf task          384  of          512
+ starting wrf task           95  of          512
+ starting wrf task          242  of          512
+ starting wrf task          162  of          512
+ starting wrf task          444  of          512
+ starting wrf task           84  of          512
+ starting wrf task          170  of          512
+ starting wrf task          387  of          512
+ starting wrf task          372  of          512
+ starting wrf task           83  of          512
+ starting wrf task          315  of          512
+ starting wrf task          338  of          512
+ starting wrf task          396  of          512
+ starting wrf task           14  of          512
+ starting wrf task          188  of          512
+ starting wrf task          333  of          512
+ starting wrf task           68  of          512
+ starting wrf task          139  of          512
+ starting wrf task          500  of          512
+ starting wrf task          249  of          512
+ starting wrf task          423  of          512
+ starting wrf task           99  of          512
+ starting wrf task          192  of          512
+ starting wrf task          171  of          512
+ starting wrf task          143  of          512
+ starting wrf task           71  of          512
+ starting wrf task          310  of          512
+ starting wrf task            3  of          512
+ starting wrf task          394  of          512
+ starting wrf task          369  of          512
+ starting wrf task          350  of          512
+ starting wrf task          136  of          512
+ starting wrf task          399  of          512
+ starting wrf task          190  of          512
+ starting wrf task          207  of          512
+ starting wrf task          419  of          512
+ starting wrf task           80  of          512
+ starting wrf task           28  of          512
+ starting wrf task          451  of          512
+ starting wrf task          141  of          512
+ starting wrf task           91  of          512
+ starting wrf task          376  of          512
+ starting wrf task          498  of          512
+ starting wrf task           79  of          512
+ starting wrf task          241  of          512
+ starting wrf task          343  of          512
+ starting wrf task          326  of          512
+ starting wrf task          318  of          512
+ starting wrf task          175  of          512
+ starting wrf task          263  of          512
+ starting wrf task          116  of          512
+ starting wrf task           27  of          512
+ starting wrf task          325  of          512
+ starting wrf task          182  of          512
+ starting wrf task          148  of          512
+ starting wrf task           76  of          512
+ starting wrf task          246  of          512
+ starting wrf task          209  of          512
+ starting wrf task            5  of          512
+ starting wrf task          483  of          512
+ starting wrf task           25  of          512
+ starting wrf task          505  of          512
+ starting wrf task          167  of          512
+ starting wrf task          193  of          512
+ starting wrf task          137  of          512
+ starting wrf task          335  of          512
+ starting wrf task           89  of          512
+ starting wrf task          509  of          512
+ starting wrf task          494  of          512
+ starting wrf task          382  of          512
+ starting wrf task          317  of          512
+ starting wrf task           16  of          512
+ starting wrf task          111  of          512
+ starting wrf task          185  of          512
+ starting wrf task          507  of          512
+ starting wrf task          431  of          512
+ starting wrf task          105  of          512
+ starting wrf task          392  of          512
+ starting wrf task          321  of          512
+ starting wrf task          184  of          512
+ starting wrf task          124  of          512
+ starting wrf task          428  of          512
+ starting wrf task           30  of          512
+ starting wrf task          309  of          512
+ starting wrf task           70  of          512
+ starting wrf task          380  of          512
+ starting wrf task          391  of          512
+ starting wrf task          216  of          512
+ starting wrf task          367  of          512
+ starting wrf task          337  of          512
+ starting wrf task          210  of          512
+ starting wrf task          398  of          512
+ starting wrf task          118  of          512
+ starting wrf task          103  of          512
+ starting wrf task           90  of          512
+ starting wrf task          306  of          512
+ starting wrf task          179  of          512
+ starting wrf task           81  of          512
+ starting wrf task          375  of          512
+ starting wrf task          198  of          512
+ starting wrf task          197  of          512
+ starting wrf task          436  of          512
+ starting wrf task          168  of          512
+ starting wrf task          180  of          512
+ starting wrf task          150  of          512
+ starting wrf task          130  of          512
+ starting wrf task          499  of          512
+ starting wrf task          322  of          512
+ starting wrf task           67  of          512
+ starting wrf task          110  of          512
+ starting wrf task          200  of          512
+ starting wrf task          429  of          512
+ starting wrf task          311  of          512
+ starting wrf task           20  of          512
+ starting wrf task           29  of          512
+ starting wrf task          348  of          512
+ starting wrf task          359  of          512
+ starting wrf task          220  of          512
+ starting wrf task          460  of          512
+ starting wrf task          386  of          512
+ starting wrf task          169  of          512
+ starting wrf task          308  of          512
+ starting wrf task           39  of          512
+ starting wrf task          172  of          512
+ starting wrf task          331  of          512
+ starting wrf task          247  of          512
+ starting wrf task          490  of          512
+ starting wrf task          450  of          512
+ starting wrf task          122  of          512
+ starting wrf task          132  of          512
+ starting wrf task          173  of          512
+ starting wrf task          378  of          512
+ starting wrf task          202  of          512
+ starting wrf task          406  of          512
+ starting wrf task          221  of          512
+ starting wrf task          353  of          512
+ starting wrf task          123  of          512
+ starting wrf task          204  of          512
+ starting wrf task          334  of          512
+ starting wrf task          313  of          512
+ starting wrf task          508  of          512
+ starting wrf task           38  of          512
+ starting wrf task           72  of          512
+ starting wrf task          420  of          512
+ starting wrf task           62  of          512
+ starting wrf task          328  of          512
+ starting wrf task          120  of          512
+ starting wrf task          156  of          512
+ starting wrf task          356  of          512
+ starting wrf task          448  of          512
+ starting wrf task          164  of          512
+ starting wrf task           96  of          512
+ starting wrf task           92  of          512
+ starting wrf task          434  of          512
+ starting wrf task          496  of          512
+ starting wrf task          403  of          512
+ starting wrf task          485  of          512
+ starting wrf task          189  of          512
+ starting wrf task          362  of          512
+ starting wrf task          294  of          512
+ starting wrf task          390  of          512
+ starting wrf task           74  of          512
+ starting wrf task          266  of          512
+ starting wrf task           37  of          512
+ starting wrf task          296  of          512
+ starting wrf task          265  of          512
+ starting wrf task           31  of          512
+ starting wrf task          125  of          512
+ starting wrf task          284  of          512
+ starting wrf task            9  of          512
+ starting wrf task          257  of          512
+ starting wrf task           36  of          512
+ starting wrf task           66  of          512
+ starting wrf task          493  of          512
+ starting wrf task          208  of          512
+ starting wrf task          402  of          512
+ starting wrf task           82  of          512
+ starting wrf task           23  of          512
+ starting wrf task          144  of          512
+ starting wrf task          358  of          512
+ starting wrf task          114  of          512
+ starting wrf task          481  of          512
+ starting wrf task          303  of          512
+ starting wrf task          135  of          512
+ starting wrf task          501  of          512
+ starting wrf task          160  of          512
+ starting wrf task          383  of          512
+ starting wrf task          405  of          512
+ starting wrf task           34  of          512
+ starting wrf task           21  of          512
+ starting wrf task          157  of          512
+ starting wrf task          456  of          512
+ starting wrf task          491  of          512
+ starting wrf task          363  of          512
+ starting wrf task          407  of          512
+ starting wrf task          149  of          512
+ starting wrf task          504  of          512
+ starting wrf task          285  of          512
+ starting wrf task          187  of          512
+ starting wrf task            4  of          512
+ starting wrf task          462  of          512
+ starting wrf task          133  of          512
+ starting wrf task          381  of          512
+ starting wrf task          215  of          512
+ starting wrf task           78  of          512
+ starting wrf task          158  of          512
+ starting wrf task          327  of          512
+ starting wrf task          281  of          512
+ starting wrf task           18  of          512
+ starting wrf task          290  of          512
+ starting wrf task          214  of          512
+ starting wrf task           41  of          512
+ starting wrf task          305  of          512
+ starting wrf task          388  of          512
+ starting wrf task          484  of          512
+ starting wrf task          199  of          512
+ starting wrf task          422  of          512
+ starting wrf task          457  of          512
+ starting wrf task           52  of          512
+ starting wrf task          298  of          512
+ starting wrf task          476  of          512
+ starting wrf task          414  of          512
+ starting wrf task          461  of          512
+ starting wrf task          385  of          512
+ starting wrf task          357  of          512
+ starting wrf task          186  of          512
+ starting wrf task          165  of          512
+ starting wrf task          368  of          512
+ starting wrf task          154  of          512
+ starting wrf task          108  of          512
+ starting wrf task           12  of          512
+ starting wrf task           44  of          512
+ starting wrf task          439  of          512
+ starting wrf task          401  of          512
+ starting wrf task          468  of          512
+ starting wrf task          489  of          512
+ starting wrf task          288  of          512
+ starting wrf task          101  of          512
+ starting wrf task          131  of          512
+ starting wrf task          145  of          512
+ starting wrf task          177  of          512
+ starting wrf task          408  of          512
+ starting wrf task           94  of          512
+ starting wrf task          459  of          512
+ starting wrf task          212  of          512
+ starting wrf task          255  of          512
+ starting wrf task          272  of          512
+ starting wrf task           45  of          512
+ starting wrf task          146  of          512
+ starting wrf task          492  of          512
+ starting wrf task          511  of          512
+ starting wrf task          302  of          512
+ starting wrf task           19  of          512
+ starting wrf task          117  of          512
+ starting wrf task          463  of          512
+ starting wrf task          341  of          512
+ starting wrf task          211  of          512
+ starting wrf task          332  of          512
+ starting wrf task          295  of          512
+ starting wrf task          283  of          512
+ starting wrf task           50  of          512
+ starting wrf task          365  of          512
+ starting wrf task          151  of          512
+ starting wrf task          134  of          512
+ starting wrf task          224  of          512
+ starting wrf task          427  of          512
+ starting wrf task          366  of          512
+ starting wrf task          480  of          512
+ starting wrf task          292  of          512
+ starting wrf task          282  of          512
+ starting wrf task           77  of          512
+ starting wrf task          477  of          512
+ starting wrf task          194  of          512
+ starting wrf task          280  of          512
+ starting wrf task          233  of          512
+ starting wrf task          203  of          512
+ starting wrf task          275  of          512
+ starting wrf task          438  of          512
+ starting wrf task          503  of          512
+ starting wrf task          115  of          512
+ starting wrf task          129  of          512
+ starting wrf task           22  of          512
+ starting wrf task          196  of          512
+ starting wrf task          227  of          512
+ starting wrf task          213  of          512
+ starting wrf task          121  of          512
+ starting wrf task          430  of          512
+ starting wrf task          206  of          512
+ starting wrf task          307  of          512
+ starting wrf task          421  of          512
+ starting wrf task           60  of          512
+ starting wrf task          231  of          512
+ starting wrf task          502  of          512
+ starting wrf task          205  of          512
+ starting wrf task          470  of          512
+ starting wrf task          109  of          512
+ starting wrf task          339  of          512
+ starting wrf task          279  of          512
+ starting wrf task          232  of          512
+ starting wrf task          412  of          512
+ starting wrf task          191  of          512
+ starting wrf task          474  of          512
+ starting wrf task          487  of          512
+ starting wrf task          410  of          512
+ starting wrf task          433  of          512
+ starting wrf task            6  of          512
+ starting wrf task          230  of          512
+ starting wrf task          112  of          512
+ starting wrf task          389  of          512
+ starting wrf task          475  of          512
+ starting wrf task           55  of          512
+ starting wrf task          364  of          512
+ starting wrf task          153  of          512
+ starting wrf task          324  of          512
+ starting wrf task          239  of          512
+ starting wrf task          441  of          512
+ starting wrf task          442  of          512
+ starting wrf task          301  of          512
+ starting wrf task          443  of          512
+ starting wrf task          455  of          512
+ starting wrf task           63  of          512
+ starting wrf task          140  of          512
+ starting wrf task          447  of          512
+ starting wrf task          128  of          512
+ starting wrf task          354  of          512
+ starting wrf task          286  of          512
+ starting wrf task          138  of          512
+ starting wrf task          234  of          512
+ starting wrf task          379  of          512
+ starting wrf task          107  of          512
+ starting wrf task          126  of          512
+ starting wrf task          344  of          512
+ starting wrf task           40  of          512
+ starting wrf task          482  of          512
+ starting wrf task          466  of          512
+ starting wrf task          102  of          512
+ starting wrf task          299  of          512
+ starting wrf task          176  of          512
+ starting wrf task           49  of          512
+ starting wrf task           43  of          512
+ starting wrf task          274  of          512
+ starting wrf task          291  of          512
+ starting wrf task          395  of          512
+ starting wrf task          236  of          512
+ starting wrf task          355  of          512
+ starting wrf task          458  of          512
+ starting wrf task           58  of          512
+ starting wrf task          393  of          512
+ starting wrf task          223  of          512
+ starting wrf task           46  of          512
+ starting wrf task           24  of          512
+ starting wrf task           35  of          512
+ starting wrf task          237  of          512
+ starting wrf task          219  of          512
+ starting wrf task          250  of          512
+ starting wrf task           42  of          512
+ starting wrf task          248  of          512
+ starting wrf task          469  of          512
+ starting wrf task           75  of          512
+ starting wrf task          417  of          512
+ starting wrf task          472  of          512
+ starting wrf task          319  of          512
+ starting wrf task           85  of          512
+ starting wrf task          323  of          512
+ starting wrf task          478  of          512
+ starting wrf task          195  of          512
+ starting wrf task           86  of          512
+ starting wrf task           88  of          512
+ starting wrf task          278  of          512
+ starting wrf task          418  of          512
+ starting wrf task          229  of          512
+ starting wrf task          222  of          512
+ starting wrf task          506  of          512
+ starting wrf task          300  of          512
+ starting wrf task          178  of          512
+ starting wrf task          181  of          512
+ starting wrf task           69  of          512
+ starting wrf task          345  of          512
+ starting wrf task          413  of          512
+ starting wrf task          104  of          512
+ starting wrf task          217  of          512
+ starting wrf task           73  of          512
+ starting wrf task          293  of          512
+ starting wrf task          218  of          512
+ starting wrf task          235  of          512
+ starting wrf task           65  of          512
+ starting wrf task           64  of          512
+ starting wrf task          314  of          512
+ starting wrf task           26  of          512
+ starting wrf task          452  of          512
+ starting wrf task           17  of          512
+ starting wrf task          316  of          512
+ starting wrf task          155  of          512
+ starting wrf task          166  of          512
+ starting wrf task          360  of          512
+ starting wrf task          201  of          512
+ starting wrf task          304  of          512
+ starting wrf task          411  of          512
+ starting wrf task          510  of          512
+ starting wrf task          330  of          512
+ starting wrf task          289  of          512
+ starting wrf task          497  of          512
+ starting wrf task          329  of          512
+ starting wrf task          479  of          512
+ starting wrf task          152  of          512
+ starting wrf task          320  of          512
+ starting wrf task          277  of          512
+ starting wrf task          426  of          512
+ starting wrf task           54  of          512
+ starting wrf task           57  of          512
+ starting wrf task          147  of          512
+ starting wrf task          416  of          512
+ starting wrf task          349  of          512
+ starting wrf task          425  of          512
+ starting wrf task          404  of          512
+ starting wrf task          159  of          512
+ starting wrf task          113  of          512
+ starting wrf task          336  of          512
+ starting wrf task          400  of          512
+ starting wrf task          347  of          512
+ starting wrf task          409  of          512
+ starting wrf task          424  of          512
+ starting wrf task          415  of          512
+ starting wrf task          119  of          512
+ starting wrf task          486  of          512
+ starting wrf task           32  of          512
+ starting wrf task          453  of          512
+ starting wrf task          488  of          512
+ starting wrf task          495  of          512
+ starting wrf task          127  of          512
+ starting wrf task          454  of          512
+ starting wrf task          340  of          512
+ starting wrf task          449  of          512
+ starting wrf task          273  of          512
+ starting wrf task          297  of          512
+ starting wrf task          361  of          512
+ starting wrf task           51  of          512
+ starting wrf task          464  of          512
+ starting wrf task          276  of          512
+ starting wrf task          287  of          512
+ starting wrf task           61  of          512
+ starting wrf task          465  of          512
+ starting wrf task           47  of          512
+ starting wrf task           33  of          512
+ starting wrf task           59  of          512
+ starting wrf task          352  of          512
+ starting wrf task          471  of          512
+ starting wrf task           53  of          512
+ starting wrf task           48  of          512
+ starting wrf task          226  of          512
+ starting wrf task           56  of          512
+ starting wrf task          225  of          512
+ starting wrf task          228  of          512
+ starting wrf task          238  of          512
+ starting wrf task          467  of          512
+ starting wrf task          473  of          512
+grep SUCCESS COMPLETE WRF rsl.out.0000
+d01 2015-11-26_00:00:00 wrf: SUCCESS COMPLETE WRF
+if ( 0 != 0 ) then
+mkdir rsl
+mv rsl.out.0000 rsl.out.0001 rsl.out.0002 rsl.out.0003 rsl.out.0004 rsl.out.0005 rsl.out.0006 rsl.out.0007 rsl.out.0008 rsl.out.0009 rsl.out.0010 rsl.out.0011 rsl.out.0012 rsl.out.0013 rsl.out.0014 rsl.out.0015 rsl.out.0016 rsl.out.0017 rsl.out.0018 rsl.out.0019 rsl.out.0020 rsl.out.0021 rsl.out.0022 rsl.out.0023 rsl.out.0024 rsl.out.0025 rsl.out.0026 rsl.out.0027 rsl.out.0028 rsl.out.0029 rsl.out.0030 rsl.out.0031 rsl.out.0032 rsl.out.0033 rsl.out.0034 rsl.out.0035 rsl.out.0036 rsl.out.0037 rsl.out.0038 rsl.out.0039 rsl.out.0040 rsl.out.0041 rsl.out.0042 rsl.out.0043 rsl.out.0044 rsl.out.0045 rsl.out.0046 rsl.out.0047 rsl.out.0048 rsl.out.0049 rsl.out.0050 rsl.out.0051 rsl.out.0052 rsl.out.0053 rsl.out.0054 rsl.out.0055 rsl.out.0056 rsl.out.0057 rsl.out.0058 rsl.out.0059 rsl.out.0060 rsl.out.0061 rsl.out.0062 rsl.out.0063 rsl.out.0064 rsl.out.0065 rsl.out.0066 rsl.out.0067 rsl.out.0068 rsl.out.0069 rsl.out.0070 rsl.out.0071 rsl.out.0072 rsl.out.0073 rsl.out.0074 rsl.out.0075 rsl.out.0076 rsl.out.0077 rsl.out.0078 rsl.out.0079 rsl.out.0080 rsl.out.0081 rsl.out.0082 rsl.out.0083 rsl.out.0084 rsl.out.0085 rsl.out.0086 rsl.out.0087 rsl.out.0088 rsl.out.0089 rsl.out.0090 rsl.out.0091 rsl.out.0092 rsl.out.0093 rsl.out.0094 rsl.out.0095 rsl.out.0096 rsl.out.0097 rsl.out.0098 rsl.out.0099 rsl.out.0100 rsl.out.0101 rsl.out.0102 rsl.out.0103 rsl.out.0104 rsl.out.0105 rsl.out.0106 rsl.out.0107 rsl.out.0108 rsl.out.0109 rsl.out.0110 rsl.out.0111 rsl.out.0112 rsl.out.0113 rsl.out.0114 rsl.out.0115 rsl.out.0116 rsl.out.0117 rsl.out.0118 rsl.out.0119 rsl.out.0120 rsl.out.0121 rsl.out.0122 rsl.out.0123 rsl.out.0124 rsl.out.0125 rsl.out.0126 rsl.out.0127 rsl.out.0128 rsl.out.0129 rsl.out.0130 rsl.out.0131 rsl.out.0132 rsl.out.0133 rsl.out.0134 rsl.out.0135 rsl.out.0136 rsl.out.0137 rsl.out.0138 rsl.out.0139 rsl.out.0140 rsl.out.0141 rsl.out.0142 rsl.out.0143 rsl.out.0144 rsl.out.0145 rsl.out.0146 rsl.out.0147 rsl.out.0148 rsl.out.0149 rsl.out.0150 rsl.out.0151 rsl.out.0152 rsl.out.0153 rsl.out.0154 rsl.out.0155 rsl.out.0156 rsl.out.0157 rsl.out.0158 rsl.out.0159 rsl.out.0160 rsl.out.0161 rsl.out.0162 rsl.out.0163 rsl.out.0164 rsl.out.0165 rsl.out.0166 rsl.out.0167 rsl.out.0168 rsl.out.0169 rsl.out.0170 rsl.out.0171 rsl.out.0172 rsl.out.0173 rsl.out.0174 rsl.out.0175 rsl.out.0176 rsl.out.0177 rsl.out.0178 rsl.out.0179 rsl.out.0180 rsl.out.0181 rsl.out.0182 rsl.out.0183 rsl.out.0184 rsl.out.0185 rsl.out.0186 rsl.out.0187 rsl.out.0188 rsl.out.0189 rsl.out.0190 rsl.out.0191 rsl.out.0192 rsl.out.0193 rsl.out.0194 rsl.out.0195 rsl.out.0196 rsl.out.0197 rsl.out.0198 rsl.out.0199 rsl.out.0200 rsl.out.0201 rsl.out.0202 rsl.out.0203 rsl.out.0204 rsl.out.0205 rsl.out.0206 rsl.out.0207 rsl.out.0208 rsl.out.0209 rsl.out.0210 rsl.out.0211 rsl.out.0212 rsl.out.0213 rsl.out.0214 rsl.out.0215 rsl.out.0216 rsl.out.0217 rsl.out.0218 rsl.out.0219 rsl.out.0220 rsl.out.0221 rsl.out.0222 rsl.out.0223 rsl.out.0224 rsl.out.0225 rsl.out.0226 rsl.out.0227 rsl.out.0228 rsl.out.0229 rsl.out.0230 rsl.out.0231 rsl.out.0232 rsl.out.0233 rsl.out.0234 rsl.out.0235 rsl.out.0236 rsl.out.0237 rsl.out.0238 rsl.out.0239 rsl.out.0240 rsl.out.0241 rsl.out.0242 rsl.out.0243 rsl.out.0244 rsl.out.0245 rsl.out.0246 rsl.out.0247 rsl.out.0248 rsl.out.0249 rsl.out.0250 rsl.out.0251 rsl.out.0252 rsl.out.0253 rsl.out.0254 rsl.out.0255 rsl.out.0256 rsl.out.0257 rsl.out.0258 rsl.out.0259 rsl.out.0260 rsl.out.0261 rsl.out.0262 rsl.out.0263 rsl.out.0264 rsl.out.0265 rsl.out.0266 rsl.out.0267 rsl.out.0268 rsl.out.0269 rsl.out.0270 rsl.out.0271 rsl.out.0272 rsl.out.0273 rsl.out.0274 rsl.out.0275 rsl.out.0276 rsl.out.0277 rsl.out.0278 rsl.out.0279 rsl.out.0280 rsl.out.0281 rsl.out.0282 rsl.out.0283 rsl.out.0284 rsl.out.0285 rsl.out.0286 rsl.out.0287 rsl.out.0288 rsl.out.0289 rsl.out.0290 rsl.out.0291 rsl.out.0292 rsl.out.0293 rsl.out.0294 rsl.out.0295 rsl.out.0296 rsl.out.0297 rsl.out.0298 rsl.out.0299 rsl.out.0300 rsl.out.0301 rsl.out.0302 rsl.out.0303 rsl.out.0304 rsl.out.0305 rsl.out.0306 rsl.out.0307 rsl.out.0308 rsl.out.0309 rsl.out.0310 rsl.out.0311 rsl.out.0312 rsl.out.0313 rsl.out.0314 rsl.out.0315 rsl.out.0316 rsl.out.0317 rsl.out.0318 rsl.out.0319 rsl.out.0320 rsl.out.0321 rsl.out.0322 rsl.out.0323 rsl.out.0324 rsl.out.0325 rsl.out.0326 rsl.out.0327 rsl.out.0328 rsl.out.0329 rsl.out.0330 rsl.out.0331 rsl.out.0332 rsl.out.0333 rsl.out.0334 rsl.out.0335 rsl.out.0336 rsl.out.0337 rsl.out.0338 rsl.out.0339 rsl.out.0340 rsl.out.0341 rsl.out.0342 rsl.out.0343 rsl.out.0344 rsl.out.0345 rsl.out.0346 rsl.out.0347 rsl.out.0348 rsl.out.0349 rsl.out.0350 rsl.out.0351 rsl.out.0352 rsl.out.0353 rsl.out.0354 rsl.out.0355 rsl.out.0356 rsl.out.0357 rsl.out.0358 rsl.out.0359 rsl.out.0360 rsl.out.0361 rsl.out.0362 rsl.out.0363 rsl.out.0364 rsl.out.0365 rsl.out.0366 rsl.out.0367 rsl.out.0368 rsl.out.0369 rsl.out.0370 rsl.out.0371 rsl.out.0372 rsl.out.0373 rsl.out.0374 rsl.out.0375 rsl.out.0376 rsl.out.0377 rsl.out.0378 rsl.out.0379 rsl.out.0380 rsl.out.0381 rsl.out.0382 rsl.out.0383 rsl.out.0384 rsl.out.0385 rsl.out.0386 rsl.out.0387 rsl.out.0388 rsl.out.0389 rsl.out.0390 rsl.out.0391 rsl.out.0392 rsl.out.0393 rsl.out.0394 rsl.out.0395 rsl.out.0396 rsl.out.0397 rsl.out.0398 rsl.out.0399 rsl.out.0400 rsl.out.0401 rsl.out.0402 rsl.out.0403 rsl.out.0404 rsl.out.0405 rsl.out.0406 rsl.out.0407 rsl.out.0408 rsl.out.0409 rsl.out.0410 rsl.out.0411 rsl.out.0412 rsl.out.0413 rsl.out.0414 rsl.out.0415 rsl.out.0416 rsl.out.0417 rsl.out.0418 rsl.out.0419 rsl.out.0420 rsl.out.0421 rsl.out.0422 rsl.out.0423 rsl.out.0424 rsl.out.0425 rsl.out.0426 rsl.out.0427 rsl.out.0428 rsl.out.0429 rsl.out.0430 rsl.out.0431 rsl.out.0432 rsl.out.0433 rsl.out.0434 rsl.out.0435 rsl.out.0436 rsl.out.0437 rsl.out.0438 rsl.out.0439 rsl.out.0440 rsl.out.0441 rsl.out.0442 rsl.out.0443 rsl.out.0444 rsl.out.0445 rsl.out.0446 rsl.out.0447 rsl.out.0448 rsl.out.0449 rsl.out.0450 rsl.out.0451 rsl.out.0452 rsl.out.0453 rsl.out.0454 rsl.out.0455 rsl.out.0456 rsl.out.0457 rsl.out.0458 rsl.out.0459 rsl.out.0460 rsl.out.0461 rsl.out.0462 rsl.out.0463 rsl.out.0464 rsl.out.0465 rsl.out.0466 rsl.out.0467 rsl.out.0468 rsl.out.0469 rsl.out.0470 rsl.out.0471 rsl.out.0472 rsl.out.0473 rsl.out.0474 rsl.out.0475 rsl.out.0476 rsl.out.0477 rsl.out.0478 rsl.out.0479 rsl.out.0480 rsl.out.0481 rsl.out.0482 rsl.out.0483 rsl.out.0484 rsl.out.0485 rsl.out.0486 rsl.out.0487 rsl.out.0488 rsl.out.0489 rsl.out.0490 rsl.out.0491 rsl.out.0492 rsl.out.0493 rsl.out.0494 rsl.out.0495 rsl.out.0496 rsl.out.0497 rsl.out.0498 rsl.out.0499 rsl.out.0500 rsl.out.0501 rsl.out.0502 rsl.out.0503 rsl.out.0504 rsl.out.0505 rsl.out.0506 rsl.out.0507 rsl.out.0508 rsl.out.0509 rsl.out.0510 rsl.out.0511 rsl
+mv rsl.error.0000 rsl.error.0001 rsl.error.0002 rsl.error.0003 rsl.error.0004 rsl.error.0005 rsl.error.0006 rsl.error.0007 rsl.error.0008 rsl.error.0009 rsl.error.0010 rsl.error.0011 rsl.error.0012 rsl.error.0013 rsl.error.0014 rsl.error.0015 rsl.error.0016 rsl.error.0017 rsl.error.0018 rsl.error.0019 rsl.error.0020 rsl.error.0021 rsl.error.0022 rsl.error.0023 rsl.error.0024 rsl.error.0025 rsl.error.0026 rsl.error.0027 rsl.error.0028 rsl.error.0029 rsl.error.0030 rsl.error.0031 rsl.error.0032 rsl.error.0033 rsl.error.0034 rsl.error.0035 rsl.error.0036 rsl.error.0037 rsl.error.0038 rsl.error.0039 rsl.error.0040 rsl.error.0041 rsl.error.0042 rsl.error.0043 rsl.error.0044 rsl.error.0045 rsl.error.0046 rsl.error.0047 rsl.error.0048 rsl.error.0049 rsl.error.0050 rsl.error.0051 rsl.error.0052 rsl.error.0053 rsl.error.0054 rsl.error.0055 rsl.error.0056 rsl.error.0057 rsl.error.0058 rsl.error.0059 rsl.error.0060 rsl.error.0061 rsl.error.0062 rsl.error.0063 rsl.error.0064 rsl.error.0065 rsl.error.0066 rsl.error.0067 rsl.error.0068 rsl.error.0069 rsl.error.0070 rsl.error.0071 rsl.error.0072 rsl.error.0073 rsl.error.0074 rsl.error.0075 rsl.error.0076 rsl.error.0077 rsl.error.0078 rsl.error.0079 rsl.error.0080 rsl.error.0081 rsl.error.0082 rsl.error.0083 rsl.error.0084 rsl.error.0085 rsl.error.0086 rsl.error.0087 rsl.error.0088 rsl.error.0089 rsl.error.0090 rsl.error.0091 rsl.error.0092 rsl.error.0093 rsl.error.0094 rsl.error.0095 rsl.error.0096 rsl.error.0097 rsl.error.0098 rsl.error.0099 rsl.error.0100 rsl.error.0101 rsl.error.0102 rsl.error.0103 rsl.error.0104 rsl.error.0105 rsl.error.0106 rsl.error.0107 rsl.error.0108 rsl.error.0109 rsl.error.0110 rsl.error.0111 rsl.error.0112 rsl.error.0113 rsl.error.0114 rsl.error.0115 rsl.error.0116 rsl.error.0117 rsl.error.0118 rsl.error.0119 rsl.error.0120 rsl.error.0121 rsl.error.0122 rsl.error.0123 rsl.error.0124 rsl.error.0125 rsl.error.0126 rsl.error.0127 rsl.error.0128 rsl.error.0129 rsl.error.0130 rsl.error.0131 rsl.error.0132 rsl.error.0133 rsl.error.0134 rsl.error.0135 rsl.error.0136 rsl.error.0137 rsl.error.0138 rsl.error.0139 rsl.error.0140 rsl.error.0141 rsl.error.0142 rsl.error.0143 rsl.error.0144 rsl.error.0145 rsl.error.0146 rsl.error.0147 rsl.error.0148 rsl.error.0149 rsl.error.0150 rsl.error.0151 rsl.error.0152 rsl.error.0153 rsl.error.0154 rsl.error.0155 rsl.error.0156 rsl.error.0157 rsl.error.0158 rsl.error.0159 rsl.error.0160 rsl.error.0161 rsl.error.0162 rsl.error.0163 rsl.error.0164 rsl.error.0165 rsl.error.0166 rsl.error.0167 rsl.error.0168 rsl.error.0169 rsl.error.0170 rsl.error.0171 rsl.error.0172 rsl.error.0173 rsl.error.0174 rsl.error.0175 rsl.error.0176 rsl.error.0177 rsl.error.0178 rsl.error.0179 rsl.error.0180 rsl.error.0181 rsl.error.0182 rsl.error.0183 rsl.error.0184 rsl.error.0185 rsl.error.0186 rsl.error.0187 rsl.error.0188 rsl.error.0189 rsl.error.0190 rsl.error.0191 rsl.error.0192 rsl.error.0193 rsl.error.0194 rsl.error.0195 rsl.error.0196 rsl.error.0197 rsl.error.0198 rsl.error.0199 rsl.error.0200 rsl.error.0201 rsl.error.0202 rsl.error.0203 rsl.error.0204 rsl.error.0205 rsl.error.0206 rsl.error.0207 rsl.error.0208 rsl.error.0209 rsl.error.0210 rsl.error.0211 rsl.error.0212 rsl.error.0213 rsl.error.0214 rsl.error.0215 rsl.error.0216 rsl.error.0217 rsl.error.0218 rsl.error.0219 rsl.error.0220 rsl.error.0221 rsl.error.0222 rsl.error.0223 rsl.error.0224 rsl.error.0225 rsl.error.0226 rsl.error.0227 rsl.error.0228 rsl.error.0229 rsl.error.0230 rsl.error.0231 rsl.error.0232 rsl.error.0233 rsl.error.0234 rsl.error.0235 rsl.error.0236 rsl.error.0237 rsl.error.0238 rsl.error.0239 rsl.error.0240 rsl.error.0241 rsl.error.0242 rsl.error.0243 rsl.error.0244 rsl.error.0245 rsl.error.0246 rsl.error.0247 rsl.error.0248 rsl.error.0249 rsl.error.0250 rsl.error.0251 rsl.error.0252 rsl.error.0253 rsl.error.0254 rsl.error.0255 rsl.error.0256 rsl.error.0257 rsl.error.0258 rsl.error.0259 rsl.error.0260 rsl.error.0261 rsl.error.0262 rsl.error.0263 rsl.error.0264 rsl.error.0265 rsl.error.0266 rsl.error.0267 rsl.error.0268 rsl.error.0269 rsl.error.0270 rsl.error.0271 rsl.error.0272 rsl.error.0273 rsl.error.0274 rsl.error.0275 rsl.error.0276 rsl.error.0277 rsl.error.0278 rsl.error.0279 rsl.error.0280 rsl.error.0281 rsl.error.0282 rsl.error.0283 rsl.error.0284 rsl.error.0285 rsl.error.0286 rsl.error.0287 rsl.error.0288 rsl.error.0289 rsl.error.0290 rsl.error.0291 rsl.error.0292 rsl.error.0293 rsl.error.0294 rsl.error.0295 rsl.error.0296 rsl.error.0297 rsl.error.0298 rsl.error.0299 rsl.error.0300 rsl.error.0301 rsl.error.0302 rsl.error.0303 rsl.error.0304 rsl.error.0305 rsl.error.0306 rsl.error.0307 rsl.error.0308 rsl.error.0309 rsl.error.0310 rsl.error.0311 rsl.error.0312 rsl.error.0313 rsl.error.0314 rsl.error.0315 rsl.error.0316 rsl.error.0317 rsl.error.0318 rsl.error.0319 rsl.error.0320 rsl.error.0321 rsl.error.0322 rsl.error.0323 rsl.error.0324 rsl.error.0325 rsl.error.0326 rsl.error.0327 rsl.error.0328 rsl.error.0329 rsl.error.0330 rsl.error.0331 rsl.error.0332 rsl.error.0333 rsl.error.0334 rsl.error.0335 rsl.error.0336 rsl.error.0337 rsl.error.0338 rsl.error.0339 rsl.error.0340 rsl.error.0341 rsl.error.0342 rsl.error.0343 rsl.error.0344 rsl.error.0345 rsl.error.0346 rsl.error.0347 rsl.error.0348 rsl.error.0349 rsl.error.0350 rsl.error.0351 rsl.error.0352 rsl.error.0353 rsl.error.0354 rsl.error.0355 rsl.error.0356 rsl.error.0357 rsl.error.0358 rsl.error.0359 rsl.error.0360 rsl.error.0361 rsl.error.0362 rsl.error.0363 rsl.error.0364 rsl.error.0365 rsl.error.0366 rsl.error.0367 rsl.error.0368 rsl.error.0369 rsl.error.0370 rsl.error.0371 rsl.error.0372 rsl.error.0373 rsl.error.0374 rsl.error.0375 rsl.error.0376 rsl.error.0377 rsl.error.0378 rsl.error.0379 rsl.error.0380 rsl.error.0381 rsl.error.0382 rsl.error.0383 rsl.error.0384 rsl.error.0385 rsl.error.0386 rsl.error.0387 rsl.error.0388 rsl.error.0389 rsl.error.0390 rsl.error.0391 rsl.error.0392 rsl.error.0393 rsl.error.0394 rsl.error.0395 rsl.error.0396 rsl.error.0397 rsl.error.0398 rsl.error.0399 rsl.error.0400 rsl.error.0401 rsl.error.0402 rsl.error.0403 rsl.error.0404 rsl.error.0405 rsl.error.0406 rsl.error.0407 rsl.error.0408 rsl.error.0409 rsl.error.0410 rsl.error.0411 rsl.error.0412 rsl.error.0413 rsl.error.0414 rsl.error.0415 rsl.error.0416 rsl.error.0417 rsl.error.0418 rsl.error.0419 rsl.error.0420 rsl.error.0421 rsl.error.0422 rsl.error.0423 rsl.error.0424 rsl.error.0425 rsl.error.0426 rsl.error.0427 rsl.error.0428 rsl.error.0429 rsl.error.0430 rsl.error.0431 rsl.error.0432 rsl.error.0433 rsl.error.0434 rsl.error.0435 rsl.error.0436 rsl.error.0437 rsl.error.0438 rsl.error.0439 rsl.error.0440 rsl.error.0441 rsl.error.0442 rsl.error.0443 rsl.error.0444 rsl.error.0445 rsl.error.0446 rsl.error.0447 rsl.error.0448 rsl.error.0449 rsl.error.0450 rsl.error.0451 rsl.error.0452 rsl.error.0453 rsl.error.0454 rsl.error.0455 rsl.error.0456 rsl.error.0457 rsl.error.0458 rsl.error.0459 rsl.error.0460 rsl.error.0461 rsl.error.0462 rsl.error.0463 rsl.error.0464 rsl.error.0465 rsl.error.0466 rsl.error.0467 rsl.error.0468 rsl.error.0469 rsl.error.0470 rsl.error.0471 rsl.error.0472 rsl.error.0473 rsl.error.0474 rsl.error.0475 rsl.error.0476 rsl.error.0477 rsl.error.0478 rsl.error.0479 rsl.error.0480 rsl.error.0481 rsl.error.0482 rsl.error.0483 rsl.error.0484 rsl.error.0485 rsl.error.0486 rsl.error.0487 rsl.error.0488 rsl.error.0489 rsl.error.0490 rsl.error.0491 rsl.error.0492 rsl.error.0493 rsl.error.0494 rsl.error.0495 rsl.error.0496 rsl.error.0497 rsl.error.0498 rsl.error.0499 rsl.error.0500 rsl.error.0501 rsl.error.0502 rsl.error.0503 rsl.error.0504 rsl.error.0505 rsl.error.0506 rsl.error.0507 rsl.error.0508 rsl.error.0509 rsl.error.0510 rsl.error.0511 rsl
+touch FINISHED
+exit 0
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@ys0613-ib>
+Subject: Job 325600: <fc112400> in cluster <yellowstone> Done
+
+Job <fc112400> was submitted from host <yslogin5-ib> by user <hclin> in cluster <yellowstone>.
+Job was executed on host(s) <16*ys0613-ib>, in queue <regular>, as user <hclin> in cluster <yellowstone>.
+                            <16*ys0616-ib>
+                            <16*ys0617-ib>
+                            <16*ys0619-ib>
+                            <16*ys0624-ib>
+                            <16*ys0638-ib>
+                            <16*ys0717-ib>
+                            <16*ys0859-ib>
+                            <16*ys1024-ib>
+                            <16*ys1034-ib>
+                            <16*ys1138-ib>
+                            <16*ys1140-ib>
+                            <16*ys1141-ib>
+                            <16*ys1144-ib>
+                            <16*ys1147-ib>
+                            <16*ys1148-ib>
+                            <16*ys1150-ib>
+                            <16*ys1151-ib>
+                            <16*ys1152-ib>
+                            <16*ys1153-ib>
+                            <16*ys1154-ib>
+                            <16*ys1155-ib>
+                            <16*ys1156-ib>
+                            <16*ys1161-ib>
+                            <16*ys1165-ib>
+                            <16*ys1167-ib>
+                            <16*ys1168-ib>
+                            <16*ys1169-ib>
+                            <16*ys1226-ib>
+                            <16*ys1228-ib>
+                            <16*ys1646-ib>
+                            <16*ys1725-ib>
+</glade/u/home/hclin> was used as the home directory.
+</glade/u/home/hclin/scripts/rt2015/ob_ascii> was used as the working directory.
+Started at Tue Nov 24 08:04:36 2015
+Results reported on Tue Nov 24 08:35:00 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/csh -f
+#BSUB -J fc112400
+#BSUB -q regular
+#BSUB -n 512
+#BSUB -o job_fc.out
+#BSUB -e job_fc.out
+#BSUB -W 1:00
+#BSUB -P P64000510
+set echo
+
+setenv EXPT ob_ascii
+if ( ! $?PARAMS_SET ) then
+   source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params15.csh
+endif
+
+if ( ! $?ANAL_DATE ) then
+   echo "ANAL_DATE not set"
+   exit 1
+endif
+if ( ! $?FCST_DOMAINS ) then
+   echo "FCST_DOMAINS not set"
+   exit 1
+endif
+if ( ! $?FCST_RUN_DIR ) then
+   echo "FCST_RUN_DIR not set"
+   exit 1
+endif
+
+if ( ! $?WRF_SRC_DIR ) setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+if ( ! $?DA_METHOD )   set DA_METHOD = hyb_e50_amsua
+
+set DATE = $ANAL_DATE
+set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
+
+set MAX_DOM = ${FCST_DOMAINS}
+if ( ${MAX_DOM} == 1 ) then
+   set WRF_RUN_DIR = ${FCST_RUN_DIR}/${DATE}
+   set OUT_INTERVAL_d01 = 60
+else if ( ${MAX_DOM} == 2 ) then
+   set WRF_RUN_DIR = ${FCST_RUN_DIR}/${DATE}
+   set OUT_INTERVAL_d01 = 60
+endif
+set WPS_RUN_DIR = ${WPS_RUNDIR_TOP}/${DATE}/wps_rundir
+if ( ! -d ${WPS_RUN_DIR} ) then
+   set WPS_RUN_DIR = /glade/scratch/hclin/CONUS/gfs_wrfbdy/${DATE}
+   if ( ! -e ${WPS_RUN_DIR}/fhr_0/gfs_wrfbdy_d01_${START_DATE} ) then
+      echo "Error in run_fcst.csh: gfs_wrfbdy_d01 not available"
+      exit 1
+   endif
+endif
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   921630.00 sec.
+    Max Memory :                                 224300 MB
+    Average Memory :                             211744.30 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              548
+    Max Threads :                                5865
+    Run time :                                   1820 sec.
+    Turnaround time :                            2088 sec.
+
+The output (if any) is above this job summary.
+

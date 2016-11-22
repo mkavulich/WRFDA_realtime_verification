@@ -1,0 +1,4 @@
+# Ignore WRFDA build, log directories, radiance_info
+WRFDA_v38-_orig
+logdir
+fix/radiance_info/
