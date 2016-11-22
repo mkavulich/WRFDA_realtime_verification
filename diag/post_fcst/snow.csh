@@ -32,7 +32,7 @@ while ( $DATE <= $END_DATE )
 setenv ANAL_DATE $DATE
 set START_FHR  = 00
 set FCST_RANGE = 48
-set SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_fcst
+set SCRIPT_DIR = ${BASE_DIR}/diag/post_fcst
 set fhrs = `seq $START_FHR 1 $FCST_RANGE`
 foreach fhr ( $fhrs )
    setenv FHR $fhr
@@ -52,12 +52,12 @@ set fhr2 = `printf %02i ${FHR}` # 23
 set fhr3 = `printf %03i ${FHR}` # 23
 
 #set PYTHON_SCRIPTS_DIR = /glade/u/home/wrfrt/rt_ensemble/python_scripts
-set PYTHON_SCRIPTS_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_fcst/python_scripts
+set PYTHON_SCRIPTS_DIR = ${DIAG_SCRIPT_DIR}/post_fcst/python_scripts
 set script_name  = ./make_webplot.py
-set GRAPHICS_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/postdir/fcst_15km/${DATE}/webplot
+set GRAPHICS_RUN_DIR = ${RUN_BASEDIR}/postdir/fcst_15_3km/${DATE}/webplot
 set LOGS_RUN_DIR = $GRAPHICS_RUN_DIR
-setenv WRF_DIR   /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km
-setenv POST_DIR  /glade/scratch/hclin/CONUS/wrfda/postdir/fcst_15km
+setenv WRF_DIR   ${RUN_BASEDIR}/expdir/rt/fcst_15_3km
+setenv POST_DIR  ${RUN_BASEDIR}/postdir/fcst_15_3km
 
 mkdir -p $GRAPHICS_RUN_DIR
 
@@ -94,7 +94,7 @@ endif
 
 end
 
-rsync -av ${GRAPHICS_RUN_DIR}/snow*CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/CONUS/hourly/${DATE}
+rsync -av ${GRAPHICS_RUN_DIR}/snow*CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/hourly/${DATE}
 
 set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
 

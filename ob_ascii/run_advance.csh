@@ -8,9 +8,10 @@
 #BSUB -W 0:10
 #BSUB -P P64000510
 set echo
+echo "Beginning $0"
 
 if ( ! $?PARAMS_SET ) then
-   source /glade/u/home/hclin/scripts/rt2015/params.csh
+   source ${BASE_DIR}/${EXPT}/params.csh
 endif
 
 if ( ! $?ANAL_DATE ) then

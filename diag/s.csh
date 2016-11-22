@@ -11,6 +11,7 @@ module load ncl
 module load python
 module load all-python-libs
 
+echo "Beginning $0"
 set START_DATE = 2015091800
 set END_DATE   = 2015091800
 set CYCLE_PERIOD = 24
@@ -23,8 +24,7 @@ if ( ! $?ANAL_DATE ) then
    echo "ANAL_DATE not set"
    exit 1
 endif
-set DIAG_SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag
-set DIAG_RUN_DIR    = /glade/scratch/hclin/CONUS/wrfda/postdir/soundings/${ANAL_DATE}
+#set DIAG_RUN_DIR    = /glade/scratch/hclin/CONUS/wrfda/postdir/soundings/${ANAL_DATE}
 set extract_sound = True
 set convert_sound = True
 
@@ -43,6 +43,6 @@ endif
 
 set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
 
-rsync -av ${DIAG_RUN_DIR}/*js nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/sounding/${ANAL_DATE}
+rsync -av ${DIAG_RUN_DIR}/*js nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/sounding/${ANAL_DATE}
 
 end #DATE loop

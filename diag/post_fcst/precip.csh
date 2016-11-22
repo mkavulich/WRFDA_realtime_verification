@@ -34,16 +34,16 @@ set fhr2 = `printf %02i ${FHR}` # 23
 set fhr3 = `printf %03i ${FHR}` # 23
 
 #set PYTHON_SCRIPTS_DIR = /glade/u/home/wrfrt/rt_ensemble/python_scripts
-set PYTHON_SCRIPTS_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_fcst/python_scripts
+set PYTHON_SCRIPTS_DIR = ${DIAG_SCRIPT_DIR}/post_fcst/python_scripts
 set script_name  = ./make_webplot.py
-set GRAPHICS_RUN_DIR = /glade/scratch/hclin/CONUS/wrfda/postdir/fcst_15_3km/${DATE}/webplot
+set GRAPHICS_RUN_DIR = ${RUN_BASEDIR}/postdir/fcst_15_3km/${DATE}/webplot
 set LOGS_RUN_DIR = $GRAPHICS_RUN_DIR
-setenv WRF_DIR   /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15_3km
-setenv POST_DIR  /glade/scratch/hclin/CONUS/wrfda/postdir/fcst_15_3km
+setenv WRF_DIR   ${RUN_BASEDIR}/expdir/rt/fcst_15_3km
+setenv POST_DIR  ${RUN_BASEDIR}/postdir/fcst_15_3km
 
 if ( ! -e ${POST_DIR}/${DATE}/fhr_${fhr}/WRFTWO${fhr2}.nc ) then
    echo "Running run_unipost_fcst.csh for fhr=$fhr ..."
-   /glade/u/home/hclin/scripts/rt2015/diag/post_fcst/run_unipost_fcst.csh
+   ${BASE_DIR}/diag/post_fcst/run_unipost_fcst.csh
    set file_to_check = ${POST_DIR}/${DATE}/fhr_${fhr}/post_done
    set unipost_done = false
    while ( $unipost_done == false )
@@ -95,5 +95,5 @@ endif
 #   $script_name -d=${DATE} -tr=${fhr},${fhr} -f=precipacc_mean    -t="${fhr}-hr accumulated precipitation (in)"
 endif
 
-#rsync -av ${GRAPHICS_RUN_DIR}/*_f${fhr3}_CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/CONUS/hourly/${DATE}
+#rsync -av ${GRAPHICS_RUN_DIR}/*_f${fhr3}_CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/hourly/${DATE}
 

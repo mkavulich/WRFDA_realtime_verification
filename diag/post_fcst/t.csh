@@ -13,7 +13,7 @@ while ( $DATE <= $END_DATE )
 setenv ANAL_DATE $DATE
 set START_FHR  = 2
 set FCST_RANGE = 2
-set SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_fcst
+set SCRIPT_DIR = ${BASE_DIR}/diag/post_fcst
 set SCRIPT_NAME = make_fcst_plots.csh
 set fhrs = `seq $START_FHR 1 $FCST_RANGE`
 foreach fhr ( $fhrs )

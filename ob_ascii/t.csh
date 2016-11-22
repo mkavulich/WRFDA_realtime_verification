@@ -1,10 +1,11 @@
 #!/bin/csh
 #set echo
+echo "Beginning $0"
 setenv EXPT       ob_ascii
 setenv OB_FORMAT  2
 #setenv QUEUE      premium
 setenv QUEUE      regular
-source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh
+source ${BASE_DIR}/${EXPT}/params.csh
 #setenv ENS_SIZE 0
 #setenv TIME_STEP 60
 #setenv TIME_STEP_FCST 75

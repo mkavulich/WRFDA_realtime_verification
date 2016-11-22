@@ -26,9 +26,9 @@ setenv TOOL_DIR        ${HOME}/bin
 setenv MAX_DOM         ${FCST_DOMAINS}
 setenv FCST_RANGE      ${FHR} #48
 setenv START_FHR       ${FHR} #0
-setenv LOGS_RUN_DIR    /glade/u/home/hclin/scripts/rt2015/ob_ascii/logdir
-setenv POST_RUN_DIR    /glade/scratch/hclin/CONUS/wrfda/postdir/${FCST_DIR}/${DATE}
-setenv FCST_RUN_DIR    /glade/scratch/hclin/CONUS/wrfda/expdir/rt/${FCST_DIR}/${DATE}
+setenv LOGS_RUN_DIR    ${BASE_DIR}/ob_ascii/logdir
+setenv POST_RUN_DIR    ${RUN_BASEDIR}/postdir/${FCST_DIR}/${DATE}
+setenv FCST_RUN_DIR    ${RUN_BASEDIR}/expdir/rt/${FCST_DIR}/${DATE}
 setenv wrfdir          /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf/run
 setenv dir ${FCST_RUN_DIR}
 #setenv dir ${FCST_RUN_DIR}/ens_${mem}   # Where the files are located for this member
@@ -47,7 +47,7 @@ else
    set CRTMDIR = ${UPP_CODE_DIR}/src/lib/crtm2/coefficients
 endif
 set WRF_RAIN_EXEC = /glade/u/home/schwartz/wrf_get_rain_2011_GRIB/get_wrf_rain
-set POST_STORAGE  = /glade/scratch/hclin/CONUS/wrfda/postdir
+set POST_STORAGE  = ${RUN_BASEDIR}/postdir
 
 if ( ! -d ${POST_STORAGE}/precip/${DATE} ) mkdir -p ${POST_STORAGE}/precip/${DATE}
 

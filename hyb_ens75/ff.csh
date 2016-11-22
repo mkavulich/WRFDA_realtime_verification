@@ -1,5 +1,6 @@
 #!/bin/csh
 #set echo
+echo "Beginning $0"
 setenv EXPT       hyb_ens75
 setenv OB_FORMAT  2
 #setenv QUEUE      premium

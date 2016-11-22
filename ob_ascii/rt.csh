@@ -4,7 +4,8 @@ setenv EXPT       ob_ascii
 setenv OB_FORMAT  2
 #setenv QUEUE      premium
 setenv QUEUE      regular
-source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh
+echo "Beginning $0"
+source ${BASE_DIR}/${EXPT}/params.csh
 
 if ( ${#argv} > 0 ) then
    set DATE = $1

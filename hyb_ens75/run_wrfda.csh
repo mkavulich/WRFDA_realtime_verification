@@ -12,6 +12,7 @@
 set echo
 module load mkl
 module swap intel/12.1.5 intel/13.1.2
+echo "Beginning $0"
 
 if ( ! $?PARAMS_SET ) then
    source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh

@@ -1,4 +1,5 @@
 #!/bin/csh
+echo "Beginning $0"
 if ( ! $?PARAMS_SET ) then
    source /glade/u/home/hclin/scripts/rt2015/params.csh
 endif

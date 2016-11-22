@@ -1,11 +1,13 @@
 #!/bin/csh
 #set echo
+echo "Beginning $0"
 setenv EXPT       hyb_ens75
 setenv OB_FORMAT  2
 #setenv QUEUE      premium
 setenv QUEUE      regular
 setenv use_standby false #true
-source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh
+source /glade/p/wrf/WORKDIR/wrfda_realtime/${EXPT}/params.csh
+setenv MAILTO "${USER}@ucar.edu"
 
 if ( ${#argv} > 0 ) then
    set DATE = $1
@@ -38,10 +40,13 @@ if ( $hh == 00 ) then
    setenv QUEUE premium
 endif
 
+# Need ANAL_DATE for these variables, so they aren't set in "params.csh"
+setenv DIAG_RUN_DIR   ${RUN_BASEDIR}/postdir/soundings/${ANAL_DATE}
+
 cd ${SCRIPT_DIR}
 \rm -f ${SCRIPT_DIR}/job.out
 echo "`date` started for ${EXPT} ${DATE}" > ${SCRIPT_DIR}/logdir/started_${DATE}
-mail -s "RT2015: ${DATE} ${EXPT} started" "hclin@ucar.edu" < ${SCRIPT_DIR}/logdir/started_${DATE}
+mail -s "RT2015: ${DATE} ${EXPT} started" "${MAILTO}" < ${SCRIPT_DIR}/logdir/started_${DATE}
 
 if ( $DATE == $FIRST_DATE ) then
    setenv FG_SOURCE  cold #ensfc_mean
@@ -64,7 +69,7 @@ if ( $OB_FORMAT == "2" ) then
          if ( $obs_done == false ) then
             if ( -e ${OB_DIR_TOP}/${DATE}/FAIL ) then
                echo "   `date` Error in run_obsproc.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error obsproc" "hclin@ucar.edu" < ${OB_DIR_TOP}/${DATE}/log.d01.${DATE}
+               mail -s "RT2015: ${DATE} ${EXPT} Error obsproc" "${MAILTO}" < ${OB_DIR_TOP}/${DATE}/log.d01.${DATE}
                #exit 1
                setenv OB_FORMAT 1
                set obs_done = true
@@ -136,7 +141,7 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
                goto SUBMIT_DA_AGAIN
             else
                echo "   `date` Error in run_wrfda.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error da" "hclin@ucar.edu" < ${SCRIPT_DIR}/logdir/log.${hh}z
+               mail -s "RT2015: ${DATE} ${EXPT} Error da" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
                exit 1
             endif
          endif
@@ -160,7 +165,7 @@ if ( ! -e ${file_to_check} ) then
       if ( $adv_done == false ) then
          if ( -e ${EXP_DIR_TOP}/advance/${DATE}/FAIL ) then
             echo "   `date` Error in run_advance.csh ......"
-            mail -s "RT2015: ${DATE} ${EXPT} Error advance" "hclin@ucar.edu" < ${SCRIPT_DIR}/logdir/log.${hh}z
+            mail -s "RT2015: ${DATE} ${EXPT} Error advance" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
             exit 1
          endif
          sleep 60
@@ -170,7 +175,7 @@ endif
 
 if ( -e ${EXP_DIR_TOP}/advance/${DATE}/FINISHED ) then
    echo "`date` Done rt.csh for ${EXPT} ${DATE}"
-   mail -s "RT2015: ${DATE} ${EXPT} Done" "hclin@ucar.edu" < ${EXP_DIR_TOP}/${DATE}/statistics
+   mail -s "RT2015: ${DATE} ${EXPT} Done" "${MAILTO}" < ${EXP_DIR_TOP}/${DATE}/statistics
 endif
 
 #post-processing
@@ -215,7 +220,7 @@ if ( $hh == 00 ) then
          if ( $fc_done == false ) then
             if ( -e ${FCST_RUN_DIR}/${DATE}/FAIL ) then
                echo "   `date` Error in run_fcst.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error FCST" "hclin@ucar.edu" < ${SCRIPT_DIR}/logdir/log.${hh}z
+               mail -s "RT2015: ${DATE} ${EXPT} Error FCST" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
                exit 1
             endif
             sleep 600

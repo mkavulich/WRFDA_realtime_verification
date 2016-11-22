@@ -8,6 +8,7 @@
 #BSUB -P P64000510
 
 set echo
+echo "Beginning $0"
 set START_DATE = $ANAL_DATE #2015052700
 set END_DATE   = $ANAL_DATE #2015082512
 set CYCLE_PERIOD = 06

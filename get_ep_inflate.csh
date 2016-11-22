@@ -12,11 +12,11 @@
 set echo
 setenv bsub_cmd    /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
 setenv BIN_DIR     $HOME/bin
-setenv SCRIPT_DIR  /glade/u/home/hclin/scripts/rt2015
+setenv SCRIPT_DIR  /glade/p/wrf/WORKDIR/wrfda_realtime
 #setenv EP_EXE_DIR  /glade/p/work/hclin/code_intel/WRFDA/trunk_serial/var/build
 #setenv EP_EXE_DIR  /glade/p/work/hclin/code_intel/WRFDA/v371+/var/build #starting 2015102118
-setenv EP_EXE_DIR  /glade/p/work/hclin/code_intel/WRFDA/v38-/var/build
-setenv EP_DIR_TOP  /glade/scratch/hclin/CONUS/wrfda/enspert_inflate
+setenv EP_EXE_DIR  ${SCRIPT_DIR}/WRFDA_v38-_orig
+setenv EP_DIR_TOP  /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/enspert_inflate
 #setenv FC_DIR_TOP  /glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir
 setenv FC_DIR_TOP  /glade/scratch/wrfrt/realtime_ensemble/wrfdart_80M40L/rundir
 setenv ENS_SIZE    80
@@ -26,18 +26,21 @@ setenv ADVANCE_HOUR   6
    if ( $#argv > 0 ) then
       setenv ANAL_DATE $1
    else
-      set date_yyyymmdd = `date -u +%Y%m%d`
-      set hh            = `date -u +%H`  ;  set hh = `expr $hh \+ 0`
-      if      ( $hh >= 0  && $hh < 6  ) then
-         set hh = '00'
-      else if ( $hh >= 6  && $hh < 12 ) then
-         set hh = '06'
-      else if ( $hh >= 12 && $hh < 18 ) then
-         set hh = '12'
-      else if ( $hh >= 18 && $hh < 24 ) then
-         set hh = '18'
-      endif
-      setenv ANAL_DATE ${date_yyyymmdd}${hh}
+# Set up for manual running only initially
+      echo 'Manual runing only. Exiting.'
+      exit 1
+#      set date_yyyymmdd = `date -u +%Y%m%d`
+#      set hh            = `date -u +%H`  ;  set hh = `expr $hh \+ 0`
+#      if      ( $hh >= 0  && $hh < 6  ) then
+#         set hh = '00'
+#      else if ( $hh >= 6  && $hh < 12 ) then
+#         set hh = '06'
+#      else if ( $hh >= 12 && $hh < 18 ) then
+#         set hh = '12'
+#      else if ( $hh >= 18 && $hh < 24 ) then
+#         set hh = '18'
+#      endif
+#      setenv ANAL_DATE ${date_yyyymmdd}${hh}
    endif
 
    setenv FCST_DATE `${BIN_DIR}/da_advance_time.exe ${ANAL_DATE} ${ADVANCE_HOUR}`

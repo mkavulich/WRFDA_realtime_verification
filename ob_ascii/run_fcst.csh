@@ -7,10 +7,11 @@
 #BSUB -W 5:00
 #BSUB -P P64000510
 set echo
+echo "Beginning $0"
 
 setenv EXPT ob_ascii
 if ( ! $?PARAMS_SET ) then
-   source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh
+   source ${BASE_DIR}/${EXPT}/params.csh
 endif
 
 if ( ! $?ANAL_DATE ) then

@@ -193,5 +193,5 @@ $script_name -d=${DATE} -tr=${fhr},${fhr} -f=cref_mean  -b=wind10m_mean      -t=
  endif
 
 #rsync -av ${GRAPHICS_RUN_DIR}/*_f${fhr3}_CONUS.png nebula.mmm.ucar.edu:/web/htdocs/people/hclin/rt_wrfda/images/CONUS/hourly/${DATE}
-rsync -av ${GRAPHICS_RUN_DIR}/*_f${fhr3}_CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/CONUS/hourly/${DATE}
+rsync -av ${GRAPHICS_RUN_DIR}/*_f${fhr3}_CONUS.png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/hourly/${DATE}
 

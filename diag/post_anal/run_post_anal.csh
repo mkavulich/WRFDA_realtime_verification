@@ -10,8 +10,12 @@ module load ncl
 module load python
 module load all-python-libs
 
-setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+if ( ! $?POSTAN_SCRIPT_DIR ) then
+   set POSTAN_SCRIPT_DIR = /glade/p/wrf/WORKDIR/wrfda_realtime/diag/post_anal
+endif
+if ( ! $?DA_RUN_DIR_TOP ) then
+   set DA_RUN_DIR_TOP = ${RUN_BASEDIR}/expdir/orig/${EXPT}
+endif
 
-set POSTAN_SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_anal
 ${POSTAN_SCRIPT_DIR}/make_inc_plots.csh
 ${POSTAN_SCRIPT_DIR}/make_anal_plots.csh

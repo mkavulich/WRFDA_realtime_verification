@@ -9,11 +9,12 @@
 #BSUB -P P64000510
 #
 set echo
+echo "Beginning $0"
 module load mkl
 module swap intel/12.1.5 intel/13.1.2
 
 if ( ! $?PARAMS_SET ) then
-   source /glade/u/home/hclin/scripts/rt2015/params.csh
+   source ${BASE_DIR}/${EXPT}/params.csh
 endif
 #set FG_SOURCE = $1
 #set FG_SOURCE = ensfc_mean

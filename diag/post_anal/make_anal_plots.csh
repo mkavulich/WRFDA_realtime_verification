@@ -12,15 +12,14 @@ if ( ! $?ANAL_DATE ) then
 endif
 
 if ( ! $?POSTAN_SCRIPT_DIR ) then
-    set POSTAN_SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag/post_anal
+    set POSTAN_SCRIPT_DIR = /glade/p/wrf/WORKDIR/wrfda_realtime/diag/post_anal
 endif
 if ( ! $?DA_RUN_DIR_TOP ) then
-   #set DA_RUN_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015112400/hyb_ens75
-   set DA_RUN_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+   set DA_RUN_DIR_TOP = ${RUN_BASEDIR}/expdir/orig/${EXPT}
 endif
 
   set datea = $ANAL_DATE
-  set plotdir = /glade/scratch/hclin/CONUS/wrfda/postdir/webplot
+  set plotdir = ${RUN_BASEDIR}/postdir/webplot
   set an_file = ${plotdir}/an_${datea}_all.nc
 
   cd $plotdir
@@ -90,7 +89,7 @@ python make_webplot.py -d=${datea} -f=iso850_mean -c=hgt850_mean -b=wind850_mean
  set mvlist = `ls *f000_ANLYS.png | egrep -v 'ncar.png'`
  mv $mvlist ${plotdir}/${datea}
 
- rsync -av ${plotdir}/${datea}/*ANLYS.png galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/CONUS/${datea}
+ rsync -av ${plotdir}/${datea}/*ANLYS.png galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/${datea}
 
 #set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
 #

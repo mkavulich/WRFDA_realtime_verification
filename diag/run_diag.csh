@@ -5,19 +5,16 @@
 #set DATE = $START_DATE
 #while ( $DATE <= $END_DATE )
 
+echo "Beginning $0"
 #echo $DATE
 #setenv ANAL_DATE $DATE
 if ( ! $?ANAL_DATE ) then
    echo "ANAL_DATE not set"
    exit 1
 endif
-set DIAG_SCRIPT_DIR = /glade/u/home/hclin/scripts/rt2015/diag
-set DIAG_RUN_DIR    = /glade/scratch/hclin/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
-#set DA_RUN_DIR      = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/${ANAL_DATE}
-#setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2015112400/hyb_ens75
-#setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016060800/hyb_ens75
-#setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75
-setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+#set DIAG_RUN_DIR    = /glade/scratch/hclin/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
+set DIAG_RUN_DIR    = /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
+#setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 set DA_RUN_DIR       = ${DA_RUN_DIR_TOP}/${ANAL_DATE}
 set plot_conv_loc          = True
 set proc_gts_omb_oma       = True
@@ -153,9 +150,9 @@ if ( $?plot_rad_ts ) then
    end
 endif
 
-rsync -av $DIAG_RUN_DIR/*png galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/CONUS/${ANAL_DATE}
+rsync -av $DIAG_RUN_DIR/*png galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/${ANAL_DATE}
 
-rsync -av /glade/u/home/sobash/SHARPpy/OBS/${ANAL_DATE}/*js galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/conus15km/images/sounding/${ANAL_DATE}
+rsync -av /glade/u/home/sobash/SHARPpy/OBS/${ANAL_DATE}/*js galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/sounding/${ANAL_DATE}
 
 #set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
 #

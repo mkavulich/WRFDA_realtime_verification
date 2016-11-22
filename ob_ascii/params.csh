@@ -1,4 +1,5 @@
 
+echo "Beginning $0"
 setenv PARAMS_SET  yes
 setenv bsub_cmd    /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
 setenv BIN_DIR     $HOME/bin

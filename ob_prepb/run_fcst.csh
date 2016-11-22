@@ -9,8 +9,9 @@
 set echo
 
 setenv EXPT ob_prepb
+echo "Beginning $0"
 if ( ! $?PARAMS_SET ) then
-   source /glade/u/home/hclin/scripts/rt2015/${EXPT}/params.csh
+   source ${BASE_DIR}/${EXPT}/params.csh
 endif
 
 if ( ! $?ANAL_DATE ) then
