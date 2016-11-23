@@ -30,7 +30,7 @@ endif
 if ( ! $?WRF_SRC_DIR ) setenv WRF_SRC_DIR /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
 
 set DATE = $ANAL_DATE
-set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
+set START_DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -w`
 
 set MAX_DOM = ${FCST_DOMAINS}
 if ( ${MAX_DOM} == 1 ) then
@@ -78,7 +78,7 @@ ln -sf ${WRF_SRC_DIR}/run/tr* .
    set hh = `echo $DATE | cut -c9-10`
 
 #set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
-set END_DATE = `${BIN_DIR}/da_advance_time.exe $DATE $FCST_RANGE -w`
+set END_DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $FCST_RANGE -w`
 set ccyy_s = `echo $START_DATE | cut -c1-4`
 set mm_s   = `echo $START_DATE | cut -c6-7`
 set dd_s   = `echo $START_DATE | cut -c9-10`
@@ -356,7 +356,7 @@ EOF_bc
    @ n = 1
    while ( $n <= $nfile )
       @ fcsthour = $LBC_FREQ * ( $n - 1 )
-      set wrftime = `${BIN_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
+      set wrftime = `${EP_EXE_DIR}/da_advance_time.exe $DATE ${fcsthour} -w`
       #cp -p ${WPS_RUN_DIR}/fhr_${fcsthour}/gfs_wrfbdy_d01_${wrftime} .
       ln -sf ${WPS_RUN_DIR}/fhr_${fcsthour}/gfs_wrfbdy_d01_${wrftime} .
       ln -sf gfs_wrfbdy_d01_${wrftime} wrfbdy_d01_${wrftime}

@@ -153,6 +153,6 @@ rsync -av $DIAG_RUN_DIR/*png nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_
 
 #rsync -av /glade/u/home/sobash/SHARPpy/OBS/${ANAL_DATE}/*js nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/sounding/${ANAL_DATE}
 
-set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
+set DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD`
 
 end #DATE loop

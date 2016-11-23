@@ -17,8 +17,8 @@ set BIN_DIR = ${HOME}/bin
 set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua
 while ( $DATE <= $END_DATE )
 
-   set gdate = (`${BIN_DIR}/da_advance_time.exe $DATE 0 -g`)
-   set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
+   set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
+   set gdatef = (`${EP_EXE_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
 
    cd ${EXP_DIR_TOP}/${DATE}
 
@@ -79,6 +79,6 @@ while ( $DATE <= $END_DATE )
       echo "Error archiving for ${DATE}"
    endif
 
-   set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
+   set DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD`
 
 end #DATE loop

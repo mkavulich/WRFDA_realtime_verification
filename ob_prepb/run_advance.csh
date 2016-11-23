@@ -53,8 +53,8 @@ ln -sf ${WRF_SRC_DIR}/run/tr* .
    set dd = `echo $DATE | cut -c7-8`
    set hh = `echo $DATE | cut -c9-10`
 
-set START_DATE = `${BIN_DIR}/da_advance_time.exe $DATE 0 -w`
-set END_DATE = `${BIN_DIR}/da_advance_time.exe $DATE $FCST_RANGE -w`
+set START_DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -w`
+set END_DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $FCST_RANGE -w`
 set ccyy_s = `echo $START_DATE | cut -c1-4`
 set mm_s   = `echo $START_DATE | cut -c6-7`
 set dd_s   = `echo $START_DATE | cut -c9-10`

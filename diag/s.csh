@@ -41,7 +41,7 @@ if ( $?convert_sound ) then
    ${DIAG_SCRIPT_DIR}/sounding_to_json.py >&! /dev/null
 endif
 
-set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
+set DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD`
 
 rsync -av ${DIAG_RUN_DIR}/*js nebula.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/sounding/${ANAL_DATE}
 

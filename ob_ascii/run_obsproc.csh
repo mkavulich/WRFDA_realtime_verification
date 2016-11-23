@@ -42,7 +42,7 @@ if ( ! -e gfs.t${hh}z.prepbufr.nr ) then
    /usr/bin/wget -np ftp://ftp.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.${DATE}/gfs.t${hh}z.prepbufr.nr
 endif
 
-set OBS_DATE1 = `${BIN_DIR}/da_advance_time.exe ${DATE} -3h`
+set OBS_DATE1 = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} -3h`
 #scp -p loquat.mmm.ucar.edu:/shared/mmmtmp/mm5rt/data/obs/obs.${OBS_DATE1} ${OBSPROC_RUN_DIR}
 #scp -p loquat.mmm.ucar.edu:/shared/mmmtmp/mm5rt/data/obs/obs.${DATE}      ${OBSPROC_RUN_DIR}
 scp -p nebula.mmm.ucar.edu:/shared/mmmtmp/mm5rt/data/obs/obs.${OBS_DATE1} ${OBSPROC_RUN_DIR}
@@ -69,8 +69,8 @@ if ( -e ${OBSPROC_EXE_DIR}/msfc.tbl ) then
    ln -s -f ${OBSPROC_EXE_DIR}/msfc.tbl ./msfc.tbl
 endif
 #
-set DATE1 = `${BIN_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
-set DATE2 = `${BIN_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
+set DATE1 = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
+set DATE2 = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
 #
 set ccyy1 = `echo $DATE1 | cut -c1-4`
 set   mm1 = `echo $DATE1 | cut -c5-6`

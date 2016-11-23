@@ -1,14 +1,14 @@
 
 echo "Beginning $0"
 setenv PARAMS_SET  yes
+#setenv bsub_cmd    bsub
 setenv bsub_cmd    /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
-setenv BIN_DIR     $HOME/bin
 setenv BASE_DIR    /glade/p/wrf/WORKDIR/wrfda_realtime
+setenv BIN_DIR     ${BASE_DIR}/bin
 setenv SCRIPT_DIR  ${BASE_DIR}/${EXPT}
 setenv DIAG_SCRIPT_DIR ${BASE_DIR}/diag
 setenv FIX_DIR     ${BASE_DIR}/fix
 setenv FC_DIR_TOP  /glade/scratch/wrfrt/realtime_ensemble/wrfdart/rundir
-setenv OB_DIR_TOP  /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/obsproc
 setenv FCST_HOUR      48
 setenv ADVANCE_HOUR   6
 setenv WRFDA_SRC_DIR  ${BASE_DIR}/WRFDA_v38-_orig/
@@ -17,10 +17,12 @@ setenv EP_EXE_DIR  ${WRFDA_SRC_DIR}/var/build
 setenv EXE_DIR        ${WRFDA_SRC_DIR}/var/build
 setenv OBSPROC_EXE_DIR  ${WRFDA_SRC_DIR}/var/obsproc
 setenv WRF_SRC_DIR    /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
+setenv EP_DIR_TOP  /glade/scratch/hclin/CONUS/wrfda/enspert_inflate
 
 # RUN DIRS
 setenv RUN_BASEDIR    /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda
 setenv DA_RUN_DIR_TOP ${RUN_BASEDIR}/expdir/orig/${EXPT}
+setenv OB_DIR_TOP  ${RUN_BASEDIR}/obsproc
 
 setenv EXP_DIR_TOP    ${DA_RUN_DIR_TOP}
 setenv LOG_DIR        ${EXP_DIR_TOP}/logdir
@@ -72,9 +74,9 @@ setenv OBSERR_FILE  ${FIX_DIR}/obs_errtable_hclin
 
 setenv FIRST_DATE 2016102512
 
-setenv FG_SOURCE  cycle
+#setenv FG_SOURCE  cycle
 #setenv FG_SOURCE  ensfc_mean
-#setenv FG_SOURCE  cold
+setenv FG_SOURCE  cold
 setenv JE_FACTOR  1.33
 #setenv JE_FACTOR  2
 setenv ENS_SIZE   80

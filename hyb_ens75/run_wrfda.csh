@@ -4,9 +4,9 @@
 ##BSUB -n 128
 ##BSUB -n 64
 #BSUB -n 96
-#BSUB -o job.out
-#BSUB -e job.out
-#BSUB -W 0:15
+#BSUB -oo job.out
+#BSUB -eo job.out
+#BSUB -W 0:30
 #BSUB -P P64000510
 #
 set echo
@@ -34,8 +34,8 @@ endif
 
 set DATE  = $ANAL_DATE
 
-set PREV_DATE = `${HOME}/bin/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
-set NEXT_DATE = `${HOME}/bin/da_advance_time.exe ${DATE}  ${CYCLE_PERIOD}`
+set PREV_DATE = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
+set NEXT_DATE = `${EP_EXE_DIR}/da_advance_time.exe ${DATE}  ${CYCLE_PERIOD}`
 set cc = `echo $DATE | cut -c1-2`
 set yy = `echo $DATE | cut -c3-4`
 set ccyy = `echo $DATE | cut -c1-4`
@@ -43,8 +43,8 @@ set   mm = `echo $DATE | cut -c5-6`
 set   dd = `echo $DATE | cut -c7-8`
 set   hh = `echo $DATE | cut -c9-10`
 set   mi = 00 #`echo $DATE | cut -c11-12`
-set DATE1 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
-set DATE2 = `${HOME}/bin/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
+set DATE1 = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW1} -f ccyymmddhhnn`
+set DATE2 = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} ${TIMEWINDOW2} -f ccyymmddhhnn`
 set ccyy1 = `echo $DATE1 | cut -c1-4`
 set   mm1 = `echo $DATE1 | cut -c5-6`
 set   dd1 = `echo $DATE1 | cut -c7-8`
@@ -69,7 +69,7 @@ else
    set   mi_e = 00 #`echo $DATE | cut -c11-12`
 endif
 
-set DATE_WRF = `${BIN_DIR}/da_advance_time.exe ${DATE} 0 -w`
+set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} 0 -w`
 
    set domain_id = 01
 
@@ -81,8 +81,8 @@ set DATE_WRF = `${BIN_DIR}/da_advance_time.exe ${DATE} 0 -w`
    rm -f ${DA_RUN_DIR}/FAIL
 
 
-set gdate = (`${BIN_DIR}/da_advance_time.exe $DATE 0 -g`)
-set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
+set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
+set gdatef = (`${EP_EXE_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
 
 #if ( ! -e wrfinput_d${domain_id}_${gdate[1]}_${gdate[2]}_mean || \
 #     ! -e wrfbdy_d${domain_id}_${gdatef[1]}_${gdatef[2]}_mean ) then
@@ -158,7 +158,7 @@ set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
    #ln -sf ${WRFDA_SRC_DIR}/var/run/radiance_info ./radiance_info
    ln -sf ${FIX_DIR}/radiance_info ./radiance_info
 # link VARBC related file
-   set VARBC_PREV_DATE = `${HOME}/bin/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
+   set VARBC_PREV_DATE = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} -${CYCLE_PERIOD}`
    #set in params.csh set VARBC_DIR = /nfs/gpfs/PAS0400/osu5183/VARBC
 
    if ( ! -e ${EXP_DIR_TOP}/${VARBC_PREV_DATE}/VARBC.out ) then
@@ -191,7 +191,7 @@ set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
             exit 1
       else
          ln -sf ${FG_FILE} fg_orig
-         cp -p ${FG_FILE} fg
+         \cp -p ${FG_FILE} fg
       endif
    else if ( ${FG_SOURCE} == 'cycle' ) then
       set FG_FILE = ${EXP_DIR_TOP}/advance/${PREV_DATE}/wrfout_d${domain_id}_${DATE_WRF}
@@ -200,24 +200,24 @@ set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
             exit 1
       else
          ln -sf ${FG_FILE} fg_orig
-         cp -p ${FG_FILE} fg
+         \cp -p ${FG_FILE} fg
       endif
    endif
 
    if ( ${FGAT} == TRUE ) then
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 03 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 03 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg01
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 04 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 04 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg02
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 05 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 05 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg03
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 06 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 06 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg04
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 07 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 07 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg05
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 08 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 08 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg06
-      set DATE_WRF = `${HOME}/bin/da_advance_time.exe ${PREV_DATE} 09 -w`
+      set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${PREV_DATE} 09 -w`
       ln -sf ${EXP_DIR_TOP}/${PREV_DATE}/wrf/wrfinput_d${domain_id}_${DATE_WRF} fg07
    endif
 
@@ -226,7 +226,7 @@ set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD -g`)
       if ( $VAR4D == TRUE ) then
          set UPDATE_LATERAL_BDY = .true.
          ln -sf ${REAL_RUN_DIR}/${DATE}/wrfbdy_d${domain_id} ${DA_RUN_DIR}/wrfbdy_d${domain_id}_orig
-         cp -p ${REAL_RUN_DIR}/${DATE}/wrfbdy_d${domain_id} ${DA_RUN_DIR}/wrfbdy_d${domain_id}
+         \cp -p ${REAL_RUN_DIR}/${DATE}/wrfbdy_d${domain_id} ${DA_RUN_DIR}/wrfbdy_d${domain_id}
       else
          set UPDATE_LATERAL_BDY = .false.
       endif
@@ -262,7 +262,7 @@ EOF
       ln -sf fg wrfinput_d01
       if ( ${VAR4D_LBC} == TRUE ) then
          #ln -sf ${REAL_RUN_DIR}/${NEXT_DATE}/wrfinput_d${domain_id} fg02
-         cp -p ${REAL_RUN_DIR}/${NEXT_DATE}/wrfinput_d${domain_id} fg02
+         \cp -p ${REAL_RUN_DIR}/${NEXT_DATE}/wrfinput_d${domain_id} fg02
       endif
       #ln -sf ${REAL_RUN_DIR}/${DATE}/wrfbdy_d${domain_id} wrfbdy_d${domain_id}
    endif
@@ -604,9 +604,9 @@ endif
       set UPDATE_LOW_BDY     = .false.
       cd ${DA_RUN_DIR}
       if ( ${VAR4D} == TRUE ) then
-         cp -p ${DA_RUN_DIR}/wrfbdy_d${domain_id} ${DA_RUN_DIR}/wrfbdy_d${domain_id}_${DATE}
+         \cp -p ${DA_RUN_DIR}/wrfbdy_d${domain_id} ${DA_RUN_DIR}/wrfbdy_d${domain_id}_${DATE}
       else
-         cp -p wrfbdy_d${domain_id}_${gdatef[1]}_${gdatef[2]}_mean ${DA_RUN_DIR}/wrfbdy_d${domain_id}_${DATE}
+         \cp -p wrfbdy_d${domain_id}_${gdatef[1]}_${gdatef[2]}_mean ${DA_RUN_DIR}/wrfbdy_d${domain_id}_${DATE}
       endif
       cat >! ${DA_RUN_DIR}/parame.in << EOF
 &control_param

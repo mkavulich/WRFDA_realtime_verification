@@ -39,6 +39,6 @@ while ( $DATE <= $END_DATE )
       echo "Error archiving obs for ${DATE}"
    endif
 
-   set DATE = `${HOME}/bin/da_advance_time.exe $DATE $CYCLE_PERIOD`
+   set DATE = `${EP_EXE_DIR}/da_advance_time.exe $DATE $CYCLE_PERIOD`
 
 end #DATE loop

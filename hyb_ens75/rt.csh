@@ -1,5 +1,6 @@
 #!/bin/csh
-#set echo
+set echo
+set verbose
 echo "Beginning $0"
 setenv EXPT       hyb_ens75
 setenv OB_FORMAT  2
@@ -10,6 +11,7 @@ source /glade/p/wrf/WORKDIR/wrfda_realtime/${EXPT}/params.csh
 setenv MAILTO "${USER}@ucar.edu"
 
 if ( ${#argv} > 0 ) then
+   setenv REALTIME_RUN false # If we specified a date, it is not realtime
    set DATE = $1
    set cc = `echo $DATE | cut -c1-2`
    set yy = `echo $DATE | cut -c3-4`
@@ -17,6 +19,7 @@ if ( ${#argv} > 0 ) then
    set dd = `echo $DATE | cut -c7-8`
    set hh = `echo $DATE | cut -c9-10`
 else
+   setenv REALTIME_RUN true # If we specified a date, it is not realtime
    set cc = `date -u '+%C'`
    set yy = `date -u '+%y'`
    set mm = `date -u '+%m'`
@@ -37,14 +40,13 @@ endif
 set echo
 setenv ANAL_DATE $DATE
 if ( $hh == 00 ) then
-   setenv QUEUE premium
+#   setenv QUEUE premium
 endif
 
 # Need ANAL_DATE for these variables, so they aren't set in "params.csh"
 setenv DIAG_RUN_DIR   ${RUN_BASEDIR}/postdir/soundings/${ANAL_DATE}
 
 cd ${SCRIPT_DIR}
-\rm -f ${SCRIPT_DIR}/job.out
 echo "`date` started for ${EXPT} ${DATE}" > ${SCRIPT_DIR}/logdir/started_${DATE}
 mail -s "RT2015: ${DATE} ${EXPT} started" "${MAILTO}" < ${SCRIPT_DIR}/logdir/started_${DATE}
 
@@ -102,8 +104,8 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
    set DA_RUN_DIR = ${EXP_DIR_TOP}/${DATE}
    if ( ! -d ${DA_RUN_DIR} ) mkdir -p ${DA_RUN_DIR}
    
-   set gdate = (`${BIN_DIR}/da_advance_time.exe $DATE 0 -g`)
-   set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
+   set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
+   set gdatef = (`${EP_EXE_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
    set inpfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart_80M40L/output/${DATE}/wrfinput_d01_${gdate[1]}_${gdate[2]}_mean
    set bdyfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart_80M40L/output/${DATE}/wrfbdy_d01_${gdatef[1]}_${gdatef[2]}_mean
    #set tarfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/${DATE}/retro.tar
@@ -113,11 +115,11 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
    while ( $done == false )
       if ( -e $inpfile && -e $bdyfile ) then
          set done = true
-         cp -p $inpfile $DA_RUN_DIR
-         cp -p $bdyfile $DA_RUN_DIR
+         \cp -p $inpfile $DA_RUN_DIR
+         \cp -p $bdyfile $DA_RUN_DIR
       else if ( -e $tarfile ) then
          set done = true
-         cp -p $tarfile $DA_RUN_DIR
+         \cp -p $tarfile $DA_RUN_DIR
       endif
       if ( $done == false ) sleep 120
    end
@@ -125,7 +127,8 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
    @ num_rerun = 0
    SUBMIT_DA_AGAIN:
    echo "`date` submit run_wrfda.csh ......"
-   ${bsub_cmd} -q ${QUEUE} -J "da${mm}${dd}${hh}" < ${SCRIPT_DIR}/run_wrfda.csh >&! ${LOG_DIR}/${DATE}.wrfda
+   echo "${SCRIPT_DIR}script\n${mm}month\n${dd}day\n${hh}hour\n"
+   ${bsub_cmd} -q ${QUEUE} -J "da${mm}${dd}${hh}" < ${SCRIPT_DIR}/run_wrfda.csh
 
    set da_done = false
    while ( $da_done == false )
@@ -186,7 +189,9 @@ echo "`date` running run_post_anal.csh ......"
 ${DIAG_SCRIPT_DIR}/post_anal/run_post_anal.csh >&! ${SCRIPT_DIR}/logdir/postanlog.${hh}z
 
 if ( $hh == 00 ) then
-   sleep 1800 #hcl wait for gfs bdy
+   if ( $REALTIME_RUN == true ) then
+      sleep 1800 #hcl wait for gfs bdy
+   endif
    #48-hour forecast
    cd ${SCRIPT_DIR}
    set file_to_check = ${FCST_RUN_DIR}/${DATE}/FINISHED
@@ -194,7 +199,7 @@ if ( $hh == 00 ) then
       echo "`date` submit run_fcst.csh ......"
       ${bsub_cmd} -q regular -J "fc_${mm}${dd}${hh}" < ${SCRIPT_DIR}/run_fcst.csh >&! ${LOG_DIR}/${DATE}.fcst
       #${bsub_cmd} -q economy -J "fc_${mm}${dd}${hh}" < ${SCRIPT_DIR}/run_fcst.csh >&! ${LOG_DIR}/${DATE}.fcst
-      cp -p ${LOG_DIR}/${DATE}.fcst jobid_${DATE}
+      \cp -p ${LOG_DIR}/${DATE}.fcst jobid_${DATE}
       if ( `head -1 jobid_${DATE} | cut -c1-7` != WARNING ) then
          @ cind1 = `cat jobid_${DATE} | awk '{print index($0,"<")}'` + 1
          @ cind2 = `cat jobid_${DATE} | awk '{print index($0,">")}'` - 1
@@ -203,7 +208,7 @@ if ( $hh == 00 ) then
             /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bswitch standby ${JOB_ID}
          endif
       endif
-      rm jobid_${DATE}
+      \rm jobid_${DATE}
 
       set fc_done = false
       while ( $fc_done == false )

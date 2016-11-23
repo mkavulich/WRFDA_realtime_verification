@@ -98,8 +98,8 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
    set DA_RUN_DIR = ${EXP_DIR_TOP}/${DATE}
    if ( ! -d ${DA_RUN_DIR} ) mkdir -p ${DA_RUN_DIR}
    
-   set gdate = (`${BIN_DIR}/da_advance_time.exe $DATE 0 -g`)
-   set gdatef = (`${BIN_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
+   set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
+   set gdatef = (`${EP_EXE_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
    set inpfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/${DATE}/wrfinput_d01_${gdate[1]}_${gdate[2]}_mean
    set bdyfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/${DATE}/wrfbdy_d01_${gdatef[1]}_${gdatef[2]}_mean
    #set tarfile = /glade/scratch/wrfrt/realtime_ensemble/wrfdart/output/${DATE}/retro.tar
