@@ -7,7 +7,7 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
-load "$HOME/bin/advance_cymdh.ncl"
+load "$BIN_DIR/advance_cymdh.ncl"
 
 ;***********************************************************************
 ; user-defined settings
@@ -20,13 +20,14 @@ cycle_period = 06
 data_dir_top = getenv("DA_RUN_DIR_TOP")
 
 ;obfiles = "/fs/lustre/hclin/nc4_south/var3d_rad_glb_freez/2008080200/var/filtered_obs_01"
-fgfile = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/2015060900/fg"
+;fgfile = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua/2015060900/fg"
+fgfile = "$data_dir_top/$start_date/fg"
 out_type = "pdf"
 ;ob_format = 1
 ob_format = 2
 ;data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua"
 ;data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015112400/hyb_ens75"
-plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+;plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
 ;plotname = "./obsloc"+date
 ;limit_domain = True
 limit_domain = False

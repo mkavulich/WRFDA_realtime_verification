@@ -1,16 +1,10 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "/glade/u/home/hclin/scripts/rt2015/diag/utils_hclin.ncl"
+load "$DIAG_SCRIPT_DIR/utils_hclin.ncl"
 ;load "$HOME/bin/advance_cymdh.ncl"
 
-   ;data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir" ;/start2015060812/ob_ascii" ;ccyymmddhh/statistics
-   ;exps = (/ "ob_ascii/hybrid_ens75_amsua", "ob_prepb/hybrid_ens75_amsua" /)
-   ;exp_names = (/ "ob_ascii", "ob_prepb" /)
-   ;init_start_date = "2015051300"
-   ;init_end_date = "2015053100"
-   ;cycle_period = 24
 
-   data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir"
+   data_dir_top = getenv("DA_RUN_DIR_TOP")
    exps = (/ "rt" /)
    exp_names = (/ "RT_WRFDA" /)
    ;init_start_date = "2015062712"
@@ -33,7 +27,7 @@ load "/glade/u/home/hclin/scripts/rt2015/diag/utils_hclin.ncl"
    ncol = 4
 
    data_dir = data_dir_top+"/"+exps
-   plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   plot_dir_top = run_basedir + "/diagdir/rt"
    plot_dir = plot_dir_top+"/"+init_end_date
 system("mkdir -p "+plot_dir)
 

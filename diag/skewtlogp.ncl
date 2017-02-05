@@ -5,7 +5,7 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRF_contributed.ncl"
-load "$HOME/bin/utils_hclin.ncl"
+load "$BIN_DIR/utils_hclin.ncl"
 
 begin
 ;
@@ -25,7 +25,7 @@ system("date")
  
 ; For realtime scripting
 
-;EXEC = getenv("TOOL_DIR")+"/da_advance_time.exe"
+;EXEC = getenv("EXE_DIR")+"/da_advance_time.exe"
 ;mem = getenv("MEM")
 ;st_mem = sprinti("%0.3i",stringtointeger(mem))
 ;storage_top = getenv("storage_top")+"/"

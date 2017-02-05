@@ -9,6 +9,7 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 date     = getenv("ANAL_DATE")
 ob_type  = getenv("OB_TYPE")
 var_type = getenv("VAR_TYPE")
+diag_dir = getenv("DIAG_RUN_DIR")
 ;date     = "2015072800"
 ;ob_type  = "sound"
 ;var_type = "t"
@@ -18,8 +19,8 @@ var_type = getenv("VAR_TYPE")
 ;obtype = (/ var_type+"_"+ob_type /)
 obtype = (/ ob_type+"_"+var_type /)
 
-plotdir = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt/"+date
-exp_dirs = (/ "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt/"+date /)
+plotdir = diag_dir + "/"+date
+exp_dirs = (/ diag_dir+"/"+date /)
 exp_names = (/ "RT-WRFDA" /)
 nexp = dimsizes(exp_dirs)
 nregion = 1

@@ -4,7 +4,7 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
-load "$HOME/bin/utils_hclin.ncl"
+load "$BIN_DIR/utils_hclin.ncl"
 
 begin
 
@@ -67,7 +67,8 @@ begin
    ;instrument = "noaa-19-amsua"
    ;instrument = "metop-2-amsua"
    datdir = datdir_top+"/"
-   plotdir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   diag_dir = getenv("DIAG_RUN_DIR")
+   plotdir_top = diag_dir
    expt = "RT"
 
    ;start_date   = "2015062812"

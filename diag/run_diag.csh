@@ -16,23 +16,23 @@ endif
 set DIAG_RUN_DIR    = /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
 #setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 set DA_RUN_DIR       = ${DA_RUN_DIR_TOP}/${ANAL_DATE}
-set plot_conv_loc          = True
-set proc_gts_omb_oma       = True
-set plot_ts_omb_oma        = True
-set plot_prf_omb_oma       = True
-set plot_ts_omb_oma_levels = True
-set plot_rad_loc           = True
-set plot_rad_ts            = True
+set plot_conv_loc          = true
+set proc_gts_omb_oma       = false
+set plot_ts_omb_oma        = false
+set plot_prf_omb_oma       = false
+set plot_ts_omb_oma_levels = false
+set plot_rad_loc           = false
+set plot_rad_ts            = false
 
 if ( ! -d ${DIAG_RUN_DIR} ) mkdir -p ${DIAG_RUN_DIR}
 
 module load ncl
 
-if ( $?plot_conv_loc ) then
+if ( $plot_conv_loc == true ) then
    ncl ${DIAG_SCRIPT_DIR}/plot_ob_ascii_loc.ncl
 endif
 
-if ( $?proc_gts_omb_oma ) then
+if ( $proc_gts_omb_oma == true ) then
    cd $DIAG_RUN_DIR
    echo ${ANAL_DATE} >&! gts_omb_oma
    \cat ${DA_RUN_DIR}/gts_omb_oma_01 >> gts_omb_oma
@@ -40,7 +40,7 @@ if ( $?proc_gts_omb_oma ) then
    rm -f gts_omb_oma
 endif
 
-if ( $?plot_prf_omb_oma ) then
+if ( $plot_prf_omb_oma == true ) then
    cd $DIAG_RUN_DIR
    foreach obtype ( sound geoamv airep )
       if ( $obtype == sound ) then
@@ -64,7 +64,7 @@ if ( $?plot_prf_omb_oma ) then
    /usr/bin/montage prf_omb_oma_geoamv_u.png prf_omb_oma_geoamv_v.png -tile 2x -geometry '500x500>' prf_omb_oma_geoamv.png
 endif
 
-if ( $?plot_ts_omb_oma ) then
+if ( $plot_ts_omb_oma == true ) then
    cd $DIAG_RUN_DIR
    foreach obtype ( sound sonde_sfc geoamv airep synop metar gpspw buoy ships profiler pilot gpsref )
       if ( $obtype == sound ) then
@@ -95,7 +95,7 @@ if ( $?plot_ts_omb_oma ) then
    if ( -e ts_omb_oma_gpsref_ref.png ) mv ts_omb_oma_gpsref_ref.png ts_omb_oma_gpsref.png
 endif
 
-if ( $?plot_ts_omb_oma_levels ) then
+if ( $plot_ts_omb_oma_levels == true ) then
    cd $DIAG_RUN_DIR
    foreach obtype ( sound geoamv airep )
       if ( $obtype == sound ) then
@@ -115,7 +115,7 @@ if ( $?plot_ts_omb_oma_levels ) then
    end
 endif
 
-if ( $?plot_rad_loc ) then
+if ( $plot_rad_loc == true ) then
    cd $DIAG_RUN_DIR
    set hh = `echo $ANAL_DATE | cut -c9-10`
    if ( $hh == 06 || $hh == 18 ) then
@@ -132,7 +132,7 @@ if ( $?plot_rad_loc ) then
    end
 endif
 
-if ( $?plot_rad_ts ) then
+if ( $plot_rad_ts == true ) then
    cd $DIAG_RUN_DIR
    set hh = `echo $ANAL_DATE | cut -c9-10`
    if ( $hh == 06 || $hh == 18 ) then

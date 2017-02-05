@@ -1,16 +1,13 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$HOME/bin/advance_cymdh.ncl"
+load "$BIN_DIR/advance_cymdh.ncl"
 
-   ;data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir" ;/start2015060812/ob_ascii" ;ccyymmddhh/statistics
-   ;exps = (/ "ob_ascii/hybrid_ens75_amsua", "ob_prepb/hybrid_ens75_amsua" /)
-   ;expnames = (/ "ob_ascii", "ob_prepb" /)
-   ;init_start_date = "2015051300"
-   ;init_end_date = "2015053100"
-   ;cycle_period = 24
+   expt = getenv("EXPT")
+   run_basedir = getenv("RUN_BASEDIR")
 
-   data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii" ;ccyymmddhh/statistics
-   exps = (/ "hyb_e50_amsua" /)
+   ;data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii" ;ccyymmddhh/statistics
+   data_dir_top = getenv("DA_RUN_DIR_TOP")
+   exps = (/ expt + "_amsua" /)
    expnames = (/ "RT_WRFDA" /)
    ;init_start_date = "2015062712"
    ;init_end_date = "2015072712"
@@ -21,7 +18,7 @@ load "$HOME/bin/advance_cymdh.ncl"
    cycle_period = 12
 
    data_dir = data_dir_top+"/"+exps
-   plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   plot_dir_top = run_basedir + "/diagdir/rt"
    plot_dir = plot_dir_top+"/"+init_end_date
 system("mkdir -p "+plot_dir)
 

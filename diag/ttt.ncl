@@ -1,9 +1,10 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "/glade/u/home/hclin/scripts/rt2015/diag/utils_hclin.ncl"
+load "$DIAG_SCRIPT_DIR/utils_hclin.ncl"
 ;load "$HOME/bin/advance_cymdh.ncl"
 
-   data_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir"
+   run_basedir = getenv("RUN_BASEDIR")
+   data_dir_top = run_basedir + "/diagdir"
    exps = (/ "rt" /)
    exp_names = (/ "RT_WRFDA" /)
    init_end_date = "2015122412"
@@ -34,7 +35,7 @@ exit
    ncol = 4
 
    data_dir = data_dir_top+"/"+exps
-   plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   plot_dir_top = data_dir_top + "/rt"
    plot_dir = plot_dir_top+"/"+init_end_date
 system("mkdir -p "+plot_dir)
 

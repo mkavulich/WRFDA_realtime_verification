@@ -4,7 +4,7 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
-load "$HOME/bin/utils_hclin.ncl"
+load "$BIN_DIR/utils_hclin.ncl"
 
    ;expnames = (/ "gfs", "cold", "warm" /)
    ;plotdir = "/glade/scratch/hclin/DA/DA2014/Spring2012/x1.40962_m80/diag_rad"
@@ -14,7 +14,8 @@ load "$HOME/bin/utils_hclin.ncl"
    ;expdirs = (/ expdir1, expdir2, expdir3 /)
 
    expnames = (/ "RT_WRFDA" /)
-   plotdir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   diag_dir = getenv("DIAG_RUN_DIR")
+   plotdir_top = diag_dir
    ;expdir1 = "/glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua"
    expdir1 = getenv("DA_RUN_DIR_TOP")
    expdirs = (/ expdir1 /)
