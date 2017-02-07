@@ -38,7 +38,7 @@ set echo
              ${ANAL_DATE}/ep/u.e* ${ANAL_DATE}/ep/v.e* ${ANAL_DATE}/ep/t.e* ${ANAL_DATE}/ep/q*.e* \
              ${ANAL_DATE}/ep/*.mean ${ANAL_DATE}/ep/*.stdv \
              ${ANAL_DATE}/ep/prior_inf_ic
-      set HSI_DIR = /home/hclin/RT2015/enspert_inflate
+      set HSI_DIR = ${HSI_BASEDIR}/enspert_inflate
       hsi "cd ${HSI_DIR}; lcd ${EP_DIR_TOP}; put -p ${archive_fname}"
       if { hsi ls ${HSI_DIR}/${archive_fname} >& /dev/null } then
          \rm -f ${ANAL_DATE}/ep/qcloud.* ${ANAL_DATE}/ep/qrain.* ${ANAL_DATE}/ep/qice.* ${ANAL_DATE}/ep/qsnow.* ${ANAL_DATE}/ep/qgraup.*

@@ -14,7 +14,7 @@ set CYCLE_PERIOD = 06
 set ADVANCE_HOUR = 06
 set DATE = $START_DATE
 set BIN_DIR = ${HOME}/bin
-set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua
+#set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015060812/ob_ascii/hyb_e50_amsua
 while ( $DATE <= $END_DATE )
 
    set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
@@ -22,7 +22,7 @@ while ( $DATE <= $END_DATE )
 
    cd ${EXP_DIR_TOP}/${DATE}
 
-   set HSI_DIR = /home/hclin/RT2015/${DATE}
+   set HSI_DIR = /home/kavulich/RT2017/${DATE}
    hsi "mkdir -p ${HSI_DIR}"
 
    set archive_fname = wrfda_diags_${DATE}.tar

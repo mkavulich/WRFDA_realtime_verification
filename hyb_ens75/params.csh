@@ -18,9 +18,10 @@ setenv EXE_DIR        ${WRFDA_SRC_DIR}/var/build
 setenv OBSPROC_EXE_DIR  ${WRFDA_SRC_DIR}/var/obsproc
 setenv WRF_SRC_DIR    /glade/p/work/wrfrt/rt_ensemble_code/WRFV3.6.1_ncar_ensf
 setenv EP_DIR_TOP  /glade/scratch/hclin/CONUS/wrfda/enspert_inflate
+setenv HSI_BASEDIR /home/kavulich/RT2017
 
 # RUN DIRS
-setenv RUN_BASEDIR    /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda
+setenv RUN_BASEDIR    /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/
 setenv DA_RUN_DIR_TOP ${RUN_BASEDIR}/expdir/orig/${EXPT}
 setenv OB_DIR_TOP  ${RUN_BASEDIR}/obsproc
 

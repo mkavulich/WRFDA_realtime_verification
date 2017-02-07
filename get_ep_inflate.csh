@@ -84,7 +84,7 @@ setenv ADVANCE_HOUR   6
 
    /glade/apps/opt/nco/4.4.2/gnu/4.8.2/bin/ncea -O wrfout_d01_${FCST_DATE}.* ${EP_DIR_TOP}/wrfout_d01_${ANAL_DATE}_${FCST_DATE}.mean
 
-   set HSI_DIR = /home/hclin/RT2015/ensfcst_mean
+   set HSI_DIR = ${HSI_BASEDIR}/ensfcst_mean
    hsi "cd ${HSI_DIR}; lcd ${EP_DIR_TOP}; put -p wrfout_d01_${ANAL_DATE}_${FCST_DATE}.mean"
    if { hsi ls ${HSI_DIR}/wrfout_d01_${ANAL_DATE}_${FCST_DATE}.mean >& /dev/null } then
       \rm -f ${EP_DIR_TOP}/wrfout_d01_${ANAL_DATE}_${FCST_DATE}.mean

@@ -17,15 +17,15 @@ set BIN_DIR = ${HOME}/bin
 #set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2015112400/hyb_ens75
 #set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016060800/hyb_ens75
 #set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016082612/hyb_ens75
-set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+#set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 while ( $DATE <= $END_DATE )
 
    set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
    set gdatef = (`${EP_EXE_DIR}/da_advance_time.exe $DATE $ADVANCE_HOUR -g`)
 
-   cd ${EXP_DIR_TOP}/${DATE}
+   cd ${DA_RUN_DIR_TOP}/${DATE}
 
-   set HSI_DIR = /home/hclin/RT2015/hyb_ens75/${DATE}
+   set HSI_DIR = ${HSI_BASEDIR}/hyb_ens75/${DATE}
    hsi "mkdir -p ${HSI_DIR}"
 
    set archive_fname = wrfda_diags_${DATE}.tar
@@ -56,7 +56,7 @@ while ( $DATE <= $END_DATE )
    endif
    if ( -e ${archive_fname} ) gzip ${archive_fname}
 
-   hsi "cd ${HSI_DIR}; lcd ${EXP_DIR_TOP}/${DATE}; put -p ${archive_fname}.gz"
+   hsi "cd ${HSI_DIR}; lcd ${DA_RUN_DIR_TOP}/${DATE}; put -p ${archive_fname}.gz"
    if { hsi ls ${HSI_DIR}/${archive_fname}.gz >& /dev/null } then
       \rm -f ${archive_fname}.gz
    else
@@ -64,6 +64,7 @@ while ( $DATE <= $END_DATE )
    endif
 
    set archive_fname = wrfda_inout_${DATE}.tar.gz
+   if ( ${FG_SOURCE} != 'cold' ) then
    tar czvfh ${archive_fname} \
        LANDUSE.TBL \
        VARBC.in \
@@ -74,8 +75,19 @@ while ( $DATE <= $END_DATE )
        radiance_info/*info \
        wrfbdy_d01_${DATE} \
        wrfvar_output_d01_${DATE}
+   else
+   tar czvfh ${archive_fname} \
+       LANDUSE.TBL \
+       VARBC.in \
+       fg \
+       namelist.input \
+       parame.in.latbdy \
+       radiance_info/*info \
+       wrfbdy_d01_${DATE} \
+       wrfvar_output_d01_${DATE}
+   endif
 
-   hsi "cd ${HSI_DIR}; lcd ${EXP_DIR_TOP}/${DATE}; put -p ${archive_fname}"
+   hsi "cd ${HSI_DIR}; lcd ${DA_RUN_DIR_TOP}/${DATE}; put -p ${archive_fname}"
    if { hsi ls ${HSI_DIR}/${archive_fname} >& /dev/null } then
       \rm -f ${archive_fname}
    else

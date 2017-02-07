@@ -15,13 +15,13 @@ set CYCLE_PERIOD = 06
 set ADVANCE_HOUR = 06
 set DATE = $START_DATE
 set BIN_DIR = ${HOME}/bin
-set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/obsproc
+#set EXP_DIR_TOP = /glade/scratch/hclin/CONUS/wrfda/obsproc
 while ( $DATE <= $END_DATE )
 
    set hh = `echo $DATE | cut -c9-10`
-   cd ${EXP_DIR_TOP}
+   cd ${OB_DIR_TOP}
 
-   set HSI_DIR = /home/hclin/RT2015/${DATE}
+   set HSI_DIR = /home/kavulich/RT2017/${DATE}
    hsi "mkdir -p ${HSI_DIR}"
 
    set archive_fname = obs_${DATE}.tar
@@ -32,7 +32,7 @@ while ( $DATE <= $END_DATE )
           tar --append --file=${archive_fname} ${DATE}/${gfsobs}
        endif
    end
-   hsi "cd ${HSI_DIR}; lcd ${EXP_DIR_TOP}; put -p ${archive_fname}"
+   hsi "cd ${HSI_DIR}; lcd ${OB_DIR_TOP}; put -p ${archive_fname}"
    if { hsi ls ${HSI_DIR}/${archive_fname} >& /dev/null } then
       \rm -f ${archive_fname}
    else
