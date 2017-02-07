@@ -77,8 +77,8 @@ set DATE_WRF = `${EP_EXE_DIR}/da_advance_time.exe ${DATE} 0 -w`
    if ( ! -d ${DA_RUN_DIR} ) mkdir -p ${DA_RUN_DIR}
    cd ${DA_RUN_DIR}
 
-   rm -f ${DA_RUN_DIR}/rsl.*
-   rm -f ${DA_RUN_DIR}/FAIL
+   \rm -f ${DA_RUN_DIR}/rsl.*
+   \rm -f ${DA_RUN_DIR}/FAIL
 
 
 set gdate = (`${EP_EXE_DIR}/da_advance_time.exe $DATE 0 -g`)
@@ -574,17 +574,17 @@ if ( $use_radiance == true ) then
 EOF
       ${WRFDA_SRC_DIR}/var/build/da_rad_diags.exe
       #$HOME/bin/mcp diags'_*' oma'_*'
-      rm -rf $DATE
-      rm -f namelist.da_rad_diags da_rad_diags.exe
+#      rm -rf $DATE
+#      rm -f namelist.da_rad_diags da_rad_diags.exe
       tar cvf rad01_oma_${DATE}.tar 01_oma_*.*
       gzip rad01_oma_${DATE}.tar
-      rm -f 01_oma_*.*
+      \rm -f 01_oma_*.*
    endif
 endif
 #############################################################
 
    mv  wrfvar_output  wrfvar_output_d${domain_id}_${DATE} 
-   rm gts_omb_oma_0?.* unpert_obs*
+   \rm -f gts_omb_oma_0?.* unpert_obs*
 
    foreach file_rej ( `ls rej_obs_conv_01.*` )
       cat ${file_rej} >> rej_obs_conv_01
@@ -595,8 +595,8 @@ endif
    if ( ! -d rsl ) mkdir -p rsl
    mv rsl.out.* rsl
    mv rsl.error.* rsl
-   rm rej_obs_conv_01.* rej_obs_conv_02.* 
-   rm filtered_obs.* #rsl.error.* rsl.out.*
+   \rm -f rej_obs_conv_01.* rej_obs_conv_02.* 
+   \rm -f filtered_obs.* #rsl.error.* rsl.out.*
 
    # update lateral bdy for coarse domain
    if ( ${domain_id} == '01' ) then

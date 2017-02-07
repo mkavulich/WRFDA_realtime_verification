@@ -48,7 +48,7 @@ setenv DIAG_RUN_DIR   ${RUN_BASEDIR}/postdir/soundings/${ANAL_DATE}
 
 cd ${SCRIPT_DIR}
 echo "`date` started for ${EXPT} ${DATE}" > ${SCRIPT_DIR}/logdir/started_${DATE}
-mail -s "RT2015: ${DATE} ${EXPT} started" "${MAILTO}" < ${SCRIPT_DIR}/logdir/started_${DATE}
+mail -s "${NAME}: ${DATE} ${EXPT} started" "${MAILTO}" < ${SCRIPT_DIR}/logdir/started_${DATE}
 
 if ( $DATE == $FIRST_DATE ) then
    setenv FG_SOURCE  cold #ensfc_mean
@@ -71,7 +71,7 @@ if ( $OB_FORMAT == "2" ) then
          if ( $obs_done == false ) then
             if ( -e ${OB_DIR_TOP}/${DATE}/FAIL ) then
                echo "   `date` Error in run_obsproc.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error obsproc" "${MAILTO}" < ${OB_DIR_TOP}/${DATE}/log.d01.${DATE}
+               mail -s "${NAME}: ${DATE} ${EXPT} Error obsproc" "${MAILTO}" < ${OB_DIR_TOP}/${DATE}/log.d01.${DATE}
                #exit 1
                setenv OB_FORMAT 1
                set obs_done = true
@@ -144,7 +144,7 @@ if ( ! -e ${EXP_DIR_TOP}/${DATE}/FINISHED ) then
                goto SUBMIT_DA_AGAIN
             else
                echo "   `date` Error in run_wrfda.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error da" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
+               mail -s "${NAME}: ${DATE} ${EXPT} Error da" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
                exit 1
             endif
          endif
@@ -168,7 +168,7 @@ if ( ! -e ${file_to_check} ) then
       if ( $adv_done == false ) then
          if ( -e ${EXP_DIR_TOP}/advance/${DATE}/FAIL ) then
             echo "   `date` Error in run_advance.csh ......"
-            mail -s "RT2015: ${DATE} ${EXPT} Error advance" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
+            mail -s "${NAME}: ${DATE} ${EXPT} Error advance" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
             exit 1
          endif
          sleep 60
@@ -178,7 +178,7 @@ endif
 
 if ( -e ${EXP_DIR_TOP}/advance/${DATE}/FINISHED ) then
    echo "`date` Done rt.csh for ${EXPT} ${DATE}"
-   mail -s "RT2015: ${DATE} ${EXPT} Done" "${MAILTO}" < ${EXP_DIR_TOP}/${DATE}/statistics
+   mail -s "${NAME}: ${DATE} ${EXPT} Done" "${MAILTO}" < ${EXP_DIR_TOP}/${DATE}/statistics
 endif
 
 #post-processing
@@ -225,7 +225,7 @@ if ( $hh == 00 ) then
          if ( $fc_done == false ) then
             if ( -e ${FCST_RUN_DIR}/${DATE}/FAIL ) then
                echo "   `date` Error in run_fcst.csh ......"
-               mail -s "RT2015: ${DATE} ${EXPT} Error FCST" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
+               mail -s "${NAME}: ${DATE} ${EXPT} Error FCST" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
                exit 1
             endif
             sleep 600
@@ -234,9 +234,11 @@ if ( $hh == 00 ) then
    endif
 endif #end 00z 48h fcst
 
-echo "`date` running archive_obs.csh ......"
-${SCRIPT_DIR}/archive_obs.csh   >&! ${SCRIPT_DIR}/logdir/arclog.${hh}z
+#echo "`date` running archive_obs.csh ......"
+#${SCRIPT_DIR}/archive_obs.csh   >&! ${SCRIPT_DIR}/logdir/arclog.${hh}z
 
-echo "`date` running archive_wrfda.csh ......"
-${SCRIPT_DIR}/archive_wrfda.csh >> ${SCRIPT_DIR}/logdir/arclog.${hh}z
+#echo "`date` running archive_wrfda.csh ......"
+#${SCRIPT_DIR}/archive_wrfda.csh >> ${SCRIPT_DIR}/logdir/arclog.${hh}z
+
+mail -s "${NAME}: ${DATE} ${EXPT} RAN FULL SUCCESS" "${MAILTO}" < ${SCRIPT_DIR}/logdir/log.${hh}z
 

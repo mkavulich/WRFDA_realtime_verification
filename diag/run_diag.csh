@@ -12,8 +12,9 @@ if ( ! $?ANAL_DATE ) then
    echo "ANAL_DATE not set"
    exit 1
 endif
+
 #set DIAG_RUN_DIR    = /glade/scratch/hclin/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
-set DIAG_RUN_DIR    = /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
+#set DIAG_RUN_DIR    = /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/diagdir/rt/${ANAL_DATE}
 #setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 set DA_RUN_DIR       = ${DA_RUN_DIR_TOP}/${ANAL_DATE}
 set plot_conv_loc          = true
@@ -24,11 +25,13 @@ set plot_ts_omb_oma_levels = false
 set plot_rad_loc           = false
 set plot_rad_ts            = false
 
+set DIAG_RUN_DIR = ${DIAG_RUN_DIR_TOP}/${ANAL_DATE}
 if ( ! -d ${DIAG_RUN_DIR} ) mkdir -p ${DIAG_RUN_DIR}
 
 module load ncl
 
 if ( $plot_conv_loc == true ) then
+   echo "Running ${DIAG_SCRIPT_DIR}/plot_ob_ascii_loc.ncl"
    ncl ${DIAG_SCRIPT_DIR}/plot_ob_ascii_loc.ncl
 endif
 
@@ -36,6 +39,7 @@ if ( $proc_gts_omb_oma == true ) then
    cd $DIAG_RUN_DIR
    echo ${ANAL_DATE} >&! gts_omb_oma
    \cat ${DA_RUN_DIR}/gts_omb_oma_01 >> gts_omb_oma
+   echo "Running ${DIAG_SCRIPT_DIR}/proc_gts_omb_oma.exe"
    ${DIAG_SCRIPT_DIR}/proc_gts_omb_oma.exe
    rm -f gts_omb_oma
 endif
@@ -55,6 +59,7 @@ if ( $plot_prf_omb_oma == true ) then
       setenv OB_TYPE $obtype
       foreach vartype ( $vartypes )
          setenv VAR_TYPE $vartype
+         echo "Running ${DIAG_SCRIPT_DIR}/plot_prf.ncl"
          ncl ${DIAG_SCRIPT_DIR}/plot_prf.ncl
       end
    end
@@ -88,6 +93,7 @@ if ( $plot_ts_omb_oma == true ) then
       setenv OB_TYPE $obtype
       foreach vartype ( $vartypes )
          setenv VAR_TYPE $vartype
+         echo "Running ${DIAG_SCRIPT_DIR}/plot_ts.ncl"
          ncl ${DIAG_SCRIPT_DIR}/plot_ts.ncl
       end
    end
@@ -110,6 +116,7 @@ if ( $plot_ts_omb_oma_levels == true ) then
       setenv OB_TYPE $obtype
       foreach vartype ( $vartypes )
          setenv VAR_TYPE $vartype
+         echo "Running ${DIAG_SCRIPT_DIR}/plot_ts_levels.ncl"
          ncl ${DIAG_SCRIPT_DIR}/plot_ts_levels.ncl
       end
    end
@@ -125,6 +132,7 @@ if ( $plot_rad_loc == true ) then
    endif
    foreach inst ( $insts )
       setenv INSTRUMENT $inst
+      echo "Running ${DIAG_SCRIPT_DIR}/plot_rad_loc.ncl"
       ncl ${DIAG_SCRIPT_DIR}/plot_rad_loc.ncl
       set file_prefix = rad_coverage_${inst}_ch0006
       /usr/bin/convert -trim -density 150x150 ${file_prefix}.pdf ${file_prefix}.png
@@ -143,6 +151,7 @@ if ( $plot_rad_ts == true ) then
    endif
    foreach inst ( $insts )
       setenv INSTRUMENT $inst
+      echo "Running ${DIAG_SCRIPT_DIR}/plot_rad_stats.ncl"
       ncl ${DIAG_SCRIPT_DIR}/plot_rad_stats.ncl
       set file_prefix = ts_rad_omb_oma_${inst}_ch0006
       /usr/bin/convert -trim -density 150x150 ${file_prefix}.pdf ${file_prefix}.png

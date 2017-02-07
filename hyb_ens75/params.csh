@@ -1,6 +1,7 @@
 
 echo "Beginning $0"
 setenv PARAMS_SET  yes
+setenv NAME RT2017
 #setenv bsub_cmd    bsub
 setenv bsub_cmd    /ncar/opt/lsf/9.1/linux2.6-glibc2.3-x86_64/bin/bsub
 setenv BASE_DIR    /glade/p/wrf/WORKDIR/wrfda_realtime
@@ -24,6 +25,7 @@ setenv HSI_BASEDIR /home/kavulich/RT2017
 setenv RUN_BASEDIR    /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/
 setenv DA_RUN_DIR_TOP ${RUN_BASEDIR}/expdir/orig/${EXPT}
 setenv OB_DIR_TOP  ${RUN_BASEDIR}/obsproc
+setenv DIAG_RUN_DIR_TOP ${RUN_BASEDIR}/diagdir
 
 setenv EXP_DIR_TOP    ${DA_RUN_DIR_TOP}
 setenv LOG_DIR        ${EXP_DIR_TOP}/logdir
