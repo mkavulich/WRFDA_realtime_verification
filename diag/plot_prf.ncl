@@ -9,7 +9,7 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 date     = getenv("ANAL_DATE")
 ob_type  = getenv("OB_TYPE")
 var_type = getenv("VAR_TYPE")
-diag_dir = getenv("DIAG_RUN_DIR")
+diag_dir = getenv("DIAG_RUN_DIR_TOP")
 ;date     = "2015072800"
 ;ob_type  = "sound"
 ;var_type = "t"

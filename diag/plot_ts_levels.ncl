@@ -3,15 +3,16 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$BIN_DIR/advance_cymdh.ncl"
 
 
-   data_dir_top = getenv("DA_RUN_DIR_TOP")
+   data_dir_top = getenv("DIAG_RUN_DIR_TOP")
+   plot_dir_top = getenv("PLOT_DIR_TOP")
 
    exps = (/ "rt" /)
    exp_names = (/ "RT_WRFDA" /)
    ;init_start_date = "2015062712"
    ;init_end_date = "2015080100"
    init_end_date = getenv("ANAL_DATE")
-   days_back = 15
-   hours_back = -1*24*days_back
+   days_back = getenv("PLOT_TIME_SERIES_DAYS")
+   hours_back = -1*24*stringtointeger(days_back)
    init_start_date = advance_cymdh(init_end_date, hours_back)
    ob_type = getenv("OB_TYPE")
    ob_var  = getenv("VAR_TYPE")
@@ -26,11 +27,10 @@ load "$BIN_DIR/advance_cymdh.ncl"
    nplev = 18
    ncol = 5
 
-   data_dir = data_dir_top+"/"+exps
-   plot_dir_top = run_basedir + "/diagdir/rt"
-;   plot_dir_top = "/glade/scratch/hclin/CONUS/wrfda/diagdir/rt"
+   data_dir = data_dir_top
    plot_dir = plot_dir_top+"/"+init_end_date
-system("mkdir -p "+plot_dir)
+   
+   system("mkdir -p "+plot_dir)
 
    init_dates  = get_dates_ccyymmddhh(init_start_date, init_end_date, cycle_period)  ; initial dates
    num_init_dates = dimsizes(init_dates)

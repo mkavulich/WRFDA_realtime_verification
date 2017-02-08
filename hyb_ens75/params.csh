@@ -26,9 +26,10 @@ setenv RUN_BASEDIR    /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/
 setenv DA_RUN_DIR_TOP ${RUN_BASEDIR}/expdir/orig/${EXPT}
 setenv OB_DIR_TOP  ${RUN_BASEDIR}/obsproc
 setenv DIAG_RUN_DIR_TOP ${RUN_BASEDIR}/diagdir
+setenv PLOT_DIR_TOP ${RUN_BASEDIR}/plotdir
 
 setenv EXP_DIR_TOP    ${DA_RUN_DIR_TOP}
-setenv LOG_DIR        ${EXP_DIR_TOP}/logdir
+setenv LOG_DIR        ${RUN_BASEDIR}/logdir
 setenv AMSU_DIR       /glade/scratch/ampsrt/data/amsu
 setenv WPS_RUNDIR_TOP /glade/scratch/wrfrt/realtime_ensemble/ensf
 setenv VARBC_DIR      /glade/scratch/kavulich/WRFDA_REALTIME/CONUS/wrfda/expdir/start2016082612/hyb_ens75/2016102400
@@ -85,3 +86,5 @@ setenv JE_FACTOR  1.33
 setenv ENS_SIZE   80
 setenv use_radiance true
 
+# Plotting parameters
+setenv PLOT_TIME_SERIES_DAYS 1

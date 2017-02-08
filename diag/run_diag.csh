@@ -8,6 +8,11 @@
 echo "Beginning $0"
 #echo $DATE
 #setenv ANAL_DATE $DATE
+if ( ${#argv} > 0 ) then
+   setenv ANAL_DATE $1
+   setenv EXPT hyb_ens75
+   source /glade/p/wrf/WORKDIR/wrfda_realtime/${EXPT}/params.csh
+endif
 if ( ! $?ANAL_DATE ) then
    echo "ANAL_DATE not set"
    exit 1
@@ -18,10 +23,10 @@ endif
 #setenv DA_RUN_DIR_TOP /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 set DA_RUN_DIR       = ${DA_RUN_DIR_TOP}/${ANAL_DATE}
 set plot_conv_loc          = true
-set proc_gts_omb_oma       = false
-set plot_ts_omb_oma        = false
-set plot_prf_omb_oma       = false
-set plot_ts_omb_oma_levels = false
+set proc_gts_omb_oma       = true
+set plot_prf_omb_oma       = true
+set plot_ts_omb_oma        = true
+set plot_ts_omb_oma_levels = true
 set plot_rad_loc           = false
 set plot_rad_ts            = false
 
@@ -159,6 +164,7 @@ if ( $plot_rad_ts == true ) then
    end
 endif
 
+echo "Copying data from $DIAG_RUN_DIR to galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/${ANAL_DATE}"
 rsync -av $DIAG_RUN_DIR/*png galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/CONUS/${ANAL_DATE}
 
 rsync -av /glade/u/home/sobash/SHARPpy/OBS/${ANAL_DATE}/*js galaxy.mmm.ucar.edu:/web/htdocs/wrf/users/wrfda/rt_wrfda/realtimetest/images/sounding/${ANAL_DATE}
