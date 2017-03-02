@@ -245,6 +245,7 @@ use Getopt::Long;
     foreach my $convert_hour (@convert_hours) {
 
        my $fcst_date = `$WRFDA_dir/var/build/da_advance_time.exe $init_date $convert_hour -w`; #Advance time to next hour
+       chomp($fcst_date);
        my $fyear  = substr("$fcst_date", 0, 4) or die "Invalid forecast date format!\n";
        my $fmonth = substr("$fcst_date", 5, 2);
        my $fday   = substr("$fcst_date", 8, 2);
@@ -430,7 +431,7 @@ use Getopt::Long;
           if ( $JOBQUEUE_WPS =~ "caldera") {
              print FH "unsetenv MP_PE_AFFINITY\n";  # Include this line to avoid caldera problems. CISL-recommended kludge *sigh*
           }
-          print FH "\rm namelist.wps\n";
+          print FH "\\rm namelist.wps\n";
           print FH "ln -sf namelist.wps.$convert_hour namelist.wps\n";
           print FH "mpirun.lsf ./geogrid.exe\n";
           print FH "./link_grib.csh grib_*\n";
@@ -478,7 +479,7 @@ use Getopt::Long;
           if ( $JOBQUEUE_REAL =~ "caldera") {
              print FH "unsetenv MP_PE_AFFINITY\n";  # Include this line to avoid caldera problems. CISL-recommended kludge *sigh*
           }
-          print FH "\rm namelist.input\n";
+          print FH "\\rm namelist.input\n";
           print FH "ln -sf namelist.input.$convert_hour namelist.input\n";
           print FH "mpirun.lsf ./real.exe\n";
           print FH "if ( (!(-e 'wrfinput_d01')) && (!(-e '$Script_dir/FAIL')) ) then\n";
@@ -551,7 +552,7 @@ use Getopt::Long;
     }
     chdir $Script_dir;
 
-    copy($0,$Out_dir); #Keep a copy of this script with these settings for future reference.
+    copy($0,"$Out_dir/"); #Keep a copy of this script with these settings for future reference.
 
     #Advance to next forecast date
     $init_date = `$WRFDA_dir/var/build/da_advance_time.exe $init_date ${FC_INTERVAL}h -w`;
