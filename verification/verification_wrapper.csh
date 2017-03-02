@@ -55,52 +55,48 @@ setenv CONTROL_EXP_DIR   ${MKBASEDIR}/verification/gfs_forecast/Output
 setenv RUN_DIR /glade/p/wrf/WORKDIR/wrfda_realtime/verification/GFS_verify
 setenv VERIFY_ITS_OWN_ANALYSIS false
 
-echo "Start date parent:"
-echo $END_DATE
-
-./da_verif_grid.ksh
+#echo "Start date parent:"
+#echo $END_DATE
+#
+#./da_verif_grid.ksh
 
 
 
 # Settings for ./da_run_suite_verif_obs.ksh
 
-#setenv CLEAN false
-#setenv INITIAL_DATE 2017022000
-#setenv FINAL_DATE 2013122512
-#setenv EXP_DIR `pwd`/${EXPT}
-#setenv OB_DIR /kumquat/wrfhelp/DATA/WRFDA/arctic_tutorial_case/ob/
-#setenv FILTERED_OBS_DIR ${EXP_DIR_TOP}/2017022200/
-#setenv BE_DIR /kumquat/wrfhelp/DATA/WRFDA/arctic_tutorial_case/be/
-#setenv FC_DIR /kumquat/wrfhelp/DATA/WRFDA/verification/conv_only/fc
-#setenv WINDOW_START ${TIMEWINDOW1}
-#setenv WINDOW_END ${TIMEWINDOW2}
-#setenv CYCLE_PERIOD 24
+setenv CLEAN false
+setenv INITIAL_DATE ${START_DATE}
+setenv FINAL_DATE ${END_DATE}
+setenv EXP_DIR `pwd`/REALTIME/${EXPT}
+setenv OB_DIR /glade/scratch/hclin/CONUS/wrfda/obsproc
+setenv FILTERED_OBS_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75/${END_DATE}
+setenv BE_DIR ${FILTERED_OBS_DIR}
+setenv FC_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
+setenv WINDOW_START ${TIMEWINDOW1}
+setenv WINDOW_END ${TIMEWINDOW2}
 #setenv NUM_PROCS 4
-#setenv VERIFY_HOUR 6
 #setenv RUN_CMD "mpirun -np $NUM_PROCS"
 #setenv VERIFICATION_FILE_STRING wrfout
 
 # Here is where you set the appropriate namelist variables that the script will use to run WRFDA
-#setenv NL_ANALYSIS_TYPE verify
-#setenv NL_E_WE ${E_WE_d01}
-#setenv NL_E_SN ${E_SN_d01}
-#setenv NL_E_VERT ${N_VERT}
-#setenv NL_DX ${DX_d01}
-#setenv NL_DY ${DX_d01}
-#setenv NL_SF_SURFACE_PHYSICS 2
-#setenv NL_NUM_LAND_CAT 24
+setenv NL_ANALYSIS_TYPE verify
+setenv NL_E_WE ${E_WE_d01}
+setenv NL_E_SN ${E_SN_d01}
+setenv NL_E_VERT ${N_VERT}
+setenv NL_DX ${DX_d01}
+setenv NL_DY ${DX_d01}
+setenv NL_SF_SURFACE_PHYSICS 2
+setenv NL_NUM_LAND_CAT 24
 
-#./da_run_suite_verif_obs.ksh
+./da_run_suite_verif_obs.ksh
+
 # Settings for da_verif_obs_plot.ksh
 
-#setenv END_DATE 2013122312
-#setenv END_DATE 2013122512
 #setenv RUN_DIR "`pwd`/conv_only/plots"
 #setenv NUM_EXPT 1
 #setenv EXP_NAMES 'conv_only'
 #setenv EXP_LEGENDS '(/"conv_only"/)'
 #setenv EXP_DIRS "$EXP_DIR"
-#setenv INTERVAL 6
 #setenv NUM_PROCS 4
 #setenv VERIFY_HOUR 00
 #setenv GRAPHICS_DIR /kumquat/wrfhelp/DATA/WRFDA/TOOLS/graphics/ncl
