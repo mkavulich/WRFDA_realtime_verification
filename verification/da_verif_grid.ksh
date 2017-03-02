@@ -14,6 +14,8 @@
 
 echo "<PRE>"
 
+set -x
+
 export REL_DIR=${REL_DIR:-$HOME/trunk}
 export WRFVAR_DIR=${WRFVAR_DIR:-$REL_DIR/wrfvar}
 export SCRIPTS_DIR=${SCRIPTS_DIR:-$WRFVAR_DIR/scripts}
@@ -63,7 +65,7 @@ export JEND=${JEND:-10000}
 #=========================================================
 # BELOW THIS LINE NO CHANGES ARE REQUIRED                 
 #=========================================================
-export WORK_DIR=${RUN_DIR}/working
+export WORK_DIR=${RUN_DIR}/${START_DATE}
 mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
 export VERT_TYPE=${VERT_TYPE:-'p'}
@@ -72,7 +74,7 @@ iexp=0
 exp_dirs=''
 out_dirs=''
 for EXP_DIR in $EXP_DIRS; do
-   exp_dirs="$exp_dirs '$EXP_DIR/fc/',"
+   exp_dirs="$exp_dirs '$EXP_DIR/',"
 done
 for EXP_NAME in $EXP_NAMES; do
    out_dirs="$out_dirs '$EXP_NAME',"
@@ -107,7 +109,7 @@ done
 cat > namelist.in << EOF
 &control_main
  verify_its_own_analysis     = ${VERIFY_ITS_OWN_ANALYSIS},
- control_exp_dir             = '${CONTROL_EXP_DIR}/fc', 
+ control_exp_dir             = '${CONTROL_EXP_DIR}', 
  num_verifying_experiments   = ${NUM_EXPT},
  verif_dirs                  = ${exp_dirs}
  out_dirs                    = ${out_dirs}
@@ -291,9 +293,9 @@ chmod +x run3
 ./run3
 #-----------------------------------------------------------------------------------------------------------------------
 
-mv $WORK_DIR/*.pdf $RUN_DIR
+#mv $WORK_DIR/*.pdf $RUN_DIR
 #-----------------------------------------------------------------------------------------------------------------------
-echo "Ploting successfully completed..."
+echo "Plotting successfully completed..."
 #-----------------------------------------------------------------------------------------------------------------------
 fi #RUN_VERIF_GRID_PLOTS 
 exit 0

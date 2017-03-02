@@ -1,6 +1,5 @@
 #!/bin/csh -f
 
-set echo
 # Wrapper script for running WRFDA verification package
 
 # Set some initial variables, then source the main "parameters" script
@@ -13,12 +12,12 @@ setenv MAIL_TO   kavulich@ucar.edu
 setenv MKBASEDIR   /glade/p/wrf/WORKDIR/wrfda_realtime
 
 if ( ${#argv} > 0 ) then
-   setenv START_DATE $1
-   set cc = `echo $START_DATE | cut -c1-2`
-   set yy = `echo $START_DATE | cut -c3-4`
-   set mm = `echo $START_DATE | cut -c5-6`
-   set dd = `echo $START_DATE | cut -c7-8`
-   set hh = `echo $START_DATE | cut -c9-10`
+   setenv END_DATE $1
+   set cc = `echo $END_DATE | cut -c1-2`
+   set yy = `echo $END_DATE | cut -c3-4`
+   set mm = `echo $END_DATE | cut -c5-6`
+   set dd = `echo $END_DATE | cut -c7-8`
+   set hh = `echo $END_DATE | cut -c9-10`
 else
    set cc = `date -u '+%C'`
    set yy = `date -u '+%y'`
@@ -34,7 +33,7 @@ else
    else if ( $hh >    18 && $hh < 24 ) then
       set hh = '18'
    endif
-   setenv START_DATE ${cc}${yy}${mm}${dd}${hh}
+   setenv END_DATE ${cc}${yy}${mm}${dd}${hh}
 endif
 
 source params.csh
@@ -45,17 +44,19 @@ setenv TOOLS_DIR   /glade/p/wrf/WORKDIR/wrfda_realtime/TOOLS
 setenv SCRIPTS_DIR   ${TOOLS_DIR}/scripts
 setenv GRAPHICS_DIR   ${TOOLS_DIR}/graphics/ncl
 setenv NUM_EXPT   1
-setenv EXP_DIRS   ${FCST_DIR_TOP}/${START_DATE}
+setenv EXP_DIRS   /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
 setenv EXP_NAMES   'REALTIME'
-setenv VERIFICATION_FILE_STRING   'wrfinput'
+setenv VERIFICATION_FILE_STRING   'wrfout'
 setenv EXP_LEGENDS   '(/"WRFDA Realtime System"/)'
-setenv END_DATE   `${WRFDA_SRC_DIR}/var/build/da_advance_time.exe ${START_DATE} 48h`
+setenv START_DATE   `${WRFDA_SRC_DIR}/var/build/da_advance_time.exe ${END_DATE} -7d`
 setenv INTERVAL   24
 setenv VERIFY_HOUR   48
-setenv CONTROL_EXP_DIR   ${MKBASEDIR}/verification/gfs_forecast
+setenv CONTROL_EXP_DIR   ${MKBASEDIR}/verification/gfs_forecast/Output
+setenv RUN_DIR /glade/p/wrf/WORKDIR/wrfda_realtime/verification/GFS_verify
+setenv VERIFY_ITS_OWN_ANALYSIS false
 
 echo "Start date parent:"
-echo $START_DATE
+echo $END_DATE
 
 ./da_verif_grid.ksh
 
@@ -92,7 +93,7 @@ echo $START_DATE
 #./da_run_suite_verif_obs.ksh
 # Settings for da_verif_obs_plot.ksh
 
-#setenv START_DATE 2013122312
+#setenv END_DATE 2013122312
 #setenv END_DATE 2013122512
 #setenv RUN_DIR "`pwd`/conv_only/plots"
 #setenv NUM_EXPT 1
