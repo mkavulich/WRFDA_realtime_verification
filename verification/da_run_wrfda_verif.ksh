@@ -1,16 +1,4 @@
 #!/bin/ksh
-#########################################################################
-# Script: da_run_wrfda_verif.ksh
-#BSUB -P P64000400          # project number (required)
-#BSUB -a poe                # select poe
-#BSUB -W 30                 # wall clock time (in minutes)
-#BSUB -n 16                 # number of MPI tasks
-#BSUB -R "span[ptile=16]"   # run "ptile" tasks per node
-#BSUB -J WRFDA_verify       # job name
-#BSUB -oo WRFDA_verify.out  # output filename
-#BSUB -eo WRFDA_verify.err  # error filename
-#BSUB -q caldera            # queue
-#
 # Purpose: Run WRFDA in verification mode
 #########################################################################
 if [[ $DEBUG == true ]]; then
@@ -86,6 +74,7 @@ export NL_CO2TF=${NL_CO2TF:-0}
 export NL_W_SPECIFIED=${NL_W_SPECIFIED:-true}
 export NL_REAL_DATA_INIT_TYPE=${NL_REAL_DATA_INIT_TYPE:-3}
 
+
 #=======================================================
 
 mkdir -p $RUN_DIR
@@ -127,8 +116,6 @@ if [[ -f $DA_VARBC_IN ]]; then
    echo "DA_VARBC_IN          $DA_VARBC_IN"
 fi
 
-export WORK_DIR=${RUN_DIR}
-
 echo 'FILTERED_OBS_DIR      <A HREF="file:'$FILTERED_OBS_DIR'">'$FILTERED_OBS_DIR'</a>'
 echo 'RC_DIR                <A HREF="file:'$RC_DIR'">'$RC_DIR'</a>'
 echo 'FC_DIR                <A HREF="file:'$FC_DIR'">'$FC_DIR'</a>'
@@ -143,9 +130,8 @@ echo "WINDOW_END            $WINDOW_END"
 
 
 
-rm -rf ${WORK_DIR}
-mkdir -p ${WORK_DIR}
-cd ${WORK_DIR}
+mkdir -p ${RUN_DIR}
+cd ${RUN_DIR}
 
 START_DATE=$($BUILD_DIR/da_advance_time.exe $DATE $WINDOW_START)
 END_DATE=$($BUILD_DIR/da_advance_time.exe $DATE $WINDOW_END)
@@ -592,25 +578,8 @@ EOF
    if [[ -f rsl.out.0000 ]]; then
 #      rm -rf $RUN_DIR/rsl
       mkdir -p $RUN_DIR/rsl
-      mv rsl* $RUN_DIR/rsl
-      cd $RUN_DIR/rsl
-      for FILE in rsl*; do
-         echo "<HTML><HEAD><TITLE>$FILE</TITLE></HEAD>" > $FILE.html
-         echo "<H1>$FILE</H1><PRE>" >> $FILE.html
-         cat $FILE >> $FILE.html
-         echo "</PRE></BODY></HTML>" >> $FILE.html
-#         rm $FILE
-      done
-      echo '<A HREF="rsl/rsl.out.0000.html">rsl.out.0000</a>'
-      echo '<A HREF="rsl/rsl.error.0000.html">rsl.error.0000</a>'
-      echo '<A HREF="rsl">Other RSL output</a>'
+      cp rsl* $RUN_DIR/rsl
    fi
-
-   echo '<A HREF="trace/0.html">PE 0 trace</a>'
-   echo '<A HREF="trace">Other tracing</a>'
-   echo '<A HREF="cost_fn">Cost function</a>'
-   echo '<A HREF="grad_fn">Gradient function</a>'
-   echo '<A HREF="statistics">Statistics</a>'
 
    cat $RUN_DIR/cost_fn
 
@@ -627,7 +596,7 @@ fi
 #
 #if $CLEAN; then
 #   rm -rf $WORK_DIR
-fi
+#fi
 
 echo '</PRE></BODY></HTML>'
 

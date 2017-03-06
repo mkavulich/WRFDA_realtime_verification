@@ -79,7 +79,7 @@ else
    #setenv TIMEWINDOW2     3h00m  #1h30m
 endif
 
-setenv N_VERT           51
+setenv N_VERT           40
 setenv E_WE_d01         415
 setenv E_SN_d01         325
 setenv DX_d01           15000.0
@@ -90,6 +90,7 @@ setenv I_PARENT_START   70
 setenv J_PARENT_START   60
 setenv GRID_RATIO       5
 setenv TIME_STEP_RATIO  4
+setenv NUM_LAND_CAT     20
 #setenv OUT_INTERVAL_d01 
 
 setenv CV_OPTIONS               5

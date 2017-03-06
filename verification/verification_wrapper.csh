@@ -41,7 +41,7 @@ source params.csh
 # Settings for ./da_verif_grid.ksh
 setenv WRFVAR_DIR   ${WRFDA_SRC_DIR}
 setenv TOOLS_DIR   /glade/p/wrf/WORKDIR/wrfda_realtime/TOOLS
-setenv SCRIPTS_DIR   ${TOOLS_DIR}/scripts
+setenv SCRIPTS_DIR   `pwd`
 setenv GRAPHICS_DIR   ${TOOLS_DIR}/graphics/ncl
 setenv NUM_EXPT   1
 setenv EXP_DIRS   /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
@@ -64,13 +64,16 @@ setenv VERIFY_ITS_OWN_ANALYSIS false
 
 # Settings for ./da_run_suite_verif_obs.ksh
 
+#setenv DUMMY true # Dummy run, see how the setup goes first
 setenv CLEAN false
+setenv DEBUG true
+
 setenv INITIAL_DATE ${START_DATE}
 setenv FINAL_DATE ${END_DATE}
 setenv EXP_DIR `pwd`/REALTIME/${EXPT}
 setenv OB_DIR /glade/scratch/hclin/CONUS/wrfda/obsproc
-setenv FILTERED_OBS_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75/${END_DATE}
-setenv BE_DIR ${FILTERED_OBS_DIR}
+setenv FILTERED_OBS_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+setenv BE_DIR ${FILTERED_OBS_DIR}/${END_DATE}
 setenv FC_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
 setenv WINDOW_START ${TIMEWINDOW1}
 setenv WINDOW_END ${TIMEWINDOW2}
@@ -86,7 +89,7 @@ setenv NL_E_VERT ${N_VERT}
 setenv NL_DX ${DX_d01}
 setenv NL_DY ${DX_d01}
 setenv NL_SF_SURFACE_PHYSICS 2
-setenv NL_NUM_LAND_CAT 24
+setenv NL_NUM_LAND_CAT ${NUM_LAND_CAT}
 
 ./da_run_suite_verif_obs.ksh
 
