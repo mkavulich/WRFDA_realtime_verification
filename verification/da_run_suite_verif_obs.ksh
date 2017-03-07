@@ -56,29 +56,38 @@ while [[ $DATE -le $FINAL_DATE ]] ; do
    mkdir -p $WORK_DIR
    cd $WORK_DIR
 
-   echo "WORK_DIR         $WORK_DIR"
-   echo "RUN_DIR          $RUN_DIR"
-
-   export DA_FIRST_GUESS=${FC_DIR}/$DATE/wrfinput_d01
-   if [[ ${VERIFY_HOUR} != 0 ]]; then
-     export PREVF_DATE=`$BUILD_DIR/da_advance_time.exe $DATE -$VERIFY_HOUR 2>/dev/null`
-     export DA_FIRST_GUESS=${FC_DIR}/${PREVF_DATE}/${VERIFICATION_FILE_STRING}_d01_${ANALYSIS_DATE}
+   if [[ -e $WORK_DIR/FAIL_VERIFY ]] ; then
+      echo "Overwriting previous failed run for $DATE"
+      \rm -f $WORK_DIR/FAIL_VERIFY
    fi
-   export DA_ANALYSIS=$RUN_DIR/analysis
+   if [[ -e $WORK_DIR/SUCCESS_VERIFY ]] ; then
+      echo "Run completed previously for $DATE, skipping..."
+   else
 
-   echo "VERIFY_HOUR= ${VERIFY_HOUR}"
-   echo "Verify file=${DA_FIRST_GUESS}"
-   echo "Verify obs are: $FILTERED_OBS_DIR/$DATE/filtered_obs_01"
+      echo "WORK_DIR         $WORK_DIR"
+      echo "RUN_DIR          $RUN_DIR"
 
-      cat > da_run_wrfda_verif_bsub.ksh << EOF
+      export DA_FIRST_GUESS=${FC_DIR}/$DATE/wrfinput_d01
+      if [[ ${VERIFY_HOUR} != 0 ]]; then
+        export PREVF_DATE=`$BUILD_DIR/da_advance_time.exe $DATE -$VERIFY_HOUR 2>/dev/null`
+        export DA_FIRST_GUESS=${FC_DIR}/${PREVF_DATE}/${VERIFICATION_FILE_STRING}_d01_${ANALYSIS_DATE}
+      fi
+      export DA_ANALYSIS=$RUN_DIR/analysis
+
+      echo "VERIFY_HOUR= ${VERIFY_HOUR}"
+      echo "Verify file=${DA_FIRST_GUESS}"
+      echo "Verify obs are: $FILTERED_OBS_DIR/$DATE/filtered_obs_01"
+
+      if [[ $NUM_PROCS -gt 1 ]]; then
+         cat > da_run_wrfda_verif_bsub.ksh << EOF
 #!/bin/csh
 #########################################################################
 # Script: da_run_wrfda_verif.csh
 #BSUB -P P64000400          # project number (required)
 #BSUB -a poe                # select poe
 #BSUB -W 30                 # wall clock time (in minutes)
-#BSUB -n 16                 # number of MPI tasks
-#BSUB -R "span[ptile=16]"   # run "ptile" tasks per node
+#BSUB -n $NUM_PROCS                 # number of MPI tasks
+#BSUB -R "span[ptile=$NUM_PROCS]"   # run "ptile" tasks per node
 #BSUB -J WRFDA_verify_$DATE       # job name
 #BSUB -oo WRFDA_verify.out  # output filename
 #BSUB -eo WRFDA_verify.err  # error filename
@@ -91,9 +100,11 @@ unsetenv MP_PE_AFFINITY
 ${SCRIPTS_DIR}/da_run_wrfda_verif.ksh >& verify.out
 
 EOF
-
-
-   export STATUS=`bsub < da_run_wrfda_verif_bsub.ksh`
+      export STATUS=`bsub < da_run_wrfda_verif_bsub.ksh`
+      else
+         ${SCRIPTS_DIR}/da_run_wrfda_verif.ksh 2>&1 | tee verify.out
+      fi
+   fi
 
    export NEXT_DATE=$($BUILD_DIR/da_advance_time.exe $DATE $INTERVAL 2>/dev/null)
    export DATE=$NEXT_DATE

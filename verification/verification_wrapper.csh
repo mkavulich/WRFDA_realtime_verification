@@ -70,14 +70,14 @@ setenv DEBUG true
 
 setenv INITIAL_DATE ${START_DATE}
 setenv FINAL_DATE ${END_DATE}
-setenv EXP_DIR `pwd`/REALTIME/${EXPT}
+setenv EXP_DIR `pwd`/obs_verify/${EXPT}
 setenv OB_DIR /glade/scratch/hclin/CONUS/wrfda/obsproc
 setenv FILTERED_OBS_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
 setenv BE_DIR ${FILTERED_OBS_DIR}/${END_DATE}
 setenv FC_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
 setenv WINDOW_START ${TIMEWINDOW1}
 setenv WINDOW_END ${TIMEWINDOW2}
-#setenv NUM_PROCS 4
+setenv NUM_PROCS 16
 #setenv RUN_CMD "mpirun -np $NUM_PROCS"
 #setenv VERIFICATION_FILE_STRING wrfout
 
@@ -95,19 +95,18 @@ setenv NL_NUM_LAND_CAT ${NUM_LAND_CAT}
 
 # Settings for da_verif_obs_plot.ksh
 
-#setenv RUN_DIR "`pwd`/conv_only/plots"
-#setenv NUM_EXPT 1
-#setenv EXP_NAMES 'conv_only'
-#setenv EXP_LEGENDS '(/"conv_only"/)'
-#setenv EXP_DIRS "$EXP_DIR"
+setenv NUM_EXPT 1
+setenv EXP_NAMES 'REALTIME'
+setenv EXP_LEGENDS '(/"REALTIME"/)'
+setenv EXP_DIRS "$EXP_DIR"
+#setenv EXP_LEGENDS '(/"REALTIME","GFS"/)'
+#setenv EXP_DIRS "$EXP_DIR $GFS_DIR"
 #setenv NUM_PROCS 4
-#setenv VERIFY_HOUR 00
-#setenv GRAPHICS_DIR /kumquat/wrfhelp/DATA/WRFDA/TOOLS/graphics/ncl
 #setenv WRF_FILE "/kumquat/wrfhelp/DATA/WRFDA/cycling/run/2013122300/wrfout_d01_2013-12-23_00:00:00"
 #setenv Verify_Date_Range "12z 23 Dec - 12z 25 Dec, 2015 (${INTERVAL} hour Cycle)"
-#setenv OBS_TYPES 'synop sound'
-#setenv NUM_OBS_TYPES 2
-#setenv PLOT_WKS pdf #"pdf" will save plots in pdf format; "x11" will display the plots and not save them
+setenv OBS_TYPES 'synop sound'
+setenv NUM_OBS_TYPES 2
+setenv PLOT_WKS pdf #"pdf" will save plots in pdf format; "x11" will display the plots and not save them
 
-#./da_verif_obs_plot.ksh
+./da_verif_obs_plot.ksh
 

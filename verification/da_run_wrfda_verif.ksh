@@ -77,8 +77,6 @@ export NL_REAL_DATA_INIT_TYPE=${NL_REAL_DATA_INIT_TYPE:-3}
 
 #=======================================================
 
-mkdir -p $RUN_DIR
-
 if [[ $NL_MULTI_INC != 2 ]] ; then
    echo "<HTML><HEAD><TITLE>$EXPT wrfvar</TITLE></HEAD><BODY><H1>$EXPT wrfvar</H1><PRE>"
    if [[ $NL_MULTI_INC == 1 ]] ; then
@@ -129,7 +127,7 @@ echo "WINDOW_START          $WINDOW_START"
 echo "WINDOW_END            $WINDOW_END"
 
 
-
+rm -rf ${RUN_DIR}
 mkdir -p ${RUN_DIR}
 cd ${RUN_DIR}
 
@@ -331,7 +329,7 @@ fi
 #-------------------------------------------------------------------
 #Run WRF-Var:
 #-------------------------------------------------------------------
-mkdir trace
+mkdir -p trace
 
 if $DUMMY; then
    echo Dummy wrfvar
@@ -453,6 +451,13 @@ else
 
    if [[ -f rsl.out.0000 ]]; then
       cp rsl.out.0000 $RUN_DIR
+      if (grep "*** WRF-Var completed successfully ***" rsl.out.0000 2>/dev/null); then
+         touch ${WORK_DIR}/SUCCESS_VERIFY # Non-zero return status indicates not found or error
+      else
+         touch ${WORK_DIR}/FAIL_VERIFY
+      fi
+   else
+      touch ${WORK_DIR}/FAIL_VERIFY
    fi
 
    if [[ -f VARBC.in ]]; then

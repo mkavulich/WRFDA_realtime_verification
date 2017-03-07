@@ -21,9 +21,6 @@ export EXP_LEGENDS=${EXP_LEGENDS:-(/"no_noise","noise"/)}
 export START_DATE=${START_DATE:-2003010100}
 export END_DATE=${END_DATE:-2003010100}
 
-export RUN_DIR=${RUN_DIR:-$PWD/verification}
-export WORK_DIR=${WORK_DIR:-$RUN_DIR/working}
-
 export INTERVAL=${INTERVAL:-12}
 export Verify_Date_Range=${Verify_Date_Range:-"01 - 28 October 2006 (${INTERVAL} hour Cycle)"}
 
@@ -55,7 +52,53 @@ DIAG_VAR2="oma"
 echo "<HTML><HEAD><TITLE>Verification Plots for $EXP_NAMES<TITLE></HEAD>"
 echo "<BODY><H1>Verification Plots for $EXP_NAMES</H1><PRE>"
 
-rm -rf $WORK_DIR; mkdir -p $WORK_DIR; cd $WORK_DIR
+echo ""
+echo "Waiting for WRFDA VERIFY Run to finish"
+echo ""
+
+export DATE=$START_DATE
+export WORK_DIR=${EXP_DIR}/${DATE}
+
+export verify_done=false
+export MINUTES_WAITING=0
+while [[ $DATE -le $FINAL_DATE ]] ; do
+   while [[ $verify_done == false ]] ; do
+      if [[ -e $WORK_DIR/SUCCESS_VERIFY ]] ; then
+         echo ""
+         echo "WRFDA VERIFY step done for $DATE"
+         echo ""
+         NEXT_DATE=$(${WRFDA_SRC_DIR}/var/build/da_advance_time.exe $DATE $INTERVAL 2>/dev/null)
+         DATE=$NEXT_DATE
+         break
+      elif [[ -e $WORK_DIR/FAIL_VERIFY ]] ; then
+         echo ""
+         echo "WRFDA VERIFY failed, check it!"
+         echo ""
+         exit 2
+      fi
+      if [[ $MINUTES_WAITING -gt 15 ]]; then
+         echo ""
+         echo "WAITING TOO LONG, EXIT"
+         echo ""
+         exit 3
+      fi
+      echo "Been waiting $MINUTES_WAITING minutes"
+      let MINUTES_WAITING=$MINUTES_WAITING+1
+      sleep 60
+   done
+done
+
+echo "All WRFDA VERIFY steps done, Continuing..."
+
+export WORK_DIR=${EXP_DIR}/${END_DATE}
+export RUN_DIR=${WORK_DIR}/verification
+
+mkdir -p $RUN_DIR; cd $RUN_DIR
+
+# Hard-code these variables for now; might be worth making top-level later
+export WRF_FILE=${EXP_DIR}/${END_DATE}/wrfda/fg
+export FILE_PATH_STRING="wrfda/gts_omb_oma_${OUTER_ITER}"
+
 
 iexp=0
 exp_dirs=''
@@ -339,7 +382,7 @@ BAR_LABEL_ANGLE=45
 
 # Run NCL scripts now 
 
-NCL_COMMAND_LINE="'wksdev=\"${PLOT_WKS}\"' 'run_dir=\"${WORK_DIR}\"' \
+NCL_COMMAND_LINE="'wksdev=\"${PLOT_WKS}\"' 'run_dir=\"${RUN_DIR}\"' \
    'exp_legends=${EXP_LEGENDS}' 'exp_line_cols=${EXP_LINES_COLORS}' \
    'select_levs=${DESIRED_LEVELS}' 'get_omboma_plots=\"${GET_OMBOMA_PLOTS}\"' \
    'select_scores=${DESIRED_SCORES}' 'bar_label_angle=${BAR_LABEL_ANGLE}'"
@@ -369,8 +412,6 @@ chmod +x run4
 ./run4 > run4.log 2>&1
 fi
 #----------------
-cd $RUN_DIR
-mv $WORK_DIR/*.pdf $WORK_DIR/*.log .
 echo "<BODY><H1>Verification Plots for $EXP_NAMES</H1><UL>"
 for FILE in *.pdf *.log; do
    if [[ -f $FILE ]]; then
@@ -387,9 +428,9 @@ done
 
 echo "</UL></BODY></HTML>"
 
-if $CLEAN; then
-   rm -rf $WORK_DIR
-fi
+#if $CLEAN; then
+#   rm -rf $WORK_DIR
+#fi
 
 
 echo "da_verif_obs_plot.ksh successfully completed..."
