@@ -57,11 +57,11 @@ echo "Waiting for WRFDA VERIFY Run to finish"
 echo ""
 
 export DATE=$START_DATE
-export WORK_DIR=${EXP_DIR}/${DATE}
 
 export verify_done=false
 export MINUTES_WAITING=0
 while [[ $DATE -le $FINAL_DATE ]] ; do
+   export WORK_DIR=${EXP_DIR}/${DATE}
    while [[ $verify_done == false ]] ; do
       if [[ -e $WORK_DIR/SUCCESS_VERIFY ]] ; then
          echo ""
@@ -90,6 +90,7 @@ done
 
 echo "All WRFDA VERIFY steps done, Continuing..."
 
+#Overwrite previous WORK_DIR definition
 export WORK_DIR=${EXP_DIR}/${END_DATE}
 export RUN_DIR=${WORK_DIR}/verification
 

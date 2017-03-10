@@ -7,7 +7,7 @@ if [[ $DEBUG == true ]]; then
    set -x
 fi
 
-export NL_ANALYSIS_TYPE=verify
+export NL_ANALYSIS_TYPE=VERIFY
 export OB_DIR=$FILTERED_OBS_DIR
 
 
@@ -35,6 +35,14 @@ echo $(date) "Start"
 export DATE=$INITIAL_DATE
 
 RC=0
+
+if [[ ! -e "$BUILD_DIR/da_advance_time.exe" ]] ; then
+   echo ""
+   echo "ERROR ERROR ERROR"
+   echo "$BUILD_DIR/da_advance_time.exe DOES NOT EXIST!"
+   echo "CHECK YOUR \$WRFVAR_DIR and \$BUILD_DIR SETTINGS!"
+   exit 4
+fi
 
 while [[ $DATE -le $FINAL_DATE ]] ; do 
    export PREV_DATE=$($BUILD_DIR/da_advance_time.exe $DATE -$INTERVAL 2>/dev/null)
@@ -97,6 +105,37 @@ while [[ $DATE -le $FINAL_DATE ]] ; do
 #########################################################################
 
 unsetenv MP_PE_AFFINITY
+
+# Keep environment variables so the script can be run later
+setenv DEBUG $DEBUG
+setenv SCRIPTS_DIR $SCRIPTS_DIR
+setenv CYCLING $CYCLING
+setenv CYCLE_NUMBER $CYCLE_NUMBER
+setenv RUN_DIR $RUN_DIR
+setenv BUILD_DIR $BUILD_DIR
+setenv DATE $DATE
+setenv WINDOW_START $WINDOW_START
+setenv WINDOW_END $WINDOW_END
+setenv START_DATE $START_DATE
+setenv END_DATE $END_DATE
+setenv DA_FIRST_GUESS $DA_FIRST_GUESS
+setenv OB_DIR $OB_DIR
+setenv BE_DIR $BE_DIR
+setenv FC_DIR $FC_DIR
+setenv WRFVAR_DIR $WRFVAR_DIR
+setenv DA_FIRST_GUESS $DA_FIRST_GUESS
+setenv FILTERED_OBS_DIR $FILTERED_OBS_DIR
+
+setenv NL_TRACE_USE $NL_TRACE_USE
+setenv NL_ANALYSIS_TYPE $NL_ANALYSIS_TYPE
+setenv NL_E_WE $NL_E_WE
+setenv NL_E_SN $NL_E_SN
+setenv NL_E_VERT $NL_E_VERT
+setenv NL_DX $NL_DX
+setenv NL_DY $NL_DY
+setenv NL_SF_SURFACE_PHYSICS $NL_SF_SURFACE_PHYSICS
+setenv NL_NUM_LAND_CAT $NL_NUM_LAND_CAT
+
 ${SCRIPTS_DIR}/da_run_wrfda_verif.ksh >& verify.out
 
 EOF
