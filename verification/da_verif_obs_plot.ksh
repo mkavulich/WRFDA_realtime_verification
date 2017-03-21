@@ -22,7 +22,7 @@ export START_DATE=${START_DATE:-2003010100}
 export END_DATE=${END_DATE:-2003010100}
 
 export INTERVAL=${INTERVAL:-12}
-export Verify_Date_Range=${Verify_Date_Range:-"01 - 28 October 2006 (${INTERVAL} hour Cycle)"}
+export Verify_Date_Range=${Verify_Date_Range:-"$START_DATE - $END_DATE (${INTERVAL} hour Cycle)"}
 
 export NUM_OBS_TYPE=${NUM_OBS_TYPES:-4}
 export OBS_TYPES=${OBS_TYPES:-synop sound airep geoamv}
@@ -60,39 +60,42 @@ export DATE=$START_DATE
 
 export verify_done=false
 export MINUTES_WAITING=0
-while [[ $DATE -le $FINAL_DATE ]] ; do
-   export WORK_DIR=${EXP_DIR}/${DATE}
-   while [[ $verify_done == false ]] ; do
-      if [[ -e $WORK_DIR/SUCCESS_VERIFY ]] ; then
-         echo ""
-         echo "WRFDA VERIFY step done for $DATE"
-         echo ""
-         NEXT_DATE=$(${WRFDA_SRC_DIR}/var/build/da_advance_time.exe $DATE $INTERVAL 2>/dev/null)
-         DATE=$NEXT_DATE
-         break
-      elif [[ -e $WORK_DIR/FAIL_VERIFY ]] ; then
-         echo ""
-         echo "WRFDA VERIFY failed, check it!"
-         echo ""
-         exit 2
-      fi
-      if [[ $MINUTES_WAITING -gt 15 ]]; then
-         echo ""
-         echo "WAITING TOO LONG, EXIT"
-         echo ""
-         exit 3
-      fi
-      echo "Been waiting $MINUTES_WAITING minutes"
-      let MINUTES_WAITING=$MINUTES_WAITING+1
-      sleep 60
+for EXP_DIR in $EXP_DIRS; do
+   while [[ $DATE -le $FINAL_DATE ]] ; do
+      export WORK_DIR=${EXP_DIR}/${DATE}
+      while [[ $verify_done == false ]] ; do
+         if [[ -e $WORK_DIR/SUCCESS_VERIFY ]] ; then
+            echo ""
+            echo "WRFDA VERIFY step done for $DATE"
+            echo ""
+            NEXT_DATE=$(${WRFDA_SRC_DIR}/var/build/da_advance_time.exe $DATE $INTERVAL 2>/dev/null)
+            DATE=$NEXT_DATE
+            break
+         elif [[ -e $WORK_DIR/FAIL_VERIFY ]] ; then
+            echo ""
+            echo "WRFDA VERIFY failed, check it!"
+            echo ""
+            exit 2
+         fi
+         if [[ $MINUTES_WAITING -gt 15 ]]; then
+            echo ""
+            echo "WAITING TOO LONG, EXIT"
+            echo ""
+            exit 3
+         fi
+         echo "Been waiting $MINUTES_WAITING minutes"
+         let MINUTES_WAITING=$MINUTES_WAITING+1
+         sleep 60
+      done
    done
+export DATE=$START_DATE
 done
 
 echo "All WRFDA VERIFY steps done, Continuing..."
 
 #Overwrite previous WORK_DIR definition
-export WORK_DIR=${EXP_DIR}/${END_DATE}
-export RUN_DIR=${WORK_DIR}/verification
+export WORK_DIR=${MKBASEDIR}/verification/obs_verify/
+export RUN_DIR=${WORK_DIR}/plot_verification/${END_DATE}
 
 mkdir -p $RUN_DIR; cd $RUN_DIR
 
