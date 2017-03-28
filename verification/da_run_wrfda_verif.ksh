@@ -191,17 +191,20 @@ fi
 
 if [[ ! -r $DA_FIRST_GUESS ]]; then
    echo "${ERR}First Guess file >$DA_FIRST_GUESS< does not exist:$END"
+   touch ${WORK_DIR}/FAIL_VERIFY
    exit 1
 fi
 
 if [[ ! -d $OB_DIR ]]; then
    echo "${ERR}Observation directory >$OB_DIR< does not exist:$END"
+   touch ${WORK_DIR}/FAIL_VERIFY
    exit 1
 fi
 
 if [[ $NL_ANALYSIS_TYPE != "VERIFY" ]] ; then
   if [[ ! -r $DA_BACK_ERRORS ]]; then
    echo "${ERR}Background Error file >$DA_BACK_ERRORS< does not exist:$END"
+   touch ${WORK_DIR}/FAIL_VERIFY
    exit 1
   fi
 fi
@@ -452,7 +455,7 @@ else
    if [[ -f rsl.out.0000 ]]; then
       cp rsl.out.0000 $RUN_DIR
       if (grep "*** WRF-Var completed successfully ***" rsl.out.0000 2>/dev/null); then
-         touch ${WORK_DIR}/SUCCESS_VERIFY # Non-zero return status indicates not found or error
+         touch ${WORK_DIR}/SUCCESS_VERIFY
       else
          touch ${WORK_DIR}/FAIL_VERIFY
       fi

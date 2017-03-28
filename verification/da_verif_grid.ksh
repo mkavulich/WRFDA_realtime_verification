@@ -14,7 +14,9 @@
 
 echo "<PRE>"
 
-set -x
+if [[ $DEBUG == true ]]; then
+   set -x
+fi
 
 export REL_DIR=${REL_DIR:-$HOME/trunk}
 export WRFVAR_DIR=${WRFVAR_DIR:-$REL_DIR/wrfvar}
@@ -65,7 +67,7 @@ export JEND=${JEND:-10000}
 #=========================================================
 # BELOW THIS LINE NO CHANGES ARE REQUIRED                 
 #=========================================================
-export WORK_DIR=${RUN_DIR}/${START_DATE}
+export WORK_DIR=${RUN_DIR}/${END_DATE}
 mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
 export VERT_TYPE=${VERT_TYPE:-'p'}
