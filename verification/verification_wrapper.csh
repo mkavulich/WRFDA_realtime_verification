@@ -72,7 +72,7 @@ setenv EXP_DIRS   /glade/scratch/hclin/CONUS/wrfda/expdir/rt/fcst_15km/
 setenv EXP_NAMES   'REALTIME'
 setenv VERIFICATION_FILE_STRING   'wrfout'
 setenv EXP_LEGENDS   '(/"WRFDA Realtime System"/)'
-setenv VERIFY_PERIOD 24h #Examples: 7d (7 days), 120h (120 hours), etc. Used with da_advance_time.exe
+setenv VERIFY_PERIOD 1d #Examples: 7d (7 days), 120h (120 hours), etc. Used with da_advance_time.exe
 setenv INTERVAL   24
 setenv VERIFY_HOUR   48
 setenv START_DATE   `${WRFDA_SRC_DIR}/var/build/da_advance_time.exe ${END_DATE} -${VERIFY_PERIOD}`
@@ -140,6 +140,33 @@ setenv NL_NUM_LAND_CAT ${NUM_LAND_CAT}
 
 ./da_run_suite_verif_obs.ksh
 
+# Settings for ./da_run_suite_verif_obs.ksh (NAM run)
+
+setenv CLEAN false
+setenv DEBUG false
+setenv NL_TRACE_USE true
+
+setenv BG NAM
+setenv INITIAL_DATE ${START_DATE}
+setenv FINAL_DATE ${END_DATE}
+setenv EXP_DIR `pwd`/obs_verify/${BG}
+setenv OB_DIR /glade/scratch/hclin/CONUS/wrfda/obsproc
+setenv FILTERED_OBS_DIR /glade/scratch/hclin/CONUS/wrfda/expdir/start2016102512/hyb_ens75
+setenv BE_DIR ${FILTERED_OBS_DIR}/${END_DATE}
+setenv FC_DIR /glade/p/wrf/WORKDIR/wrfda_realtime/verification/${BG}/Output
+setenv WINDOW_START ${TIMEWINDOW1}
+setenv WINDOW_END ${TIMEWINDOW2}
+setenv NUM_PROCS 8
+setenv NL_E_WE ${E_WE_d01}
+setenv NL_E_SN 285 # ${E_SN_d01} Needed smaller domain to fit NAM boundary conditions
+setenv NL_E_VERT ${N_VERT}
+setenv NL_DX ${DX_d01}
+setenv NL_DY ${DX_d01}
+setenv NL_SF_SURFACE_PHYSICS 2
+setenv NL_NUM_LAND_CAT ${NUM_LAND_CAT}
+
+./da_run_suite_verif_obs.ksh
+
 # Settings for ./da_run_suite_verif_obs.ksh (MPAS run)
 
 setenv CLEAN false
@@ -173,10 +200,11 @@ setenv NL_NUM_LAND_CAT ${NUM_LAND_CAT}
 #setenv EXP_NAMES 'WRFDA-REALTIME' #UNDERSCORES NOT ALLOWED, BECAUSE THAT MAKES SENSE
 #setenv EXP_LEGENDS '(/"WRFDA REALTIME"/)'
 #setenv EXP_DIRS "$EXP_DIR"
-setenv NUM_EXPT 3
-setenv EXP_NAMES 'WRFDA-REALTIME GFS MPAS'
-setenv EXP_LEGENDS '(/"WRFDA REALTIME","GFS","MPAS"/)'
-setenv EXP_DIRS "${MKBASEDIR}/verification/obs_verify/${EXPT} ${MKBASEDIR}/verification/obs_verify/GFS ${MKBASEDIR}/verification/obs_verify/MPAS"
+setenv NUM_EXPT 4
+setenv EXP_NAMES 'WRFDA-REALTIME GFS NAM MPAS'
+setenv EXP_LEGENDS '(/"WRFDA REALTIME","GFS","NAM","MPAS"/)'
+setenv EXP_DIRS "${MKBASEDIR}/verification/obs_verify/${EXPT} ${MKBASEDIR}/verification/obs_verify/GFS ${MKBASEDIR}/verification/obs_verify/NAM ${MKBASEDIR}/verification/obs_verify/MPAS"
+setenv EXP_LINES_COLORS '(/"orange","blue","green","DarkSlateGray","DarkSlateBlue","black"/)'
 #setenv NUM_PROCS 4
 #setenv WRF_FILE "/kumquat/wrfhelp/DATA/WRFDA/cycling/run/2013122300/wrfout_d01_2013-12-23_00:00:00"
 #setenv Verify_Date_Range "12z 23 Dec - 12z 25 Dec, 2015 (${INTERVAL} hour Cycle)"

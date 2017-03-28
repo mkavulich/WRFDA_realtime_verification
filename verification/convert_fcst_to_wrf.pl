@@ -89,7 +89,6 @@ if ($Convert_GFS =~ /T/i) {
    push @forecasts, "GFS";
 }
 if ($Convert_NAM =~ /T/i) {
-#   die "NAM domain too small, doofus\n";
    push @forecasts, "NAM";
 }
 if ($Convert_MPAS =~ /T/i) {
@@ -191,6 +190,8 @@ if ($Convert_MPAS =~ /T/i) {
     } elsif ($fcst eq "NAM") {
        $NUM_METGRID_LEVELS=40;     #NAM default 40
        $NUM_METGRID_SOIL_LEVELS=4; #NAM Default 4
+       $P_TOP = 5000;
+       @SOUTH_NORTH_GRID = ( 285, 986 ); #FOR NAM, NEED SMALLER DOMAIN
     } elsif ($fcst eq "MPAS") {
        $NUM_METGRID_LEVELS=56;     #MPAS default ???
        $NUM_METGRID_SOIL_LEVELS=4; #MPAS Default ???
