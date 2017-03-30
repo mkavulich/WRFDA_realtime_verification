@@ -36,11 +36,14 @@ use Getopt::Long;
 
 sub print_help_and_die {
   print "\nUsage : convert_fcst_to_wrf.pl --start=YYYY-MM-DD_hh:mm:ss --end=YYYY-MM-DD_hh:mm:ss --interval=24 --overwrite=yes/[no]\n";
+  print "\n                               --run_wps=[true]/false --run_real=[true]/false\n";
   print "\n                               --gfs=[true]/false --nam=true/[false] --mpas=true/[false]\n";
   print "        start:      Start date in full WRF format (YYYY-MM-DD_hh:mm:ss); default is 00z today\n";
   print "        end:        End date in full WRF format (YYYY-MM-DD_hh:mm:ss); default is same as start\n";
   print "        interval:   Interval between forecast start dates in hours; default is 24\n";
   print "        overwrite:  'yes' will overwrite old runs without asking (useful for calls from other scripts)\n";
+  print "        run_wps:    'false' will not run WPS (will use old WPS run if it exists)\n";
+  print "        run_real:   'false' will not run real.exe\n";
   print "        gfs:        'true' will convert GFS forecasts\n";
   print "        nam:        'true' will convert NAM forecasts\n";
   print "        mpas:       'true' will convert MPAS forecasts\n";
@@ -52,7 +55,7 @@ sub print_help_and_die {
  my $Script_dir = `pwd`;
  chomp $Script_dir;
  my $WPS_dir="$Main_dir/WPS";
- my $WRF_dir="/glade/p/work/hclin/code_intel/WRF/v39";
+ my $WRF_dir="$Main_dir/WRF_20170329";
  my $WRFDA_dir="/glade/p/work/hclin/code_intel/WRFDA/v39";
  my @WPS_indata_dir;
  my $Convert_GFS="true";
@@ -65,6 +68,9 @@ sub print_help_and_die {
  my $FC_INTERVAL=24;                   #Interval between forecasts  IN HOURS
  my @convert_hours = ( 0, 48 );          #Forecast hours to convert for each individual forecast (not command-line yet)
  my $overwrite = 'no';
+ my $run_wps='true';
+ my $run_real='true';
+ my $run_wrf='false';
 
 # Read command-line input
 
@@ -72,6 +78,8 @@ GetOptions( "start:s" => \$start_date,
             "end:s" => \$end_date,
             "interval:s" => \$FC_INTERVAL,
             "overwrite:s" => \$overwrite,
+            "run_wps:s" => \$run_wps,
+            "run_real:s" => \$run_real,
             "gfs:s" => \$Convert_GFS,
             "nam:s" => \$Convert_NAM,
             "mpas:s" => \$Convert_MPAS ) or &print_help_and_die;
@@ -79,6 +87,17 @@ GetOptions( "start:s" => \$start_date,
 if ( $end_date eq '') {
    $end_date = $start_date;
 }
+
+if ( ( ($run_wps =~ /t/i) and ($run_wps =~ /f/i) ) or not ( ($run_wps =~ /t/i) or ($run_wps =~ /f/i) )) {
+   die "INVALID INPUT FOR \$run_wps: $run_wps\n";
+}
+if ( ( ($run_real =~ /t/i) and ($run_real =~ /f/i) ) or not ( ($run_real =~ /t/i) or ($run_real =~ /f/i) )) {
+   die "INVALID INPUT FOR \$run_real: $run_real\n";
+}
+if ( ( ($run_wrf =~ /t/i) and ($run_wrf =~ /f/i) ) or not ( ($run_wrf =~ /t/i) or ($run_wrf =~ /f/i) )) {
+   die "INVALID INPUT FOR \$run_wrf: $run_wrf\n";
+}
+
 
 #Keep track of which forecast(s) we are converting
 my @forecasts;
@@ -99,11 +118,6 @@ if ($Convert_MPAS =~ /T/i) {
  my $geog_dir="/glade/p/work/wrfhelp/WPS_GEOG/";
 # WORKDIR is top-level; individual forecasts will be stored in $WORKDIR/@forecasts/Output/$DATE
  my $WORKDIR="/glade/p/wrf/WORKDIR/wrfda_realtime/verification";
-
-# Set which steps to run
- my $run_wps=1;  # Set to 0 to skip WPS step
- my $run_real=1; # Set to 0 to skip real.exe step
- my $run_wrf=0;  # Set to 0 to skip WRF step
 
 # WRF/WPS parameters
  my $METEM_INTERVAL=21600;   #WPS output interval               IN SECONDS
@@ -238,7 +252,7 @@ if ($Convert_MPAS =~ /T/i) {
        }
 
        print "Setting up working directory for WPS/real/exe:\n$Run_dir\n\n";
-       unless ($run_wps == 0) {
+       if ($run_wps =~ /t/i) {
           rmtree("$Run_dir");
        }
        mkdir $Run_dir;
@@ -254,7 +268,7 @@ if ($Convert_MPAS =~ /T/i) {
        print "Running WPS/real.exe to convert $fcst forecast to WRF-input format\n";
        print "  $fcst Forecast Start Time : $init_date\n";
 
-       unless ($run_wps == 0) {
+       if ($run_wps =~ /t/i) {
 
           # Get WPS files
           if ($fcst eq "GFS") {
@@ -277,10 +291,9 @@ if ($Convert_MPAS =~ /T/i) {
              die "UNKNOWN FORECAST TYPE: $fcst\n";
           }
        }
-       unless ( ($run_wrf == 0) and ($run_real == 0) ) {
+       if ( ($run_real =~ /t/i) or ($run_wrf =~ /t/i) ) {
           # Get WRF files; use glob since we need everything
           my @WRF_files = glob("$WRF_dir/run/*");
-          copy ("$WRF_dir/run/*","$Run_dir/");
 
           foreach my $file (@WRF_files) {
              my $filename=basename($file);
@@ -293,17 +306,19 @@ if ($Convert_MPAS =~ /T/i) {
                 copy("$file","$Run_dir/$filename");
                 next;
              }
-             unless (-e "$Run_dir/$filename") { copy("$file","$Run_dir/$filename") };
+             if ( (not -e "$Run_dir/$filename") or ($filename =~ ".exe")) { #Always overwrite old executables
+                 copy("$file","$Run_dir/$filename");
+             }
           }
        }
 
        chdir "$Run_dir";
-       unlink "namelist.wps" unless ($run_wps == 0);
-       unlink "namelist.input" unless ( ($run_real == 0) and ($run_wrf == 0) );
-       unless ($run_real == 0) {
+       unlink "namelist.wps" if ($run_wps =~ /t/i);
+       unlink "namelist.input" if ( ($run_real =~ /t/i) or ($run_wrf =~ /t/i) );
+       if ($run_real =~ /t/i) {
           chmod 0755, "real.exe" or die "Couldn't change the permission to real.exe: $!";
        }
-       unless ($run_wrf == 0) {
+       if ($run_wrf =~ /t/i) {
           chmod 0755, "wrf.exe" or die "Couldn't change the permission to wrf.exe: $!";
        }
 
@@ -323,7 +338,7 @@ if ($Convert_MPAS =~ /T/i) {
           print "Creating namelists\n";
 
 # WPS NAMELIST
-          unless ($run_wps == 0) {
+          if ($run_wps =~ /t/i) {
           open NL, ">namelist.wps.$convert_hour" or die "Can not open namelist.wps.$convert_hour for writing: $! \n";
              print NL "&share\n";
              print NL "wrf_core = 'ARW',\n";
@@ -371,7 +386,7 @@ if ($Convert_MPAS =~ /T/i) {
           }
 
 # WRF NAMELIST
-          unless ( ($run_real == 0) and ($run_wrf == 0) ) {
+          if ( ($run_real =~ /t/i) or ($run_wrf =~ /t/i) ) {
              open NL, ">namelist.input.$convert_hour" or die "Can not open namelist.input.$convert_hour for writing: $! \n";
              print NL "&time_control\n";
              print NL " run_days                 = $RUN_DAYS,\n";
@@ -473,7 +488,7 @@ if ($Convert_MPAS =~ /T/i) {
           }
 
           #Link WPS input data
-          if ($run_wps == 0) {
+          if ($run_wps =~ /f/i) {
              print "NOT running WPS\n";
           } else {
              print "Linking input data\n";
@@ -551,7 +566,7 @@ if ($Convert_MPAS =~ /T/i) {
              }
           }
 
-          if ($run_real == 0) {
+          if ($run_real =~ /f/i) { 
              print "NOT running real.exe\n";
           } else {
              print "Creating real.exe job\n";
@@ -598,7 +613,7 @@ if ($Convert_MPAS =~ /T/i) {
              }
           }
 
-          if ($run_wrf == 0) {
+          if ($run_wrf =~ /f/i) {
              print "NOT running WRF\n";
           } else {
              print "Creating WRF job\n";
@@ -630,7 +645,7 @@ if ($Convert_MPAS =~ /T/i) {
              print FH "\\cp $Run_dir/wrfout_d0* $Out_dir/\n";
              close FH ;
 
-             if ( ($run_wps == 0) and ($run_real == 0) ) {
+             if ( ($run_wps =~ /f/i) and ($run_real =~ /f/i) ) {
                 $job_feedback = ` bsub < run_wrf.csh`;
              } else {
                 $job_feedback = ` bsub -w "ended($jobid)" < run_wrf.csh`;
