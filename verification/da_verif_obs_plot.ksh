@@ -1,4 +1,4 @@
-#!/bin/ksh -aeux
+#!/bin/ksh 
 #============================================================;
 # Purpose:  Main script to run the verification package
 #============================================================;
@@ -52,15 +52,14 @@ DIAG_VAR2="oma"
 echo "<HTML><HEAD><TITLE>Verification Plots for $EXP_NAMES<TITLE></HEAD>"
 echo "<BODY><H1>Verification Plots for $EXP_NAMES</H1><PRE>"
 
-echo ""
-echo "Waiting for WRFDA VERIFY Run to finish"
-echo ""
-
 export DATE=$START_DATE
 
 export verify_done=false
 export MINUTES_WAITING=0
 for EXP_DIR in $EXP_DIRS; do
+   echo ""
+   echo "Waiting for WRFDA VERIFY Run in $EXP_DIR to finish"
+   echo ""
    while [[ $DATE -le $FINAL_DATE ]] ; do
       export WORK_DIR=${EXP_DIR}/${DATE}
       while [[ $verify_done == false ]] ; do
@@ -73,7 +72,7 @@ for EXP_DIR in $EXP_DIRS; do
             break
          elif [[ -e $WORK_DIR/FAIL_VERIFY ]] ; then
             echo ""
-            echo "WRFDA VERIFY failed, check it!"
+            echo "WRFDA VERIFY failed for $DATE, check it!"
             echo ""
             exit 2
          fi
@@ -157,6 +156,8 @@ cat >> namelist.plot_diag << EOF
 EOF
 
 ln -sf $BUILD_DIR/da_verif_obs.exe .
+
+echo "Running da_verif_obs.exe to create *omb.diag files"
 
 nfile=$(ls *omb.diag 2>/dev/null | wc -l)
 if [[ $nfile -eq 0 ]]; then
@@ -393,24 +394,28 @@ NCL_COMMAND_LINE="'wksdev=\"${PLOT_WKS}\"' 'run_dir=\"${RUN_DIR}\"' \
 
 #----------------
 if [ "$plotsfc" = "true" ] || [ "$plotupr" = "true" ]; then
+echo "Running verif_obs_time_series.ncl"
 echo "ncl ${NCL_COMMAND_LINE} ${GRAPHICS_DIR}/verif_obs_time_series.ncl" > run1
 chmod +x run1
 ./run1 > run1.log 2>&1
 fi
 #----------------
 if [ "$plotupr" = "true" ]; then
+echo "Running verif_obs_vert_profile.ncl"
 echo "ncl ${NCL_COMMAND_LINE} ${GRAPHICS_DIR}/verif_obs_vert_profile.ncl" > run2
 chmod +x run2
 ./run2 > run2.log 2>&1
 fi
 #----------------
 if [ "$plotsfc" = "true" ] || [ "$plotupr" = "true" ]; then
+echo "Running verif_obs_time_average.ncl"
 echo "ncl ${NCL_COMMAND_LINE} ${GRAPHICS_DIR}/verif_obs_time_average.ncl" > run3
 chmod +x run3
 ./run3 > run3.log 2>&1
 fi
 #----------------
 if [ "$plotgpsref" = "true" ]; then
+echo "Running verif_obs_vert_profile_gpsref.ncl"
 echo "ncl ${NCL_COMMAND_LINE} ${GRAPHICS_DIR}/verif_obs_vert_profile_gpsref.ncl" > run4
 chmod +x run4
 ./run4 > run4.log 2>&1
@@ -431,11 +436,6 @@ for FILE in *.log; do
 done
 
 echo "</UL></BODY></HTML>"
-
-#if $CLEAN; then
-#   rm -rf $WORK_DIR
-#fi
-
 
 echo "da_verif_obs_plot.ksh successfully completed..."
 
