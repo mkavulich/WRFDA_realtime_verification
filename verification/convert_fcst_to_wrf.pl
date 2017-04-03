@@ -37,7 +37,7 @@ use Getopt::Long;
 sub print_help_and_die {
   print "\nUsage : convert_fcst_to_wrf.pl --start=YYYY-MM-DD_hh:mm:ss --end=YYYY-MM-DD_hh:mm:ss --interval=24 --overwrite=yes/[no]\n";
   print "\n                               --run_wps=[true]/false --run_real=[true]/false\n";
-  print "\n                               --gfs=[true]/false --nam=true/[false] --mpas=true/[false]\n";
+  print "\n                               --gfs=[true]/false --nam=[true]/false --mpas=[true]/false\n";
   print "        start:      Start date in full WRF format (YYYY-MM-DD_hh:mm:ss); default is 00z today\n";
   print "        end:        End date in full WRF format (YYYY-MM-DD_hh:mm:ss); default is same as start\n";
   print "        interval:   Interval between forecast start dates in hours; default is 24\n";
@@ -59,11 +59,11 @@ sub print_help_and_die {
  my $WRFDA_dir="/glade/p/work/hclin/code_intel/WRFDA/v39";
  my @WPS_indata_dir;
  my $Convert_GFS="true";
- my $Convert_NAM="false";
- my $Convert_MPAS="false";
+ my $Convert_NAM="true";
+ my $Convert_MPAS="true";
 
 # Command-line options
- my $start_date=sprintf "%04d-%02d-%02d_00:00:00\n",$utm->year+1900,$utm->mon+1,$utm->mday; #Initial time for first GFS forecast; default to 00z today
+ my $start_date=sprintf "%04d-%02d-%02d_00:00:00",$utm->year+1900,$utm->mon+1,$utm->mday; #Initial time for first GFS forecast; default to 00z today
  my $end_date='';   #Initial time for final GFS forecast
  my $FC_INTERVAL=24;                   #Interval between forecasts  IN HOURS
  my @convert_hours = ( 0, 48 );          #Forecast hours to convert for each individual forecast (not command-line yet)
@@ -86,6 +86,14 @@ GetOptions( "start:s" => \$start_date,
 
 if ( $end_date eq '') {
    $end_date = $start_date;
+}
+
+#If input is YYYYMMDDHH format, convert to WRF format (YYYY-MM-DD_hh:mm:ss)
+unless ($start_date=~ /:/) {
+   $start_date=sprintf "%04d-%02d-%02d_%02d:00:00",substr($start_date, 0, 4),substr($start_date, 4, 2),substr($start_date, 6, 2),substr($start_date, 8, 2);
+}
+unless ($end_date=~ /:/) {
+   $end_date=sprintf "%04d-%02d-%02d_%02d:00:00",substr($end_date, 0, 4),substr($end_date, 4, 2),substr($end_date, 6, 2),substr($end_date, 8, 2);
 }
 
 if ( ( ($run_wps =~ /t/i) and ($run_wps =~ /f/i) ) or not ( ($run_wps =~ /t/i) or ($run_wps =~ /f/i) )) {
@@ -509,7 +517,8 @@ if ($Convert_MPAS =~ /T/i) {
              } elsif ($fcst eq "MPAS") {
                 symlink sprintf("$WPS_indata_dir[0]/60-15km_CONUS.$fyear-$fmonth-$fday\_%02d.nc", $fhour) , sprintf("60-15km_CONUS.$fyear-$fmonth-$fday\_%02d.nc", $fhour)  or die "Cannot symlink ".sprintf("$WPS_indata_dir[0]/60-15km_CONUS.$fyear-$fmonth-$fday\_%02d.nc", $fhour).": $!\n";
                 if (! -e "static.nc") { #only need to do this once
-                   ! system("ncrename -vtheta,theta_gwd $WPS_indata_dir[0]/static.nc static.nc") or die "Problem converting $WPS_indata_dir[0]/static.nc to correct format\n";
+#                   ! system("ncrename -vtheta,theta_gwd $WPS_indata_dir[0]/static.nc static.nc") or die "Problem converting $WPS_indata_dir[0]/static.nc to correct format\n";
+                    copy("$WPS_indata_dir[0]/static.nc","static.nc");
                 }
              } else {
                 die "UNKNOWN FCST TYPE: $fcst\n";
