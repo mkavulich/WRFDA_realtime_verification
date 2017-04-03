@@ -55,7 +55,7 @@ echo "<BODY><H1>Verification Plots for $EXP_NAMES</H1><PRE>"
 export DATE=$START_DATE
 
 export verify_done=false
-export MINUTES_WAITING=0
+export SECONDS_WAITING=0
 for EXP_DIR in $EXP_DIRS; do
    echo ""
    echo "Waiting for WRFDA VERIFY Run in $EXP_DIR to finish"
@@ -76,15 +76,15 @@ for EXP_DIR in $EXP_DIRS; do
             echo ""
             exit 2
          fi
-         if [[ $MINUTES_WAITING -gt 15 ]]; then
+         if [[ $SECONDS_WAITING -gt 600 ]]; then
             echo ""
             echo "WAITING TOO LONG, EXIT"
             echo ""
             exit 3
          fi
-         echo "Been waiting $MINUTES_WAITING minutes"
-         let MINUTES_WAITING=$MINUTES_WAITING+1
-         sleep 60
+         echo "Been waiting $SECONDS_WAITING seconds"
+         let SECONDS_WAITING=$SECONDS_WAITING+10
+         sleep 10
       done
    done
 export DATE=$START_DATE
